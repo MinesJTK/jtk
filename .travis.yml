@@ -1,0 +1,22 @@
+language: java
+
+branches:
+  only:
+    - master
+
+install: true
+
+jdk: 
+  - openjdk7
+  - oraclejdk7
+  - oraclejdk8
+  
+script: ./gradlew build -x :core:signArchives
+  
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
