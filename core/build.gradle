@@ -2,42 +2,62 @@ description = 'Mines Java Toolkit'
 
 apply plugin: 'java-library-distribution'
 apply plugin: 'maven'
+apply plugin: 'jacoco'
 apply plugin: 'signing'
 
-archivesBaseName = 'edu-mines-jtk'
-
+// tag::dependencies[]
 dependencies {
   compile 'org.jogamp.jogl:jogl-all-main:2.3.2',
-          'org.jogamp.gluegen:gluegen-rt-main:2.3.2',
-          'com.googlecode.netlib-java:netlib-java:0.9.3'
+    'org.jogamp.gluegen:gluegen-rt-main:2.3.2',
+    'com.googlecode.netlib-java:netlib-java:0.9.3'
   testCompile 'junit:junit:4.12'
 }
+// end::dependencies[]
 
+// tag::distributions[]
 distributions {
   main {
     baseName = 'edu-mines-jtk-all'
   }
 }
+// end::distributions[]
 
 javadoc {
   title = project.description
 }
 
+// tag::jacocoTestReport[]
+jacocoTestReport {
+  reports {
+    xml.enabled = true
+    html.enabled = true
+  }
+}
+
+check.dependsOn jacocoTestReport
+// end::jacocoTestReport[]
+
+// tag::deps[]
 task deps(type: Sync) {
   description = "Copies all dependencies into core/build/deps/."
   from configurations.runtime
   into "${buildDir}/deps"
 }
+// end::deps[]
 
+// tag::javadocJar[]
 task javadocJar(type: Jar, dependsOn: javadoc) {
   classifier = 'javadoc'
   from tasks.javadoc.destinationDir
 }
+// end::javadocJar[]
 
+// tag::sourcesJar[]
 task sourcesJar(type: Jar) {
   from sourceSets.main.allSource
   classifier = 'sources'
 }
+// end::sourcesJar[]
 
 artifacts {
   archives jar
@@ -63,12 +83,12 @@ if (project.hasProperty('sonatypeUsername')) {
           name 'Mines Java Toolkit'
           packaging 'jar'
           description 'Java packages for science and engineering'
-          url 'https://github.com/dhale/jtk/'
+          url 'https://github.com/MinesJTK/jtk/'
 
           scm {
-            url 'scm:git@github.com/dhale/jtk.git'
-            connection 'scm:git@github.com/dhale/jtk.git'
-            developerConnection 'scm:git@github.com/dhale/jtk.git'
+            url 'scm:git@github.com/MinesJTK/jtk.git'
+            connection 'scm:git@github.com/MinesJTK/jtk.git'
+            developerConnection 'scm:git@github.com/MinesJTK/jtk.git'
           }
 
           licenses {
