@@ -1,6 +1,6 @@
 # The Mines Java Toolkit
 
-[![Build Status](https://img.shields.io/travis/MinesJTK/jtk/master.svg)](https://travis-ci.org/MinesJTK/jtk) [![Code Climate](https://img.shields.io/codeclimate/github/MinesJTK/jtk.svg)](https://codeclimate.com/github/MinesJTK/jtk) 
+[![Build Status](https://img.shields.io/travis/MinesJTK/jtk/master.svg)](https://travis-ci.org/MinesJTK/jtk) [![Code Climate](https://img.shields.io/codeclimate/github/MinesJTK/jtk.svg)](https://codeclimate.com/github/MinesJTK/jtk) [![Codecov](https://img.shields.io/codecov/c/github/MinesJTK/jtk.svg)](https://codecov.io/gh/MinesJTK/jtk)
 
 The Mines Java Toolkit (Mines JTK) is a set of Java packages and native (non-Java) software libraries for science and engineering. Applications currently include digital signal processing, linear algebra, optimization, meshing, interpolation, and 2D and 3D graphics.
 
@@ -8,11 +8,11 @@ The Mines JTK is licensed under the [Apache License, Version 2.0](http://www.apa
 
 ### Using the Mines JTK 
 
-To use the Mines JTK, simply include its JAR (Java archive) among any other external dependencies for your project. For example, ```edu-mines-jtk-1.0.0.jar``` can be found by [searching Maven Central](https://search.maven.org). Most build tools can be easily configured to automatically download dependencies from this repository, which also holds JAR files containing documentation (javadoc) and source code for the Mines JTK.
+To use the Mines JTK, simply include its JAR (Java archive) among any other external dependencies for your project. For example, ```edu-mines-jtk-1.1.0.jar``` can be found by [searching Maven Central](https://search.maven.org). Most build tools can be easily configured to automatically download dependencies from this repository, which also holds JAR files containing documentation (javadoc) and source code for the Mines JTK.
 
 ### Getting the source code
 
-If you want to build the Mines JTK yourself, you should first [download its source code from GitHub](https://github.com/dhale/jtk). If you clone this source code repository using git, then you will be able to easily update your copy as others make changes. Alternatively, you may use the Downloads link provided by GitHub to obtain a current snapshot of the code.
+If you want to build the Mines JTK yourself, you should first [download its source code from GitHub](https://github.com/MinesJTK/jtk). If you clone this source code repository using git, then you will be able to easily update your copy as others make changes. Alternatively, you may use the Downloads link provided by GitHub to obtain a current snapshot of the code.
 
 If you are using Linux or Mac OS X (10.7+), then you already have a git command-line client. Various git clients with graphical user interfaces are also available for Linux, Mac OS X, and Windows, and git is also available within popular integrated development environments. Note that git will be necessary if you wish to propose changes (submit pull requests) for the master branch of the source code repository. 
 
@@ -22,7 +22,7 @@ To determine if you have a git command-line client, in a terminal window type ``
 2. type the command:
 
 ```
-git clone https://github.com/dhale/jtk.git
+git clone https://github.com/MinesJTK/jtk.git
 ```
 
 This command will create a directory jtk in your current working directory. The subdirectory .git contains a complete copy of the repository for the Mines Java Toolkit. If instead you simply use the GitHub Downloads link, then this subdirectory will be absent.
