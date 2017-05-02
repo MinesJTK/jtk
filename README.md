@@ -1,5 +1,7 @@
 # The Mines Java Toolkit
 
+[![Build Status](https://travis-ci.org/MinesJTK/jtk.svg?branch=master)](https://travis-ci.org/MinesJTK/jtk)
+
 The Mines Java Toolkit (Mines JTK) is a set of Java packages and native (non-Java) software libraries for science and engineering. Applications currently include digital signal processing, linear algebra, optimization, meshing, interpolation, and 2D and 3D graphics.
 
 The Mines JTK is licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
