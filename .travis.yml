@@ -21,10 +21,18 @@ cache:
     - $HOME/.gradle/wrapper/
 
 before_script:
-  - export DISPLAY=:99.0
+  - chmod +x gradlew
+  - export DISPLAY=:99
   - export LIBGL_ALWAYS_SOFTWARE=1
+
+  # Remove cloud-init, it breaks updates sometimes
+  - sudo apt-get remove cloud-init -qq --force-yes
   - sudo apt-get update -qq --force-yes
+
+  # Testing setup
   - sudo apt-get install -qq --force-yes libgd2-xpm ia32-libs ia32-libs-multiarch gawk maven
+
+  # Prepare software rendering
   - sudo apt-get install -qq --force-yes mesa-utils libgl1-mesa-swx11 libgl1-mesa-swx11-dev xvfb
   - /sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 1400x900x24 -ac +extension GLX +render
   - glxinfo
