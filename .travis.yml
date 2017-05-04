@@ -20,7 +20,7 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
 
-before_script
+before_script:
   - chmod +x gradlew
   - export DISPLAY=:99
   - export LIBGL_ALWAYS_SOFTWARE=1
