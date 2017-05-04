@@ -29,10 +29,9 @@ public class ArrayStackTest extends TestCase {
     junit.textui.TestRunner.run(suite);
   }
 
-
   public void testStandardFunctionality() {
     int np = 10;
-    MockArrayStack<Integer> as = new MockArrayStack<>();
+    ArrayStack<Integer> as = new ArrayStack<>();
     Assert.assertEquals(0,as.size());
 
     // Test push
@@ -60,8 +59,4 @@ public class ArrayStackTest extends TestCase {
     }
   }
 
-/////////////////////////////////////////////////////////////////////////////
-// private
-
-  private class MockArrayStack<E> extends ArrayStack<E> { };
 }
