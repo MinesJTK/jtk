@@ -21,6 +21,7 @@ cache:
     - $HOME/.gradle/wrapper/
 
 before_script
+  - chmod +x gradlew
   - export DISPLAY=:99
   - export LIBGL_ALWAYS_SOFTWARE=1
 
@@ -37,8 +38,7 @@ before_script
   - sleep 3
   - glxinfo
 
-script:
-  - gradle build -x :core:signArchives
+script: ./gradlew build -x :core:signArchives
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
