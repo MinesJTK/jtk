@@ -49,4 +49,4 @@ addons:
       name: "chrisengelsma/jtk"
     notification_email: chris.engelsma@gmail.com
     build_command:  ./gradlew build -x :core:signArchives
-    branch_pattern: master
+    branch_pattern: coverity_scan
