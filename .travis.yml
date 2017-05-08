@@ -37,27 +37,6 @@ before_install:
 
 env:
   global:
-    # Coverity Scan token
-    secure: "jJirBkZOyJ8KuYXMbjUpKem2FGaCsLBq7roP9oHs5mz8wIKENGB3i7pBe5USVLCwVAuqJ+TPjbfSo4nSnCIf5mLdJoNnyrq8FAYhSRzA/zl4COW6eN0Of9dgCOzcOriPY9rXUVbIapWoMogntnAS6MpmbiSxQCsq99VsIHq3TYk="
-
-script:
-  - autoreconf -f -i
-  - ./configure --enable-tests
-  - make -j2
-  - make check
-
-addons:
-  coverity_scan:
-    project:
-      name: sionescu/libfixposix
-    build_command_prepend: autoreconf -f -i && ./configure --enable-tests
-    build_command: make -j4
-    branch_pattern: coverity
-    notification_email: sionescu@cddr.org
-
-
-env:
-  global:
    # Coverity token
    - secure: "SNKJAyFHhLyds1iQBJZ/0rZzougnOIcRd7cooSyhwHusZ/0h47T4FZ8veTtvSw1kNRfN/ciQWsxl9nEWfKH+OBCyCozKCVhhbWgm0PNyOZGM1bjftJQkr18+KffnlUVejLnY26J/aHunyC4xsQrQn9nOum8G3x/BQOrh76V8ET5x50n0cUBJlKyxZDXwOcheE2p5QCoHHv5VjL0mns3lLd8aA4mkDSCb+sHL0yxSH1ON5H2yFMfzcYsv5N7i8wI445/V2R01BrvZZdl93WxgSArCIMG3psI/zXhYB2XH6K7KVVisO00r60gulMu/VMp7GmWAVTrk2CXa4e5d1SYGfptKgA0rModnX4BFd59huP8V1wXMDKYNulVnE5r01tmKMT8+tREnMwM8JHN+NLfE0BjPyPFcuPU1JwsACYoz2dLqMhEBWRi2IDgs4UZ3YT2na/cPAG57N4OWnc8dBlAB53b6qtZmGqtyrSvkmnudQR9vjPJA3070zwovLISyiQ49tCvOFGiGtzBp0U+1Bq/28ahxbGKigsl6zDa00wjRxjvraUMYbRgQ86Wfs1UnWsi5IX+8dcq7rjP4ZHLrvU0inHuyzFyV/O7Yw/ADZ+E5HcOwCtenZvXg546Z7n2/ujHQGmYXEBuNIhpyEjDom2SorXdzMF+7FwgpnQuBo/fnzlM="
 
