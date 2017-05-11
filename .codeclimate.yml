@@ -4,12 +4,11 @@ engines:
     channel: "beta"
 
 exclude_paths:
-  - docs/*
-  - misc/*
-  - gradle/*
-  - demo/*
-  - ./*
+  - "docs/*"
+  - "misc/*"
+  - "gradle/*"
+  - "demo/*"
 
 ratings:
   paths:
-  - **/.java
+  - "**/.java"
