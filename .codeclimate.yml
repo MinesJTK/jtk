@@ -3,6 +3,11 @@ engines:
     enabled: true
     channel: "beta"
 
+exclude_paths:
+  - "docs/"
+  - "misc/"
+  - "gradle/"
+
 ratings:
   paths:
-  - "core/**/.java"
+  - "**/.java"
