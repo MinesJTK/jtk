@@ -11,4 +11,4 @@ exclude_paths:
 
 ratings:
   paths:
-  - "**/.java"
+  - "core/src/main/java/edu/mines/jtk/util/**.java"
