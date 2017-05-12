@@ -5,11 +5,13 @@ apply plugin: 'maven'
 apply plugin: 'jacoco'
 apply plugin: 'signing'
 
+jar.baseName = 'edu.mines.jtk'
+
 // tag::dependencies[]
 dependencies {
-  compile 'org.jogamp.jogl:jogl-all-main:2.3.2',
-    'org.jogamp.gluegen:gluegen-rt-main:2.3.2',
-    'com.googlecode.netlib-java:netlib-java:0.9.3'
+  compile     'org.jogamp.jogl:jogl-all-main:2.3.2',
+              'org.jogamp.gluegen:gluegen-rt-main:2.3.2',
+              'com.googlecode.netlib-java:netlib-java:0.9.3'
   testCompile 'junit:junit:4.12'
 }
 // end::dependencies[]
@@ -17,14 +19,18 @@ dependencies {
 // tag::distributions[]
 distributions {
   main {
-    baseName = 'edu-mines-jtk-all'
+    baseName = 'edu.mines.jtk'
   }
 }
 // end::distributions[]
 
+
+
+// tag::javadoc[]
 javadoc {
   title = project.description
 }
+// end::javadoc[]
 
 // tag::jacocoTestReport[]
 jacocoTestReport {
@@ -33,7 +39,6 @@ jacocoTestReport {
     html.enabled = true
   }
 }
-
 check.dependsOn jacocoTestReport
 // end::jacocoTestReport[]
 
