@@ -14,25 +14,135 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.util;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.junit.Test;
+
+import static junit.framework.TestCase.assertFalse;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Tests {@link edu.mines.jtk.util.ArgsParser}.
  * @author Dave Hale, Colorado School of Mines
- * @version 2001.02.05, 2006.07.12
+ * @author Chris Engelsma
+ * @version 2017.05.15
  */
-public class ArgsParserTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(ArgsParserTest.class);
-    junit.textui.TestRunner.run(suite);
+public class ArgsParserTest {
+
+  @Test
+  public void testBooleanConverter() throws Exception {
+    String[] args = { "-atrue", "-bTrue", "-cfalse", "-dFalse", "-eFoo" };
+    String shortOpts = "a:b:c:d:e:";
+    ArgsParser ap = new ArgsParser(args,shortOpts);
+    String[] values = ap.getValues();
+    assertTrue(ap.toBoolean(values[0]));
+    assertTrue(ap.toBoolean(values[1]));
+    assertFalse(ap.toBoolean(values[2]));
+    assertFalse(ap.toBoolean(values[3]));
   }
 
+  @Test(expected = ArgsParser.OptionException.class)
+  public void testBooleanConverterShouldThrowException() throws Exception {
+    ArgsParser.toBoolean("true"); // Should work
+    ArgsParser.toBoolean("Foo");  // Shouldn't.
+  }
+
+  @Test(expected = ArgsParser.OptionException.class)
+  public void testDoubleConverterShouldThrowException() throws Exception {
+    ArgsParser.toDouble("1.986"); // Should work
+    ArgsParser.toDouble("Foo");   // Shouldn't.
+  }
+
+  @Test(expected = ArgsParser.OptionException.class)
+  public void testFloatConverterShouldThrowException() throws Exception {
+    ArgsParser.toFloat("1.986"); // Should work
+    ArgsParser.toFloat("Foo");   // Shouldn't.
+  }
+
+  @Test(expected = ArgsParser.OptionException.class)
+  public void testIntConverterShouldThrowException() throws Exception {
+    ArgsParser.toInt("1986"); // Should work.
+    ArgsParser.toInt("Foo");  // Shouldn't.
+  }
+
+  @Test(expected = ArgsParser.OptionException.class)
+  public void testLongConverterShouldThrowException() throws Exception {
+    ArgsParser.toLong("1986"); // Should work.
+    ArgsParser.toLong("Foo");  // Shouldn't.
+  }
+
+  @Test(expected = ArgsParser.OptionException.class)
+  public void testShortOptionNoValueThrowsException() throws Exception {
+    String[] args = { "-a3.14", "-b" };
+    String shortOpts = "a:d";
+    ArgsParser ap = new ArgsParser(args,shortOpts);
+  }
+
+  @Test(expected = ArgsParser.OptionException.class)
+  public void testDoLongOptionNoValueThrowsException() throws Exception {
+    String[] args = { "--alpha" };
+    String shortOpts = "a:";
+    String[] longOpts = { "alpha=" };
+    ArgsParser ap = new ArgsParser(args,shortOpts,longOpts);
+  }
+
+  @Test(expected = ArgsParser.OptionException.class)
+  public void testDoLongOptionUnexpectedValueThrowsException() throws Exception {
+    String[] args = { "--a=3.14" };
+    String shortOpts = "a";
+    String[] longOpts = { "alpha" };
+    ArgsParser ap = new ArgsParser(args,shortOpts,longOpts);
+  }
+
+  @Test(expected = ArgsParser.OptionException.class)
+  public void testDoShortOptionNoValueThrowsException() throws Exception {
+    String[] args = { "-a" };
+    String shortOpts = "a:";
+    ArgsParser ap = new ArgsParser(args,shortOpts);
+  }
+
+  @Test(expected = ArgsParser.OptionException.class)
+  public void testLongOptionNonUniquePrefixThrowsException() throws Exception {
+    String[] args = { "--a=3.14", "--a=6.25" };
+    String shortOpts = "a:a:";
+    String[] longOpts = { "alpha=", "alpha=" };
+    ArgsParser ap = new ArgsParser(args,shortOpts,longOpts);
+  }
+
+  @Test(expected = ArgsParser.OptionException.class)
+  public void testLongOptionNotRecognizedThrowsException() throws Exception {
+    String[] args = { "--a=3.14", "--b=6.25" };
+    String shortOpts = "a:d:";
+    String[] longOpts = { "alpha=", "delta=" };
+    ArgsParser ap = new ArgsParser(args,shortOpts,longOpts);
+  }
+
+  @Test
+  public void testArgsParserConstructorShortOptsOnly() throws Exception {
+    String[] args = { "-a3.14", "-b", "foo" };
+    String shortOpts = "ha:b";
+    ArgsParser ap = new ArgsParser(args,shortOpts);
+    String[] options = ap.getOptions();
+    String[] values = ap.getValues();
+    String[] others = ap.getOtherArgs();
+    assertArrayEquals(new String[] { "-a", "-b"}, options);
+    assertArrayEquals(new String[] { "3.14", ""}, values);
+    assertArrayEquals(new String[] { "foo" }, others);
+  }
+
+  @Test
+  public void testSkipsMalformedStartingArgs() throws Exception {
+    String[] args = { "--", "-", "-a3.14" };
+    String shortOpts = "a:";
+    ArgsParser ap = new ArgsParser(args, shortOpts);
+  }
+
+  @Test
   public void testArgsParser() {
     String[][] args = {
       {"-a3.14","-b","foo"},
       {"-a","3.14","-b","foo"},
       {"--alpha","3.14","--beta","foo"},
+      {"--a=3.14","--b","foo"},
       {"--a=3.14","--b","foo"},
     };
     for (String[] arg:args) {

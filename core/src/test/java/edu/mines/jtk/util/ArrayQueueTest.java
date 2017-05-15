@@ -16,20 +16,17 @@ package edu.mines.jtk.util;
 
 import java.util.Random;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.*;
+import org.junit.Test;
 
 /**
  * Tests {@link edu.mines.jtk.util.ArrayQueue}.
  * @author Dave Hale, Colorado School of Mines
- * @version 07/16/2008.
+ * @version 2017.05.15
  */
-public class ArrayQueueTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(ArrayQueueTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class ArrayQueueTest {
 
+  @Test
   public void testRandom() {
     ArrayQueue<Integer> aq = new ArrayQueue<Integer>();
     Random r = new Random();
