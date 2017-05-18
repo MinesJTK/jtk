@@ -16,22 +16,21 @@ package edu.mines.jtk.mesh;
 
 import java.io.*;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import edu.mines.jtk.util.Stopwatch;
+import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertEquals;
+import static org.testng.AssertJUnit.assertTrue;
 
 /**
  * Tests {@link edu.mines.jtk.mesh.TetMesh}.
  * @author Dave Hale, Colorado School of Mines
  * @version 2003.08.26, 2006.08.02
  */
-public class TetMeshTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(TetMeshTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class TetMeshTest {
 
+  @Test
   public void testNabors() {
     TetMesh tm = new TetMesh();
     TetMesh.Node n0 = new TetMesh.Node(1.0f,0.0f,0.0f);
@@ -86,6 +85,7 @@ public class TetMeshTest extends TestCase {
     assertEquals(3,tm.getNodeNabors(n4).length);
   }
 
+  @Test
   public void testIO() throws IOException,ClassNotFoundException {
 
     // Make tet mesh.
@@ -153,6 +153,7 @@ public class TetMeshTest extends TestCase {
     assertEquals(7,((Integer)map.get(n111)).intValue());
   }
 
+  @Test
   public void testTetListener() {
     TetMesh tm = new TetMesh();
     tm.addNode(new TetMesh.Node(0.0f,0.0f,0.0f));
@@ -186,6 +187,7 @@ public class TetMeshTest extends TestCase {
     private int _nremoved;
   }
 
+  @Test
   public void testFinds() {
     TetMesh tm = new TetMesh();
     TetMesh.Node n0 = new TetMesh.Node(0.0f,0.0f,0.0f);
@@ -257,6 +259,7 @@ public class TetMeshTest extends TestCase {
     assertTrue(null==tm.findFace(n0,n3,n4));
   }
 
+  @Test
   public void testSimple() {
     TetMesh tm = new TetMesh();
     TetMesh.Node n0 = new TetMesh.Node(1.0f,0.0f,0.0f);
@@ -273,6 +276,7 @@ public class TetMeshTest extends TestCase {
     tm.validate();
   }
 
+  @Test
   public void testLine() {
     TetMesh tm = new TetMesh();
     int n = 100;
@@ -294,6 +298,7 @@ public class TetMeshTest extends TestCase {
     tm.validate();
   }
 
+  @Test
   public void testCube() {
     TetMesh tm = new TetMesh();
     TetMesh.Node n0 = new TetMesh.Node(0.0f,0.0f,0.0f);
@@ -323,6 +328,7 @@ public class TetMeshTest extends TestCase {
     tm.validate();
   }
 
+  @Test
   public void testAddFindRemove() {
     java.util.Random random = new java.util.Random();
     TetMesh tm = new TetMesh();

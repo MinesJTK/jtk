@@ -16,8 +16,8 @@ package edu.mines.jtk.interp;
 
 import java.util.Random;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.assertTrue;
+import org.testng.annotations.Test;
 
 import edu.mines.jtk.dsp.Sampling;
 import static edu.mines.jtk.util.ArrayMath.*;
@@ -27,13 +27,9 @@ import static edu.mines.jtk.util.ArrayMath.*;
  * @author Dave Hale, Colorado School of Mines
  * @version 2013.01.22
  */
-public class TrilinearInterpolator3Test extends TestCase {
-  
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(TrilinearInterpolator3Test.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class TrilinearInterpolator3Test {
 
+  @Test
   public void testSingleValues() {
     float[][][][] xy = sampleTestFunction(11,12,13);
     float[] x1 = xy[0][0][0];
@@ -68,6 +64,7 @@ public class TrilinearInterpolator3Test extends TestCase {
     }
   }
 
+  @Test
   public void testArrayValues() {
     float[][][][] xy = sampleTestFunction(11,12,13);
     float[] x1 = xy[0][0][0];
@@ -101,6 +98,7 @@ public class TrilinearInterpolator3Test extends TestCase {
     }
   }
 
+  @Test
   public void testSampleValues() {
     float[][][][] xy = sampleTestFunction(11,12,13);
     float[] x1 = xy[0][0][0];
@@ -175,13 +173,9 @@ public class TrilinearInterpolator3Test extends TestCase {
   }
 
   private static void assertEqual(float x, float y) {
-    assertTrue(x+" = "+y,almostEqual(x,y));
-  }
-  
-  private static boolean almostEqual(float x, float y) {
     float ax = abs(x);
     float ay = abs(y);
-    return abs(x-y)<=0.001f*max(ax,ay);
+    assertTrue(abs(x-y)<=0.001f*max(ax,ay));
   }
-
+  
 }

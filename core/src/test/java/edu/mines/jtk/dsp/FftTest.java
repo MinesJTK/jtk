@@ -14,7 +14,8 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.dsp;
 
-import junit.framework.*;
+import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
 
 import static edu.mines.jtk.util.ArrayMath.*;
 
@@ -23,12 +24,9 @@ import static edu.mines.jtk.util.ArrayMath.*;
  * @author Dave Hale, Colorado School of Mines
  * @version 2009.12.10
  */
-public class FftTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(FftTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class FftTest {
 
+  @Test
   public void test1() {
     for (boolean complex:_complex) {
       for (boolean overwrite:_overwrite) {
@@ -47,6 +45,7 @@ public class FftTest extends TestCase {
     }
   }
 
+  @Test
   public void test2() {
     for (boolean complex:_complex) {
       for (boolean overwrite:_overwrite) {
@@ -74,6 +73,7 @@ public class FftTest extends TestCase {
     }
   }
 
+  @Test
   public void test3() {
     for (boolean complex:_complex) {
       for (boolean overwrite:_overwrite) {
@@ -103,7 +103,8 @@ public class FftTest extends TestCase {
     }
   }
 
-  public void xxtest3() { // too long for routine testing
+  @Test(enabled = false)
+  public void xtest3() { // too long for routine testing
     for (boolean complex:_complex) {
       for (boolean overwrite:_overwrite) {
         for (boolean center1:_center) {
@@ -233,12 +234,7 @@ public class FftTest extends TestCase {
     float tolerance = (float)(n1+n2)*FLT_EPSILON;
     for (int i2=0; i2<n2; ++i2) {
       for (int i1=0; i1<n1; ++i1)
-        try {
-          assertEquals(re[i2][i1],ra[i2][i1],tolerance);
-        } catch (AssertionFailedError e) {
-          System.out.println("index i1="+i1+" i2="+i2);
-          throw e;
-        }
+        assertEquals(re[i2][i1],ra[i2][i1],tolerance);
     }
   }
   private static void assertRealEqual(
@@ -248,12 +244,7 @@ public class FftTest extends TestCase {
     for (int i3=0; i3<n3; ++i3) {
       for (int i2=0; i2<n2; ++i2) {
         for (int i1=0; i1<n1; ++i1) {
-          try {
-            assertEquals(re[i3][i2][i1],ra[i3][i2][i1],tolerance);
-          } catch (AssertionFailedError e) {
-            System.out.println("index i1="+i1+" i2="+i2+" i3="+i3);
-            throw e;
-          }
+          assertEquals(re[i3][i2][i1],ra[i3][i2][i1],tolerance);
         }
       }
     }
@@ -271,13 +262,8 @@ public class FftTest extends TestCase {
     float tolerance = (float)(n1+n2)*FLT_EPSILON;
     for (int i2=0; i2<n2; ++i2) {
       for (int i1=0; i1<n1; ++i1) {
-        try {
-          assertEquals(ce[i2][2*i1  ],ca[i2][2*i1  ],tolerance);
-          assertEquals(ce[i2][2*i1+1],ca[i2][2*i1+1],tolerance);
-        } catch (AssertionFailedError e) {
-          System.out.println("index i1="+i1+" i2="+i2);
-          throw e;
-        }
+        assertEquals(ce[i2][2*i1  ],ca[i2][2*i1  ],tolerance);
+        assertEquals(ce[i2][2*i1+1],ca[i2][2*i1+1],tolerance);
       }
     }
   }
@@ -288,13 +274,8 @@ public class FftTest extends TestCase {
     for (int i3=0; i3<n3; ++i3) {
       for (int i2=0; i2<n2; ++i2) {
         for (int i1=0; i1<n1; ++i1) {
-          try {
-            assertEquals(ce[i3][i2][2*i1  ],ca[i3][i2][2*i1  ],tolerance);
-            assertEquals(ce[i3][i2][2*i1+1],ca[i3][i2][2*i1+1],tolerance);
-          } catch (AssertionFailedError e) {
-            System.out.println("index i1="+i1+" i2="+i2+" i3="+i3);
-            throw e;
-          }
+          assertEquals(ce[i3][i2][2*i1  ],ca[i3][i2][2*i1  ],tolerance);
+          assertEquals(ce[i3][i2][2*i1+1],ca[i3][i2][2*i1+1],tolerance);
         }
       }
     }

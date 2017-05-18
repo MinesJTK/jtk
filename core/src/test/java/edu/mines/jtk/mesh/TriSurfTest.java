@@ -14,20 +14,18 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.mesh;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertEquals;
 
 /**
  * Tests {@link edu.mines.jtk.mesh.TriSurf}.
  * @author Dave Hale, Colorado School of Mines
  * @version 2003.08.26, 2007.01.12
  */
-public class TriSurfTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(TriSurfTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class TriSurfTest {
 
+  @Test
   public void testCube() {
     TriSurf.Node n000 = new TriSurf.Node(0.0f,0.0f,0.0f);
     TriSurf.Node n001 = new TriSurf.Node(0.0f,0.0f,1.0f);

@@ -14,20 +14,18 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.util;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
+
+import static org.testng.AssertJUnit.assertTrue;
 
 /**
  * Tests {@link edu.mines.jtk.util.Units}.
  * @author Dave Hale, Colorado School of Mines
  * @version 2000.02.21, 2006.07.27
  */
-public class UnitsTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(UnitsTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class UnitsTest {
 
+  @Test
   public void testDefine() {
     boolean isValid, defined;
     try {
@@ -58,6 +56,7 @@ public class UnitsTest extends TestCase {
     assertTrue(!defined);
   }
 
+  @Test
   public void testConversion() {
     try {
       Units.define("degrees F",false,"degF");
@@ -110,6 +109,7 @@ public class UnitsTest extends TestCase {
     }
   }
 
+  @Test
   public void testSpecification() {
     try {
       Units.define("degrees F",false,"degF");

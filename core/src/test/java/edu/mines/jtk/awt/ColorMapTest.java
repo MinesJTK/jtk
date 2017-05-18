@@ -14,20 +14,19 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.awt;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
- 
+import org.testng.*;
+import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertEquals;
+
 /**
- * Tests {@link edu.mines.jtk.ColorMap}.
+ * Tests {@link edu.mines.jtk.awt.ColorMap}.
  * @author Chris Engelsma
  * @since 2015.09.25
  */
-public class ColorMapTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(ColorMap.class);
-    junit.textui.TestRunner.run(suite);
-  }
- 
+public class ColorMapTest {
+
+  @Test
   public void testRgbToHsl() {
     float r,g,b;
     float h,s,l;
@@ -45,7 +44,8 @@ public class ColorMapTest extends TestCase {
       assertEquals(expected[2],test[2],0);
     }
   }
- 
+
+  @Test
   public void testHslToRgb() {
     float r,g,b;
     float h,s,l;
@@ -63,7 +63,8 @@ public class ColorMapTest extends TestCase {
       assertEquals(expected[2],test[2],0);
     }
   }
- 
+
+  @Test
   public void testRgbToCieLab() {
     float r,g,b;
     float Ls,as,bs;
@@ -82,6 +83,7 @@ public class ColorMapTest extends TestCase {
     }
   }
 
+  @Test
   public void testCieLabToRgb() {
     float r,g,b;
     float Ls,as,bs;

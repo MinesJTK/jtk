@@ -14,22 +14,19 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.sgl;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
 
 import static edu.mines.jtk.util.ArrayMath.*;
+import static org.testng.AssertJUnit.assertTrue;
 
 /**
  * Tests {@link edu.mines.jtk.sgl.BoundingBoxTree}.
  * @author Dave Hale
  * @version 2006.06.24
  */
-public class BoundingBoxTreeTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(BoundingBoxTreeTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class BoundingBoxTreeTest {
 
+  @Test
   public void testRandom() {
     int minSize = 10;
     int n = 10000;

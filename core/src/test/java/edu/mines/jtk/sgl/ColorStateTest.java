@@ -19,75 +19,72 @@ import com.jogamp.newt.opengl.GLWindow;
 import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLContext;
 import com.jogamp.opengl.GLProfile;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
+import org.testng.annotations.Test;
 
 import java.awt.*;
-import java.awt.color.ColorSpace;
-import java.nio.ByteBuffer;
-import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
 import java.util.Random;
 
 import static edu.mines.jtk.ogl.Gl.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertNull;
+import static org.testng.AssertJUnit.assertFalse;
+import static org.testng.AssertJUnit.assertTrue;
 
 /**
  * Tests {@link edu.mines.jtk.sgl.ColorState}.
  * @author Chris Engelsma
  * @version 2017.05.04
  */
-public class ColorStateTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(ColorStateTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class ColorStateTest {
 
+  @Test
   public void testDefaultConstructorParameters() {
     ColorState cs = new ColorState();
-    Assert.assertFalse(cs.hasColor());
-    Assert.assertEquals(new Color(1.0f,1.0f,1.0f,1.0f),cs.getColor());
-    Assert.assertFalse(cs.hasShadeModel());
-    Assert.assertEquals(GL_SMOOTH, cs.getShadeModel());
-    Assert.assertEquals(0, cs.getAttributeBits());
+    assertFalse(cs.hasColor());
+    assertEquals(new Color(1.0f,1.0f,1.0f,1.0f),cs.getColor());
+    assertFalse(cs.hasShadeModel());
+    assertEquals(GL_SMOOTH, cs.getShadeModel());
+    assertEquals(0, cs.getAttributeBits());
   }
 
+  @Test
   public void testColorSetsAndUnsetsCorrectly() {
     ColorState cs = new ColorState();
     Color expected = randomColor();
 
     // Test setting color.
     cs.setColor(expected);
-    Assert.assertEquals(expected,cs.getColor());
-    Assert.assertTrue(cs.hasColor());
-    Assert.assertEquals(GL_CURRENT_BIT, cs.getAttributeBits());
+    assertEquals(expected,cs.getColor());
+    assertTrue(cs.hasColor());
+    assertEquals(GL_CURRENT_BIT, cs.getAttributeBits());
 
     // Test unsetting color.
     cs.unsetColor();
-    Assert.assertEquals(new Color(1.0f,1.0f,1.0f,1.0f),cs.getColor());
-    Assert.assertFalse(cs.hasColor());
-    Assert.assertEquals(0, cs.getAttributeBits());
+    assertEquals(new Color(1.0f,1.0f,1.0f,1.0f),cs.getColor());
+    assertFalse(cs.hasColor());
+    assertEquals(0, cs.getAttributeBits());
   }
 
+  @Test
   public void testShadeModelSetsAndUnsetsCorrectly() {
     ColorState cs = new ColorState();
     int expected = GL_FLAT;
 
     // Test setting shade model
     cs.setShadeModel(expected);
-    Assert.assertEquals(cs.getShadeModel(), expected);
-    Assert.assertTrue(cs.hasShadeModel());
-    Assert.assertEquals(GL_LIGHTING_BIT, cs.getAttributeBits());
+    assertEquals(cs.getShadeModel(), expected);
+    assertTrue(cs.hasShadeModel());
+    assertEquals(GL_LIGHTING_BIT, cs.getAttributeBits());
 
     // Test unsetting shade model
     cs.unsetShadeModel();
-    Assert.assertEquals(cs.getShadeModel(), GL_SMOOTH);
-    Assert.assertFalse(cs.hasShadeModel());
-    Assert.assertEquals(0, cs.getAttributeBits());
+    assertEquals(cs.getShadeModel(), GL_SMOOTH);
+    assertFalse(cs.hasShadeModel());
+    assertEquals(0, cs.getAttributeBits());
   }
 
+  @Test
   public void testAppliesToGlState() {
     initGL();
 
@@ -101,13 +98,13 @@ public class ColorStateTest extends TestCase {
     // Test shade model is set appropriately
     int[] actualShadeModel = new int[1];
     glGetIntegerv(GL_SHADE_MODEL,actualShadeModel,0);
-    Assert.assertEquals(GL_FLAT,actualShadeModel[0]);
+    assertEquals(GL_FLAT,actualShadeModel[0]);
 
     // Test color is set appropriately
     float[] c = new float[4];
     glGetFloatv(GL_CURRENT_COLOR,c,0);
     Color actualColor = new Color(c[0],c[1],c[2],c[3]);
-    Assert.assertEquals(color, actualColor);
+    assertEquals(color, actualColor);
 
     tearDownGL();
   }

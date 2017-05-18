@@ -14,8 +14,8 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.dsp;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
 
 import static edu.mines.jtk.util.ArrayMath.*;
 
@@ -24,12 +24,9 @@ import static edu.mines.jtk.util.ArrayMath.*;
  * @author Dave Hale, Colorado School of Mines
  * @version 2013.07.23
  */
-public class SymmetricTridiagonalFilterTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(SymmetricTridiagonalFilterTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class SymmetricTridiagonalFilterTest {
 
+  @Test
   public void test1Simple() {
     int n = 5;
     double af,ai,al,b;
@@ -46,9 +43,10 @@ public class SymmetricTridiagonalFilterTest extends TestCase {
     f.apply(x,y);
     f.applyInverse(y,z);
     //dump(x); dump(y); dump(z);
-    assertEqual(x,z);
+    assertArrayEquals(x,z);
   }
 
+  @Test
   public void test2Simple() {
     int n1 = 5;
     int n2 = 4;
@@ -68,9 +66,10 @@ public class SymmetricTridiagonalFilterTest extends TestCase {
     f.applyInverse1(y,z);
     f.applyInverse2(z,z);
     //dump(x); dump(y); dump(z);
-    assertEqual(x,z);
+    assertArrayEquals(x,z);
   }
 
+  @Test
   public void test3Simple() {
     int n1 = 11;
     int n2 = 12;
@@ -90,9 +89,10 @@ public class SymmetricTridiagonalFilterTest extends TestCase {
     y = transpose23(y);
     stf.apply2(y,y);
     y = transpose23(y);
-    assertEqual(x,y);
+    assertArrayEquals(x,y);
   }
 
+  @Test
   public void test2Transpose() {
     int n1 = 4;
     int n2 = 5;
@@ -110,9 +110,10 @@ public class SymmetricTridiagonalFilterTest extends TestCase {
     f.apply2(x,z);
     z = transpose(z);
     //dump(y); dump(z);
-    assertEqual(y,z);
+    assertArrayEquals(y,z);
   }
 
+  @Test
   public void test1Random() {
     java.util.Random r = new java.util.Random();
     int ntest = 1000;
@@ -126,11 +127,12 @@ public class SymmetricTridiagonalFilterTest extends TestCase {
       float[] z = inplace?x:zerofloat(n);
       stf.apply(x,y);
       stf.applyInverse(y,z);
-      assertEqual(t,x);
-      assertEqual(t,z);
+      assertArrayEquals(t,x);
+      assertArrayEquals(t,z);
     }
   }
 
+  @Test
   public void test2Random() {
     java.util.Random r = new java.util.Random();
     int ntest = 1000;
@@ -145,15 +147,16 @@ public class SymmetricTridiagonalFilterTest extends TestCase {
       float[][] z = inplace?x:zerofloat(n1,n2);
       stf.apply1(x,y);
       stf.applyInverse1(y,z);
-      assertEqual(t,x);
-      assertEqual(t,z);
+      assertArrayEquals(t,x);
+      assertArrayEquals(t,z);
       stf.apply2(x,y);
       stf.applyInverse2(y,z);
-      assertEqual(t,x);
-      assertEqual(t,z);
+      assertArrayEquals(t,x);
+      assertArrayEquals(t,z);
     }
   }
 
+  @Test
   public void test3Random() {
     java.util.Random r = new java.util.Random();
     int ntest = 1000;
@@ -169,19 +172,20 @@ public class SymmetricTridiagonalFilterTest extends TestCase {
       float[][][] z = inplace?x:zerofloat(n1,n2,n3);
       stf.apply1(x,y);
       stf.applyInverse1(y,z);
-      assertEqual(t,x);
-      assertEqual(t,z);
+      assertArrayEquals(t,x);
+      assertArrayEquals(t,z);
       stf.apply2(x,y);
       stf.applyInverse2(y,z);
-      assertEqual(t,x);
-      assertEqual(t,z);
+      assertArrayEquals(t,x);
+      assertArrayEquals(t,z);
       stf.apply3(x,y);
       stf.applyInverse3(y,z);
-      assertEqual(t,x);
-      assertEqual(t,z);
+      assertArrayEquals(t,x);
+      assertArrayEquals(t,z);
     }
   }
 
+  @Test
   private static SymmetricTridiagonalFilter makeRandomFilter() {
     java.util.Random r = new java.util.Random();
     float af,ai,al,b;
@@ -237,37 +241,37 @@ public class SymmetricTridiagonalFilterTest extends TestCase {
     return y;
   }
 
-  private static void assertEqual(float[] e, float[] a) {
+  private static void assertArrayEquals(float[] e, float[] a) {
     float tol = 0.001f*max(abs(e));
-    assertEqual(e,a,tol);
+    assertArrayEquals(e,a,tol);
   }
 
-  private static void assertEqual(float[][] e, float[][] a) {
+  private static void assertArrayEquals(float[][] e, float[][] a) {
     float tol = 0.001f*max(abs(e));
-    assertEqual(e,a,tol);
+    assertArrayEquals(e,a,tol);
   }
 
-  private static void assertEqual(float[][][] e, float[][][] a) {
+  private static void assertArrayEquals(float[][][] e, float[][][] a) {
     float tol = 0.001f*max(abs(e));
-    assertEqual(e,a,tol);
+    assertArrayEquals(e,a,tol);
   }
 
-  private static void assertEqual(float[] e, float[] a, float tol) {
+  private static void assertArrayEquals(float[] e, float[] a, float tol) {
     int n = e.length;
     for (int i=0; i<n; ++i) {
       assertEquals(e[i],a[i],tol);
     }
   }
 
-  private static void assertEqual(float[][] e, float[][] a, float tol) {
+  private static void assertArrayEquals(float[][] e, float[][] a, float tol) {
     int n = e.length;
     for (int i=0; i<n; ++i)
-      assertEqual(e[i],a[i],tol);
+      assertArrayEquals(e[i],a[i],tol);
   }
 
-  private static void assertEqual(float[][][] e, float[][][] a, float tol) {
+  private static void assertArrayEquals(float[][][] e, float[][][] a, float tol) {
     int n = e.length;
     for (int i=0; i<n; ++i)
-      assertEqual(e[i],a[i],tol);
+      assertArrayEquals(e[i],a[i],tol);
   }
 }

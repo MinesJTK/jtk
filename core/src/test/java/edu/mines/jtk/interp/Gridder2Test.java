@@ -16,8 +16,8 @@ package edu.mines.jtk.interp;
 
 import javax.swing.*;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
+import static org.testng.Assert.assertTrue;
 
 import edu.mines.jtk.awt.ColorMap;
 import edu.mines.jtk.dsp.Sampling;
@@ -29,8 +29,9 @@ import static edu.mines.jtk.util.ArrayMath.*;
  * @author Dave Hale, Colorado School of Mines
  * @version 2009.07.22
  */
-public class Gridder2Test extends TestCase {
+public class Gridder2Test {
 
+  /* TODO move the demo to the demo package.
   public static void main(String[] args) {
     if (args.length>=1 && args[0].equals("demo")) {
       demo();
@@ -39,6 +40,7 @@ public class Gridder2Test extends TestCase {
     TestSuite suite = new TestSuite(Gridder2Test.class);
     junit.textui.TestRunner.run(suite);
   }
+  */
 
   // Bounds on sample coordinates x1 and x2.
   private static final float XMIN = 0.0f;

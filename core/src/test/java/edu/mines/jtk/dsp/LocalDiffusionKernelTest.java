@@ -14,8 +14,9 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.dsp;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 import java.util.Random;
 import edu.mines.jtk.util.*;
@@ -26,7 +27,8 @@ import static edu.mines.jtk.util.ArrayMath.*;
  * @author Dave Hale, Colorado School of Mines
  * @version 2010.11.25
  */
-public class LocalDiffusionKernelTest extends TestCase {
+public class LocalDiffusionKernelTest {
+  /*
   public static void main(String[] args) {
     if (args.length>0 && args[0].equals("bench")) {
       boolean parallel = (args.length>1 && args[1].equals("serial")) ?
@@ -36,10 +38,9 @@ public class LocalDiffusionKernelTest extends TestCase {
     TestSuite suite = new TestSuite(LocalDiffusionKernelTest.class);
     junit.textui.TestRunner.run(suite);
   }
+  */
 
-  ///////////////////////////////////////////////////////////////////////////
-  // test
-
+  @Test
   public void testD21() {
     LocalDiffusionKernel ldk = 
       new LocalDiffusionKernel(LocalDiffusionKernel.Stencil.D21);
@@ -63,6 +64,8 @@ public class LocalDiffusionKernelTest extends TestCase {
     dump(y);
     */
   }
+
+  @Test
   public void testD22() {
     LocalDiffusionKernel ldk = 
       new LocalDiffusionKernel(LocalDiffusionKernel.Stencil.D22);

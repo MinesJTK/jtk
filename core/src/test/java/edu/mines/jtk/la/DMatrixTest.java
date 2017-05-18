@@ -14,22 +14,20 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.la;
 
-import static java.lang.Math.max;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static java.lang.Math.max;
+import static org.testng.Assert.*;
+
+import org.testng.annotations.Test;
 
 /**
  * Tests {@link edu.mines.jtk.la.DMatrix}.
  * @author Dave Hale, Colorado School of Mines
  * @version 2005.12.07
  */
-public class DMatrixTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(DMatrixTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class DMatrixTest {
 
+  @Test
   public void testConstruct() {
     int m = 3;
     int n = 4;
@@ -56,6 +54,7 @@ public class DMatrixTest extends TestCase {
     assertEqualExact(i1,i2);
   }
 
+  @Test
   public void testGetSet() {
     int m = 3;
     int n = 4;
@@ -115,6 +114,7 @@ public class DMatrixTest extends TestCase {
     assertEqualExact(r,s);
   }
 
+  @Test
   public void testOther() {
     int m = 3;
     int n = 4;

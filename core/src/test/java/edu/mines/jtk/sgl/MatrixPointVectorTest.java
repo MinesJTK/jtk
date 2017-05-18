@@ -14,24 +14,21 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.sgl;
 
+import org.testng.annotations.Test;
+
 import java.util.Random;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
 import static edu.mines.jtk.util.MathPlus.DBL_EPSILON;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Tests classes for matrix, point, and vector math.
  * @author Dave Hale
  * @version 2005.05.20
  */
-public class MatrixPointVectorTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(MatrixPointVectorTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class MatrixPointVectorTest {
 
+  @Test
   public void testMatrix() {
     int ntrial = 10;
     for (int itrial=0; itrial<ntrial; ++itrial) {
@@ -39,66 +36,70 @@ public class MatrixPointVectorTest extends TestCase {
       Matrix44 a = randomMatrix44();
 
       Matrix44 at = a.transpose();
-      assertEquals(a,at.transpose());
+      assertMatrix44Equals(a,at.transpose());
 
       Matrix44 ai = a.inverse();
-      assertEquals(a,ai.inverse());
+      assertMatrix44Equals(a,ai.inverse());
 
-      assertEquals(i,a.times(ai));
-      assertEquals(i,a.transpose().timesTranspose(ai));
-      assertEquals(i,a.transposeTimes(ai.transpose()));
+      assertMatrix44Equals(i,a.times(ai));
+      assertMatrix44Equals(i,a.transpose().timesTranspose(ai));
+      assertMatrix44Equals(i,a.transposeTimes(ai.transpose()));
 
       Matrix44 ac = new Matrix44(a);
-      assertEquals(i,ac.timesEquals(ai));
+      assertMatrix44Equals(i,ac.timesEquals(ai));
       ac = new Matrix44(a);
-      assertEquals(i,ac.transposeEquals().timesTranspose(ai));
+      assertMatrix44Equals(i,ac.transposeEquals().timesTranspose(ai));
       ac = new Matrix44(a);
-      assertEquals(i,ac.transposeTimesEquals(ai.transpose()));
+      assertMatrix44Equals(i,ac.transposeTimesEquals(ai.transpose()));
     }
   }
 
+  @Test
   public void testVector() {
     int ntrial = 10;
     for (int itrial=0; itrial<ntrial; ++itrial) {
       Vector3 u = randomVector3();
       Vector3 v = randomVector3();
       Vector3 vc = new Vector3(v);
-      assertEquals(v,v.negate().negate());
-      assertEquals(v,vc.negateEquals().negateEquals());
-      assertEquals(1.0,v.normalize().length());
-      assertEquals(1.0,vc.normalizeEquals().length());
-      assertEquals(1.0,v.normalize().lengthSquared());
-      assertEquals(v.dot(v),v.lengthSquared());
-      assertEquals(0.0,u.cross(v).dot(u));
-      assertEquals(0.0,u.cross(v).dot(v));
+      assertTuple3Equals(v,v.negate().negate());
+      assertTuple3Equals(v,vc.negateEquals().negateEquals());
+      assertEquals(1.0,v.normalize().length(),TOLERANCE);
+      assertEquals(1.0,vc.normalizeEquals().length(),TOLERANCE);
+      assertEquals(1.0,v.normalize().lengthSquared(),TOLERANCE);
+      assertEquals(v.dot(v),v.lengthSquared(),TOLERANCE);
+      assertEquals(0.0,u.cross(v).dot(u),TOLERANCE);
+      assertEquals(0.0,u.cross(v).dot(v),TOLERANCE);
     }
   }
 
+  @Test
   public void testPoint() {
     int ntrial = 10;
     for (int itrial=0; itrial<ntrial; ++itrial) {
       Point3 p = randomPoint3();
       Point3 pc = new Point3(p);
       Vector3 v = randomVector3();
-      assertEquals(p,p.plus(v).minus(v));
-      assertEquals(p,pc.plusEquals(v).minusEquals(v));
+      assertTuple3Equals(p,p.plus(v).minus(v));
+      assertTuple3Equals(p,pc.plusEquals(v).minusEquals(v));
       Point3 q = p.minus(v);
-      assertEquals(q.distanceTo(p),v.length());
+      assertEquals(q.distanceTo(p),v.length(),TOLERANCE);
     }
   }
 
+  @Test
   public void testMatrixVector() {
     int ntrial = 10;
     for (int itrial=0; itrial<ntrial; ++itrial) {
       Vector3 v = randomVector3();
       Matrix44 a = randomMatrix33();
       Matrix44 ata = a.transposeTimes(a);
-      assertEquals(ata.times(v),a.transposeTimes(a.times(v)));
+      assertTuple3Equals(ata.times(v),a.transposeTimes(a.times(v)));
       Matrix44 aat = a.timesTranspose(a);
-      assertEquals(aat.times(v),a.times(a.transposeTimes(v)));
+      assertTuple3Equals(aat.times(v),a.times(a.transposeTimes(v)));
     }
   }
 
+  @Test
   public void testMatrixPoint() {
     int ntrial = 10;
     for (int itrial=0; itrial<ntrial; ++itrial) {
@@ -107,14 +108,14 @@ public class MatrixPointVectorTest extends TestCase {
       ata = a.transposeTimes(a);
       aat = a.timesTranspose(a);
       Point3 p3 = randomPoint3();
-      assertEquals(ata.times(p3),a.transposeTimes(a.times(p3)));
-      assertEquals(aat.times(p3),a.times(a.transposeTimes(p3)));
+      assertTuple3Equals(ata.times(p3),a.transposeTimes(a.times(p3)));
+      assertTuple3Equals(aat.times(p3),a.times(a.transposeTimes(p3)));
       a = randomMatrix44();
       ata = a.transposeTimes(a);
       aat = a.timesTranspose(a);
       Point4 p4 = randomPoint4();
-      assertEquals(ata.times(p4),a.transposeTimes(a.times(p4)));
-      assertEquals(aat.times(p4),a.times(a.transposeTimes(p4)));
+      assertTuple3Equals(ata.times(p4),a.transposeTimes(a.times(p4)));
+      assertTuple3Equals(aat.times(p4),a.times(a.transposeTimes(p4)));
     }
   }
 
@@ -178,27 +179,24 @@ public class MatrixPointVectorTest extends TestCase {
     return new Point4(x,y,z,w);
   }
 
-  private static void assertEquals(Matrix44 e, Matrix44 a) {
+  private static void assertMatrix44Equals(Matrix44 e, Matrix44 a) {
     double[] em = e.m;
     double[] am = a.m;
     for (int i=0; i<16; ++i)
       assertEquals(em[i],am[i],TOLERANCE);
   }
 
-  private static void assertEquals(Tuple3 e, Tuple3 a) {
+  private static void assertTuple3Equals(Tuple3 e, Tuple3 a) {
     assertEquals(e.x,a.x,TOLERANCE);
     assertEquals(e.y,a.y,TOLERANCE);
     assertEquals(e.z,a.z,TOLERANCE);
   }
 
-  private static void assertEquals(Tuple4 e, Tuple4 a) {
+  private static void assertTuple3Equals(Tuple4 e, Tuple4 a) {
     assertEquals(e.x,a.x,TOLERANCE);
     assertEquals(e.y,a.y,TOLERANCE);
     assertEquals(e.z,a.z,TOLERANCE);
     assertEquals(e.w,a.w,TOLERANCE);
   }
 
-  private static void assertEquals(double e, double a) {
-    assertEquals(e,a,TOLERANCE);
-  }
 }

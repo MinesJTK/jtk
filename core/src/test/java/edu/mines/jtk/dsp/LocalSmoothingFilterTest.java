@@ -14,8 +14,9 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.dsp;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
+import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.assertEquals;
 
 import java.util.Random;
 import static edu.mines.jtk.util.ArrayMath.*;
@@ -25,15 +26,9 @@ import static edu.mines.jtk.util.ArrayMath.*;
  * @author Dave Hale, Colorado School of Mines
  * @version 2012.09.23
  */
-public class LocalSmoothingFilterTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(LocalSmoothingFilterTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class LocalSmoothingFilterTest {
 
-  ///////////////////////////////////////////////////////////////////////////
-  // test
-
+  @Test
   public void testSpd2() {
     int n1 = 5;
     int n2 = 6;

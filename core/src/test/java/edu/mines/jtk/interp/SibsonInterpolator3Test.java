@@ -17,8 +17,8 @@ package edu.mines.jtk.interp;
 import java.awt.*;
 import javax.swing.*;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
 
 import edu.mines.jtk.awt.ColorMap;
 import edu.mines.jtk.dsp.Sampling;
@@ -31,16 +31,17 @@ import static edu.mines.jtk.util.ArrayMath.*;
  * @author Dave Hale, Colorado School of Mines
  * @version 2009.06.14
  */
-public class SibsonInterpolator3Test extends TestCase {
+public class SibsonInterpolator3Test {
+  /* TODO move bench tests
   public static void main(String[] args) {
     if (args.length>=1 && args[0].equals("bench")) {
       benchMethods();
       return;
     }
-    TestSuite suite = new TestSuite(SibsonInterpolator3Test.class);
-    junit.textui.TestRunner.run(suite);
   }
+  */
 
+  @Test
   public void testSimpleTet() {
     testSimpleTet(HL);
     testSimpleTet(BS);
@@ -59,6 +60,7 @@ public class SibsonInterpolator3Test extends TestCase {
     assertValue(si, 0.5f, 0.5f, 0.5f, 1.5f);
   }
 
+  @Test
   public void testSimpleCube() {
     testSimpleCube(HL);
     testSimpleCube(BS);
@@ -82,6 +84,7 @@ public class SibsonInterpolator3Test extends TestCase {
     assertValue(si, 0.5f, 0.5f, 0.5f, 1.5f);
   }
 
+  @Test
   public void testLinear() {
     testLinear(HL);
     //testLinear(BS); // BS too slow
@@ -104,7 +107,7 @@ public class SibsonInterpolator3Test extends TestCase {
         for (int i1=0; i1<n1; ++i1) {
           float x1i = (float)s1.getValue(i1);
           float fe = tf.f(x1i,x2i,x3i);
-          assertEquals(fe,g[i3][i2][i1]);
+          assertEquals(fe,g[i3][i2][i1],1.0E-6);
         }
       }
     }
@@ -148,14 +151,11 @@ public class SibsonInterpolator3Test extends TestCase {
     SibsonInterpolator3.Method.WATSON_SAMBRIDGE;
 
   private static final double TOLERANCE = 1.0e-5;
-  private void assertEquals(float e, float a) {
-    assertEquals(e,a,TOLERANCE);
-  }
   private void assertValue(
     SibsonInterpolator3 si, float x1, float x2, float x3, float f) 
   {
     float g = si.interpolate(x1,x2,x3);
-    assertEquals(f,g);
+    assertEquals(f,g,TOLERANCE);
   }
 
   private static void testScattered(TestFunction tf) {

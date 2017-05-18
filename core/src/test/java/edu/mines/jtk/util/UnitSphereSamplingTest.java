@@ -14,36 +14,37 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.util;
 
-import static java.lang.Math.*;
+import org.testng.annotations.Test;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static java.lang.Math.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.AssertJUnit.assertTrue;
 
 /**
  * Tests {@link edu.mines.jtk.util.UnitSphereSampling}.
  * @author Dave Hale, Colorado School of Mines
- * @version 08/27/2008.
+ * @version 2008.08.27
  */
-public class UnitSphereSamplingTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(UnitSphereSamplingTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class UnitSphereSamplingTest {
 
+  @Test
   public void testSymmetry() {
     testSymmetry(8);
     testSymmetry(16);
   }
 
+  @Test
   public void testInterpolation() {
     testInterpolation(16,0.0001f);
   }
-  
+
+  @Test
   public void testTriangle() {
     testTriangle(8);
     testTriangle(16);
   }
 
+  @Test
   public void testTriangle1() {
     // This used to fail due to rounding errors when computing r and s.
     float[] p = {-0.82179755f,0.56977963f,0.0f};

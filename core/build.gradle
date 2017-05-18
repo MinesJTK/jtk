@@ -12,7 +12,9 @@ dependencies {
   compile     'org.jogamp.jogl:jogl-all-main:2.3.2',
               'org.jogamp.gluegen:gluegen-rt-main:2.3.2',
               'com.googlecode.netlib-java:netlib-java:0.9.3'
-  testCompile 'junit:junit:4.12'
+
+  testCompile 'org.testng:testng:6.8'
+
 }
 // end::dependencies[]
 
@@ -24,6 +26,18 @@ distributions {
 }
 // end::distributions[]
 
+
+
+// tag::test[]
+test {
+  useTestNG() {
+    options {
+      parallel="methods"
+      threadCount=5
+    }
+  }
+}
+// end::test[]
 
 
 // tag::javadoc[]

@@ -16,8 +16,8 @@ package edu.mines.jtk.interp;
 
 import java.util.Random;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
+import static org.junit.Assert.assertTrue;
 
 import edu.mines.jtk.dsp.Sampling;
 import static edu.mines.jtk.util.ArrayMath.*;
@@ -27,13 +27,9 @@ import static edu.mines.jtk.util.ArrayMath.*;
  * @author Dave Hale, Colorado School of Mines
  * @version 2013.01.22
  */
-public class BilinearInterpolator2Test extends TestCase {
-  
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(BilinearInterpolator2Test.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class BilinearInterpolator2Test {
 
+  @Test
   public void testSingleValues() {
     float[][][] xy = sampleTestFunction(11,12);
     float[] x1 = xy[0][0];
@@ -52,12 +48,13 @@ public class BilinearInterpolator2Test extends TestCase {
       float y00 = bi.interpolate00(x1i,x2i);
       float y10 = bi.interpolate10(x1i,x2i);
       float y01 = bi.interpolate01(x1i,x2i);
-      assertEqual(testFunction00(x1i,x2i),y00);
-      assertEqual(testFunction10(x1i,x2i),y10);
-      assertEqual(testFunction01(x1i,x2i),y01);
+      assertNear(testFunction00(x1i,x2i),y00);
+      assertNear(testFunction10(x1i,x2i),y10);
+      assertNear(testFunction01(x1i,x2i),y01);
     }
   }
 
+  @Test
   public void testArrayValues() {
     float[][][] xy = sampleTestFunction(11,13);
     float[] x1 = xy[0][0];
@@ -77,9 +74,10 @@ public class BilinearInterpolator2Test extends TestCase {
     float[][] yi = bi.interpolate(x1i,x2i);
     for (int i2i=0; i2i<n2i; ++i2i)
       for (int i1i=0; i1i<n1i; ++i1i)
-        assertEqual(testFunction00(x1i[i1i],x2i[i2i]),yi[i2i][i1i]);
+        assertNear(testFunction00(x1i[i1i],x2i[i2i]),yi[i2i][i1i]);
   }
 
+  @Test
   public void testSampleValues() {
     float[][][] xy = sampleTestFunction(11,13);
     float[] x1 = xy[0][0];
@@ -101,7 +99,7 @@ public class BilinearInterpolator2Test extends TestCase {
       float x2i = (float)s2i.getValue(i2i);
       for (int i1i=0; i1i<n1i; ++i1i) {
         float x1i = (float)s1i.getValue(i1i);
-        assertEqual(testFunction00(x1i,x2i),yi[i2i][i1i]);
+        assertNear(testFunction00(x1i,x2i),yi[i2i][i1i]);
       }
     }
   }
@@ -137,14 +135,10 @@ public class BilinearInterpolator2Test extends TestCase {
     return 1.4f*(1.1f+1.3f*x1);
   }
 
-  private static void assertEqual(float x, float y) {
-    assertTrue(x+" = "+y,almostEqual(x,y));
-  }
-  
-  private static boolean almostEqual(float x, float y) {
+  private static void assertNear(float x, float y) {
     float ax = abs(x);
     float ay = abs(y);
-    return abs(x-y)<=0.001f*max(ax,ay);
+    assertTrue(abs(x-y)<=0.001f*max(ax,ay));
   }
-
+  
 }

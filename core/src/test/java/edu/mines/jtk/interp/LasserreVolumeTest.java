@@ -14,23 +14,21 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.interp;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertEquals;
 
 /**
  * Tests {@link edu.mines.jtk.interp.LasserreVolume}.
  * @author Dave Hale, Colorado School of Mines
  * @version 2009.06.10
  */
-public class LasserreVolumeTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(LasserreVolumeTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class LasserreVolumeTest {
 
   private LasserreVolume lv2 = new LasserreVolume(2);
   private LasserreVolume lv3 = new LasserreVolume(3);
 
+  @Test
   public void testTriangle() {
     lv2.clear();
     lv2.addHalfSpace( 1.0, 1.0, 1.0); // make a simple
@@ -39,6 +37,7 @@ public class LasserreVolumeTest extends TestCase {
     assertEquals(0.5,lv2.getVolume());
   }
 
+  @Test
   public void testRedundant() {
     lv2.clear();
     lv2.addHalfSpace(-1.0, 1.0, 0.0); // make a simple
@@ -57,6 +56,7 @@ public class LasserreVolumeTest extends TestCase {
     assertEquals(1.0,lv2.getVolume()); // WRONG ANSWER!
   }
 
+  @Test
   public void testUnitSquare() {
     lv2.clear();
     lv2.addHalfSpace( 1.0, 0.0, 1.0);
@@ -68,6 +68,7 @@ public class LasserreVolumeTest extends TestCase {
     assertEquals(2.0,lv2.getVolume()); // WRONG ANSWER!
   }
 
+  @Test
   public void testOctahedron() {
     lv2.clear();
     lv2.addHalfSpace( 1.0, 0.0, 1.0);
@@ -81,6 +82,7 @@ public class LasserreVolumeTest extends TestCase {
     assertEquals(3.5,lv2.getVolume());
   }
 
+  @Test
   public void testUnitCube() {
     lv3.clear();
     lv3.addHalfSpace( 1.0, 0.0, 0.0, 1.0);
@@ -92,7 +94,4 @@ public class LasserreVolumeTest extends TestCase {
     assertEquals(1.0,lv3.getVolume());
   }
 
-  private static void assertEquals(double e, double a) {
-    assertEquals(e,a,1.0e-10);
-  }
 }

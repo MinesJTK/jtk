@@ -16,8 +16,8 @@ package edu.mines.jtk.dsp;
 
 import java.io.*;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.testng.Assert.assertEquals;
+import org.testng.annotations.Test;
 
 import static edu.mines.jtk.util.ArrayMath.dump;
 
@@ -26,20 +26,17 @@ import static edu.mines.jtk.util.ArrayMath.dump;
  * @author Dave Hale, Colorado School of Mines
  * @version 2008.06.09
  */
-public class EigenTensors3Test extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(EigenTensors3Test.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class EigenTensors3Test {
 
-  public static void testRandom() {
+  @Test
+  public void testRandom() {
     testRandom(true,1.0,1.0e-3,1.0e-2);
     testRandom(false,0.1,1.0e-6,1.0e-3);
   }
 
-  private static void testRandom(
-    boolean compressed, 
-    double errorAngle, double errorValue, double errorTensor) 
+  private void testRandom(
+    boolean compressed, double errorAngle,
+    double errorValue, double errorTensor)
   {
     int n1 = 19, n2 = 20, n3 = 21;
     EigenTensors3 et = new EigenTensors3(n1,n2,n3,compressed);
@@ -65,6 +62,7 @@ public class EigenTensors3Test extends TestCase {
     }
   }
 
+  @Test
   public void testIO() throws IOException,ClassNotFoundException {
 
     // Make random eigen-tensors.
@@ -109,25 +107,26 @@ public class EigenTensors3Test extends TestCase {
           et2.getEigenvalues(i1,i2,i3,a2);
           et2.getEigenvectorU(i1,i2,i3,u2);
           et2.getEigenvectorW(i1,i2,i3,w2);
-          assertEqual(a1,a2);
-          assertEqual(u1,u2);
-          assertEqual(w1,w2);
+          assertArrayEquals(a1,a2);
+          assertArrayEquals(u1,u2);
+          assertArrayEquals(w1,w2);
         }
       }
     }
   }
-  private void assertEqual(float[] e, float[] a) {
+
+  private void assertArrayEquals(float[] e, float[] a) {
     for (int i=0; i<e.length; ++i)
       assertEquals(e[i],a[i],0.0);
   }
 
-  private static void checkEigenvalues(float[] a, float[] b, double e) {
+  private void checkEigenvalues(float[] a, float[] b, double e) {
     assertEquals(a[0],b[0],e);
     assertEquals(a[1],b[1],e);
     assertEquals(a[2],b[2],e);
   }
 
-  private static void checkEigenvectors(float[] u, float[] v, double e) {
+  private void checkEigenvectors(float[] u, float[] v, double e) {
     float uv = Math.abs(u[0]*v[0]+u[1]*v[1]+u[2]*v[2]);
     double ce = 1.0-Math.cos(Math.toRadians(e));
     boolean ok = Math.abs(1.0-uv)<ce;
@@ -139,7 +138,7 @@ public class EigenTensors3Test extends TestCase {
     assertEquals(1.0,uv,ce);
   }
 
-  private static void checkTensors(float[] s, float[] t, double e) {
+  private void checkTensors(float[] s, float[] t, double e) {
     for (int i=0; i<6; ++i)
       assertEquals(s[i],t[i],e);
   }
@@ -147,7 +146,7 @@ public class EigenTensors3Test extends TestCase {
   private static java.util.Random r = new java.util.Random();
 
   // Random eigenvalues.
-  private static float[] makeRandomEigenvalues() {
+  private float[] makeRandomEigenvalues() {
     float a1 = r.nextFloat();
     float a2 = r.nextFloat();
     float a3 = r.nextFloat();
@@ -158,7 +157,7 @@ public class EigenTensors3Test extends TestCase {
   }
 
   // Random unit vector with non-negative 3rd component.
-  private static float[] makeRandomEigenvector() {
+  private float[] makeRandomEigenvector() {
     float a = r.nextFloat()-0.5f;
     float b = r.nextFloat()-0.5f;
     float c = r.nextFloat()-0.5f;
@@ -172,7 +171,7 @@ public class EigenTensors3Test extends TestCase {
   }
 
   // Random unit vector orthogonal to specified vector.
-  private static float[] makeOrthogonalVector(float[] v1) {
+  private float[] makeOrthogonalVector(float[] v1) {
     float a1 = v1[0];
     float b1 = v1[1];
     float c1 = v1[2];

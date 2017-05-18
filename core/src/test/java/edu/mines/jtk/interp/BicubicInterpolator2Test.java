@@ -16,8 +16,8 @@ package edu.mines.jtk.interp;
 
 import java.util.Random;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
+import static org.testng.Assert.assertTrue;
 
 import edu.mines.jtk.dsp.Sampling;
 import static edu.mines.jtk.util.ArrayMath.*;
@@ -27,13 +27,9 @@ import static edu.mines.jtk.util.ArrayMath.*;
  * @author Dave Hale, Colorado School of Mines
  * @version 2012.12.27
  */
-public class BicubicInterpolator2Test extends TestCase {
-  
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(BicubicInterpolator2Test.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class BicubicInterpolator2Test {
 
+  @Test
   public void testSingleValues() {
     float[][][] xy = sampleTestFunction(11,12);
     float[] x1 = xy[0][0];
@@ -56,6 +52,7 @@ public class BicubicInterpolator2Test extends TestCase {
     }
   }
 
+  @Test
   public void testArrayValues() {
     float[][][] xy = sampleTestFunction(11,13);
     float[] x1 = xy[0][0];
@@ -78,6 +75,7 @@ public class BicubicInterpolator2Test extends TestCase {
         assertEqual(testFunction00(x1i[i1i],x2i[i2i]),yi[i2i][i1i]);
   }
 
+  @Test
   public void testSampleValues() {
     float[][][] xy = sampleTestFunction(11,13);
     float[] x1 = xy[0][0];
@@ -142,13 +140,9 @@ public class BicubicInterpolator2Test extends TestCase {
   }
 
   private static void assertEqual(float x, float y) {
-    assertTrue(x+" = "+y,almostEqual(x,y));
-  }
-  
-  private static boolean almostEqual(float x, float y) {
     float ax = abs(x);
     float ay = abs(y);
-    return abs(x-y)<=0.001f*max(ax,ay);
+    assertTrue(abs(x-y)<=0.001f*max(ax,ay));
   }
-
+  
 }

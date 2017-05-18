@@ -14,15 +14,14 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.util;
 
+import org.testng.annotations.Test;
+
 import static edu.mines.jtk.util.ArrayMath.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.AssertJUnit.assertTrue;
+import static org.testng.internal.junit.ArrayAsserts.assertArrayEquals;
 
 import java.util.Random;
-
-import org.junit.Test;
-
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Tests {@link edu.mines.jtk.util.ArrayMath}.
@@ -340,7 +339,8 @@ public class ArrayMathTest {
 
   }
 
-  @Test public void testByteArrays() {
+  @Test
+  public void testByteArrays() {
     int n3 = 3, n2 = 5, n1 = 7;
 
     byte val = (byte)1;
@@ -1007,10 +1007,8 @@ public class ArrayMathTest {
     assertEq(2L,abs(-2L));
     assertEq(2.0f,abs(-2.0f));
     assertEq(2.0d,abs(-2.0d));
-    assertEquals("abs(float) changed sign of 0",
-                 0, Float.floatToIntBits(abs(0.0f)));
-    assertEquals("abs(double) changed sign of 0",
-                 0, Double.doubleToLongBits(abs(0.0d)));
+    assertEquals(0, Float.floatToIntBits(abs(0.0f)));
+    assertEquals(0, Double.doubleToLongBits(abs(0.0d)));
 
     assertEq(4,max(1,3,4,2));
     assertEq(4L,max(1L,3L,4L,2L));

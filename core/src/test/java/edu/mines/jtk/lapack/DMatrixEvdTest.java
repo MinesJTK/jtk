@@ -14,8 +14,7 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.lapack;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
 
 import static edu.mines.jtk.lapack.DMatrixTest.assertEqualFuzzy;
 
@@ -24,12 +23,9 @@ import static edu.mines.jtk.lapack.DMatrixTest.assertEqualFuzzy;
  * @author Dave Hale, Colorado School of Mines
  * @version 2005.12.16
  */
-public class DMatrixEvdTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(DMatrixEvdTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class DMatrixEvdTest {
 
+  @Test
   public void testSymmetric() {
     DMatrix a = new DMatrix(new double[][]{
       {4,1,1},
@@ -42,6 +38,7 @@ public class DMatrixEvdTest extends TestCase {
     test(a);
   }
 
+  @Test
   public void testAsymmetric() {
     DMatrix a = new DMatrix(new double[][]{
       {      0,       1,       0,     0},

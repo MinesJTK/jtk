@@ -14,8 +14,8 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.dsp;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
 
 import static edu.mines.jtk.util.ArrayMath.*;
 
@@ -24,12 +24,9 @@ import static edu.mines.jtk.util.ArrayMath.*;
  * @author Dave Hale, Colorado School of Mines
  * @version 2009.12.21
  */
-public class FilterBuffer2Test extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(FilterBuffer2Test.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class FilterBuffer2Test {
 
+  @Test
   public void testLaplacian() {
     FilterBuffer2.Extrapolation[] exs = {
       FilterBuffer2.Extrapolation.ZERO_VALUE,
@@ -47,7 +44,7 @@ public class FilterBuffer2Test extends TestCase {
         float[][] y2 = x2;
         computeLaplacian1(ex,x1,y1);
         computeLaplacian2(ex,x2,y2);
-        assertEquals(y1,y2);
+        assertArrayEquals(y1,y2);
       }
     }
   }
@@ -163,16 +160,16 @@ public class FilterBuffer2Test extends TestCase {
   }
 
   private static final float TOLERANCE = 1000.0f*FLT_EPSILON;
-  private static void assertEquals(float[] a, float[] b) {
+  private static void assertArrayEquals(float[] a, float[] b) {
     int n = a.length;
     for (int i=0; i<n; ++i) {
       assertEquals(a[i],b[i],TOLERANCE);
     }
   }
-  private static void assertEquals(float[][] a, float[][] b) {
+  private static void assertArrayEquals(float[][] a, float[][] b) {
     int n = a.length;
     for (int i=0; i<n; ++i) {
-      assertEquals(a[i],b[i]);
+      assertArrayEquals(a[i],b[i]);
     }
   }
 }

@@ -16,8 +16,10 @@ package edu.mines.jtk.interp;
 
 import java.util.Random;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
+
+import static org.junit.Assert.assertTrue;
+import static org.testng.Assert.assertEquals;
 
 import edu.mines.jtk.dsp.Sampling;
 import static edu.mines.jtk.util.ArrayMath.*;
@@ -27,13 +29,9 @@ import static edu.mines.jtk.util.ArrayMath.*;
  * @author Dave Hale, Colorado School of Mines
  * @version 2012.12.27
  */
-public class TricubicInterpolator3Test extends TestCase {
-  
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(TricubicInterpolator3Test.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class TricubicInterpolator3Test {
 
+  @Test
   public void testSingleValues() {
     float[][][][] xy = sampleTestFunction(11,12,13);
     float[] x1 = xy[0][0][0];
@@ -58,13 +56,14 @@ public class TricubicInterpolator3Test extends TestCase {
       float z100 = testFunction100(x1i,x2i,x3i);
       float z010 = testFunction010(x1i,x2i,x3i);
       float z001 = testFunction001(x1i,x2i,x3i);
-      assertEqual(z000,y000);
-      assertEqual(z100,y100);
-      assertEqual(z010,y010);
-      assertEqual(z001,y001);
+      assertNear(z000,y000);
+      assertNear(z100,y100);
+      assertNear(z010,y010);
+      assertNear(z001,y001);
     }
   }
 
+  @Test
   public void testArrayValues() {
     float[][][][] xy = sampleTestFunction(11,12,13);
     float[] x1 = xy[0][0][0];
@@ -92,12 +91,13 @@ public class TricubicInterpolator3Test extends TestCase {
       for (int i2i=0; i2i<n2i; ++i2i) {
         for (int i1i=0; i1i<n1i; ++i1i) {
           float zi = testFunction000(x1i[i1i],x2i[i2i],x3i[i3i]);
-          assertEqual(zi,yi[i3i][i2i][i1i]);
+          assertNear(zi,yi[i3i][i2i][i1i]);
         }
       }
     }
   }
 
+  @Test
   public void testSampleValues() {
     float[][][][] xy = sampleTestFunction(11,12,13);
     float[] x1 = xy[0][0][0];
@@ -128,7 +128,7 @@ public class TricubicInterpolator3Test extends TestCase {
         for (int i1i=0; i1i<n1i; ++i1i) {
           float x1i = (float)s1i.getValue(i1i);
           float zi = testFunction000(x1i,x2i,x3i);
-          assertEqual(zi,yi[i3i][i2i][i1i]);
+          assertNear(zi,yi[i3i][i2i][i1i]);
         }
       }
     }
@@ -175,14 +175,10 @@ public class TricubicInterpolator3Test extends TestCase {
     return (1.1f+x1)*(1.2f+x2);
   }
 
-  private static void assertEqual(float x, float y) {
-    assertTrue(x+" = "+y,almostEqual(x,y));
-  }
-  
-  private static boolean almostEqual(float x, float y) {
+  private static void assertNear(float x, float y) {
     float ax = abs(x);
     float ay = abs(y);
-    return abs(x-y)<=0.001f*max(ax,ay);
+    assertTrue(abs(x-y)<=0.001f*max(ax,ay));
   }
-
+  
 }

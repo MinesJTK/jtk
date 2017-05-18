@@ -14,8 +14,8 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.dsp;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
+import static org.testng.Assert.assertTrue;
 
 import static edu.mines.jtk.util.ArrayMath.*;
 
@@ -24,12 +24,9 @@ import static edu.mines.jtk.util.ArrayMath.*;
  * @author Dave Hale, Colorado School of Mines
  * @version 2005.03.21
  */
-public class FftComplexTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(FftComplexTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class FftComplexTest {
 
+  @Test
   public void test1() {
     int nmax = 1000;
     for (int n=2; n<nmax; ++n) {
@@ -44,13 +41,14 @@ public class FftComplexTest extends TestCase {
       float[] amp = fillfloat(1.0f,nfft);
       float[] phs = rampfloat(ra,rb,nfft);
       float[] cc = polar(amp,phs);
-      assertEqual(cc,cx);
+      assertNear(cc,cx);
       fft.complexToComplex(-1,cx,cx);
       fft.scale(nfft,cx);
-      assertEqual(c1,cx);
+      assertNear(c1,cx);
     }
   }
 
+  @Test
   public void test2() {
     int n1max = 26;
     int n2max = 26;
@@ -71,16 +69,17 @@ public class FftComplexTest extends TestCase {
         float[][] amp = fillfloat(1.0f,n1fft,n2fft);
         float[][] phs = rampfloat(ra,rb1,rb2,n1fft,n2fft);
         float[][] cc = polar(amp,phs);
-        assertEqual(cc,cx);
+        assertNear(cc,cx);
         fft1.complexToComplex1(-1,n2fft,cx,cx);
         fft2.complexToComplex2(-1,n1fft,cx,cx);
         fft1.scale(n1fft,n2fft,cx);
         fft2.scale(n1fft,n2fft,cx);
-        assertEqual(c1,cx);
+        assertNear(c1,cx);
       }
     }
   }
 
+  @Test
   public void test1Random() {
     int nmax = 1000;
     for (int n=2; n<nmax; ++n) {
@@ -92,10 +91,11 @@ public class FftComplexTest extends TestCase {
       fft.complexToComplex( 1,cx,cy);
       fft.complexToComplex(-1,cy,cx);
       fft.scale(nfft,cx);
-      assertEqual(cr,cx);
+      assertNear(cr,cx);
     }
   }
 
+  @Test
   public void test2Random() {
     int n1max = 26;
     int n2max = 26;
@@ -114,11 +114,12 @@ public class FftComplexTest extends TestCase {
         fft2.complexToComplex2(-1,n1fft,cx,cx);
         fft1.scale(n1fft,n2fft,cx);
         fft2.scale(n1fft,n2fft,cx);
-        assertEqual(cr,cx);
+        assertNear(cr,cx);
       }
     }
   }
 
+  @Test
   public void test3Random() {
     int n1 = 11;
     int n2 = 12;
@@ -140,23 +141,23 @@ public class FftComplexTest extends TestCase {
     fft1.scale(n1fft,n2fft,n3fft,cx);
     fft2.scale(n1fft,n2fft,n3fft,cx);
     fft3.scale(n1fft,n2fft,n3fft,cx);
-    assertEqual(cr,cx);
+    assertNear(cr,cx);
   }
 
-  private void assertEqual(float[] ca, float[] cb) {
+  private void assertNear(float[] ca, float[] cb) {
     int n1 = ca.length/2;
     float tolerance = (float)(n1)*FLT_EPSILON;
     assertTrue(cequal(tolerance,ca,cb));
   }
 
-  private void assertEqual(float[][] ca, float[][] cb) {
+  private void assertNear(float[][] ca, float[][] cb) {
     int n1 = ca[0].length/2;
     int n2 = ca.length;
     float tolerance = (float)(n1+n2)*FLT_EPSILON;
     assertTrue(cequal(tolerance,ca,cb));
   }
 
-  private void assertEqual(float[][][] ca, float[][][] cb) {
+  private void assertNear(float[][][] ca, float[][][] cb) {
     int n1 = ca[0][0].length/2;
     int n2 = ca[0].length;
     int n3 = ca.length;

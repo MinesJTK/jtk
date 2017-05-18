@@ -16,18 +16,20 @@ package edu.mines.jtk.opt;
 
 import java.util.*;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
 import edu.mines.jtk.util.Almost;
+import org.testng.annotations.Test;
 
-/** Wrap edu.mines.jtk.opt.QuadraticSolver for junit testing.
-   (junit.jar must be in CLASSPATH)
-*/
-public class QuadraticSolverTest extends TestCase {
+import static org.testng.Assert.assertEquals;
+import static org.testng.AssertJUnit.assertFalse;
+import static org.testng.AssertJUnit.assertTrue;
+
+/**
+ * Tests {@link edu.mines.jtk.opt.QuadraticSolver}.
+ */
+public class QuadraticSolverTest {
   private static final String NL = System.getProperty("line.separator");
-  /** Junit test of QuadraticSolver
-   */
+
+  @Test
   public void testQS() {
     /*
       Minimize  0.5 x'Hx + b'x = 0, where H = |2 4 | and b = (2 1)'
@@ -52,26 +54,24 @@ public class QuadraticSolverTest extends TestCase {
 
     { // not enough iterations
       ArrayVect1 result = (ArrayVect1) qs.solve(1, null);
-      assert !Almost.FLOAT.equal(-3., result.getData()[0]): "result="+result;
-      assert !Almost.FLOAT.equal(1., result.getData()[1]): "result="+result;
+      assertFalse(Almost.FLOAT.equal(-3., result.getData()[0]));
+      assertFalse(Almost.FLOAT.equal(1., result.getData()[1]));
       result.dispose();
     }
     { // just barely enough iterations
       ArrayVect1 result = (ArrayVect1) qs.solve(2, null);
-      assert Almost.FLOAT.equal(-3., result.getData()[0]): "result="+result;
-      assert Almost.FLOAT.equal(1., result.getData()[1]): "result="+result;
+      assertTrue(Almost.FLOAT.equal(-3., result.getData()[0]));
+      assertTrue(Almost.FLOAT.equal(1., result.getData()[1]));
       result.dispose();
     }
     { // Does not blow up with too many iterations
       ArrayVect1 result = (ArrayVect1) qs.solve(20, null);
-      assert Almost.FLOAT.equal(-3., result.getData()[0]): "result="+result;
-      assert Almost.FLOAT.equal(1., result.getData()[1]): "result="+result;
+      assertTrue(Almost.FLOAT.equal(-3., result.getData()[0]));
+      assertTrue(Almost.FLOAT.equal(1., result.getData()[1]));
       result.dispose();
     }
-    assert TestVect.undisposed.size() == 0 : TestVect.getTraces();
-    assert TestVect.max <= 5:
-      "max number of model vectors ("+TestVect.max+") should be less than 5";
-
+    assertEquals(0,TestVect.undisposed.size());
+    assertTrue(TestVect.max <= 5);
   }
 
   private static class TestVect extends ArrayVect1 {
@@ -123,36 +123,5 @@ public class QuadraticSolverTest extends TestCase {
       }
       return sb.toString();
     }
-  }
-
-  // OPTIONAL OPTIONAL OPTIONAL OPTIONAL OPTIONAL OPTIONAL OPTIONAL
-
-  /* Initialize objects used by all test methods */
-  @Override protected void setUp() throws Exception { super.setUp();}
-
-  /* Destruction of stuff used by all tests: rarely necessary */
-  @Override protected void tearDown() throws Exception { super.tearDown();}
-
-  // NO NEED TO CHANGE THE FOLLOWING
-
-  /** Standard constructor calls TestCase(name) constructor
-      @param name Name of junit Test.
-   */
-  public QuadraticSolverTest(String name) {super (name);}
-
-  /** This automatically generates a suite of all "test" methods.
-      @return A suite of all junit tests as a Test.
-   */
-  public static junit.framework.Test suite() {
-    try {assert false; throw new IllegalStateException("need -ea");}
-    catch (AssertionError e) {}
-    return new TestSuite(QuadraticSolverTest.class);
-  }
-
-  /** Run all tests with text gui if this class main is invoked
-      @param args Command-line arguments.
-   */
-  public static void main (String[] args) {
-    junit.textui.TestRunner.run (suite());
   }
 }

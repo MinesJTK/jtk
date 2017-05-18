@@ -14,8 +14,8 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.dsp;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.testng.Assert.assertEquals;
+import org.testng.annotations.Test;
 
 import static edu.mines.jtk.util.ArrayMath.*;
 
@@ -24,12 +24,9 @@ import static edu.mines.jtk.util.ArrayMath.*;
  * @author Dave Hale, Colorado School of Mines
  * @version 2006.10.15
  */
-public class DifferenceFilterTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(DifferenceFilterTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class DifferenceFilterTest {
 
+  @Test
   public void test1Impulse() {
     float[] e = {0.0f,0.0f,0.0f,-1.0f,2.0f,-1.0f,0.0f,0.0f,0.0f};
     int n = e.length;
@@ -49,6 +46,7 @@ public class DifferenceFilterTest extends TestCase {
     assertEqual(e,z,0.02f);
   }
 
+  @Test
   public void test2Impulse() {
     float[][] e = {
       { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f},
@@ -75,6 +73,7 @@ public class DifferenceFilterTest extends TestCase {
     assertEqual(e,z,0.04f);
   }
 
+  @Test
   public void test3Impulse() {
     float[][][] e = {
       {
@@ -128,6 +127,7 @@ public class DifferenceFilterTest extends TestCase {
     assertEqual(e,z,0.06f);
   }
 
+  @Test
   public void test1Random() {
     DifferenceFilter df = new DifferenceFilter();
     int n = 100;
@@ -160,6 +160,7 @@ public class DifferenceFilterTest extends TestCase {
     assertEquals(d1,d2,tiny);
   }
 
+  @Test
   public void test2Random() {
     DifferenceFilter df = new DifferenceFilter();
     int n1 = 19;
@@ -193,6 +194,7 @@ public class DifferenceFilterTest extends TestCase {
     assertEquals(d1,d2,tiny);
   }
 
+  @Test
   public void test3Random() {
     DifferenceFilter df = new DifferenceFilter();
     int n1 = 11;

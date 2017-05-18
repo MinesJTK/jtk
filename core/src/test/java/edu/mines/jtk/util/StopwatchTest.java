@@ -14,20 +14,18 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.util;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
+
+import static org.testng.AssertJUnit.assertTrue;
 
 /**
  * Tests {@link edu.mines.jtk.util.Stopwatch}.
  * @author Dave Hale and Dean Witte
  * @version 2004.11.02
  */
-public class StopwatchTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(StopwatchTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class StopwatchTest {
 
+  @Test
   public void test() {
     double sleepTime = 0.1;  // time to sleep in seconds
     double smallTime = 0.01; // time errors less than this are ignored

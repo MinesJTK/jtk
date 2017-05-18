@@ -14,25 +14,21 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.dsp;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
 
 /**
  * Tests {@link edu.mines.jtk.dsp.EigenTensors2}.
  * @author Dave Hale, Colorado School of Mines
  * @version 2008.06.09
  */
-public class EigenTensors2Test extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(EigenTensors2Test.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class EigenTensors2Test {
 
-  public static void testRandom() {
+  @Test
+  public void testRandom() {
     testRandom(0.1,1.0e-6);
   }
-
-  private static void testRandom(double errorAngle, double errorCoeff) {
+  private void testRandom(double errorAngle, double errorCoeff) {
     int n1 = 13, n2 = 14;
     EigenTensors2 et = new EigenTensors2(n1,n2);
     for (int i2=0; i2<n2; ++i2) {
@@ -51,7 +47,7 @@ public class EigenTensors2Test extends TestCase {
     }
   }
 
-  private static void checkEigenvalues(float[] c, float[] a, double e) {
+  private void checkEigenvalues(float[] c, float[] a, double e) {
     assertEquals(c[0],a[0],e);
     assertEquals(c[1],a[1],e);
   }

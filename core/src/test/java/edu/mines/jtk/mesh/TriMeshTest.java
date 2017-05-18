@@ -16,22 +16,20 @@ package edu.mines.jtk.mesh;
 
 import java.io.*;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
 import edu.mines.jtk.util.Stopwatch;
+
+import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
+import static org.testng.AssertJUnit.assertTrue;
 
 /**
  * Tests {@link edu.mines.jtk.mesh.TriMesh}.
  * @author Dave Hale, Colorado School of Mines
  * @version 2003.08.26, 2006.08.02
  */
-public class TriMeshTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(TriMeshTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class TriMeshTest {
 
+  @Test
   public void testNabors() {
     TriMesh tm = new TriMesh();
     TriMesh.Node n0 = new TriMesh.Node(1.0f,0.0f);
@@ -61,6 +59,7 @@ public class TriMeshTest extends TestCase {
     assertEquals(2,tm.getNodeNabors(n3).length);
   }
 
+  @Test
   public void testIO() throws IOException,ClassNotFoundException {
 
     // Make tri mesh.
@@ -108,6 +107,7 @@ public class TriMeshTest extends TestCase {
     assertEquals(3,((Integer)map.get(n11)).intValue());
   }
 
+  @Test
   public void testTriListener() {
     TriMesh tm = new TriMesh();
     tm.addNode(new TriMesh.Node(0.0f,0.0f));
@@ -140,6 +140,7 @@ public class TriMeshTest extends TestCase {
     private int _nremoved;
   }
 
+  @Test
   public void testSimple() {
     TriMesh tm = new TriMesh();
     TriMesh.Node n0 = new TriMesh.Node(0.0f,0.0f);
@@ -154,6 +155,7 @@ public class TriMeshTest extends TestCase {
     tm.validate();
   }
 
+  @Test
   public void testSquare() {
     TriMesh tm = new TriMesh();
     TriMesh.Node n0 = new TriMesh.Node(0.0f,0.0f);
@@ -171,6 +173,7 @@ public class TriMeshTest extends TestCase {
     tm.validate();
   }
 
+  @Test
   public void testAddFindRemove() {
     java.util.Random random = new java.util.Random();
     TriMesh tm = new TriMesh();
@@ -226,6 +229,7 @@ public class TriMeshTest extends TestCase {
     }
   }
 
+  @Test
   public void benchFind() {
     int nnode = 1000;
     int nfind = 10000;

@@ -14,10 +14,10 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.dsp;
 
-import java.util.Random;
+import org.testng.annotations.Test;
+import static  org.testng.Assert.assertEquals;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import java.util.Random;
 
 import static edu.mines.jtk.util.ArrayMath.*;
 
@@ -26,12 +26,9 @@ import static edu.mines.jtk.util.ArrayMath.*;
  * @author Dave Hale, Colorado School of Mines
  * @version 2005.03.21
  */
-public class ConvTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(ConvTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class ConvTest {
 
+  @Test
   public void test1Random() {
     int ntest = 1000;
     int kmin = -2;
@@ -56,14 +53,15 @@ public class ConvTest extends TestCase {
 
       convSimple(lx,kx,x,ly,ky,y,lz,kz,zs);
       Conv.conv(lx,kx,x,ly,ky,y,lz,kz,zf);
-      assertEquals(zs,zf);
+      assertArrayEquals(zs,zf);
 
       xcorSimple(lx,kx,x,ly,ky,y,lz,kz,zs);
       Conv.xcor(lx,kx,x,ly,ky,y,lz,kz,zf);
-      assertEquals(zs,zf);
+      assertArrayEquals(zs,zf);
     }
   }
 
+  @Test
   public void test2Random() {
     int ntest = 1000;
     int kmin = -2;
@@ -95,14 +93,15 @@ public class ConvTest extends TestCase {
 
       convSimple(lx1,lx2,kx1,kx2,x,ly1,ly2,ky1,ky2,y,lz1,lz2,kz1,kz2,zs);
       Conv.conv(lx1,lx2,kx1,kx2,x,ly1,ly2,ky1,ky2,y,lz1,lz2,kz1,kz2,zf);
-      assertEquals(zs,zf);
+      assertArrayEquals(zs,zf);
 
       xcorSimple(lx1,lx2,kx1,kx2,x,ly1,ly2,ky1,ky2,y,lz1,lz2,kz1,kz2,zs);
       Conv.xcor(lx1,lx2,kx1,kx2,x,ly1,ly2,ky1,ky2,y,lz1,lz2,kz1,kz2,zf);
-      assertEquals(zs,zf);
+      assertArrayEquals(zs,zf);
     }
   }
 
+  @Test
   public void test3Random() {
     int ntest = 100;
     int kmin = -2;
@@ -145,7 +144,7 @@ public class ConvTest extends TestCase {
       Conv.conv(lx1,lx2,lx3,kx1,kx2,kx3,x,
                 ly1,ly2,ly3,ky1,ky2,ky3,y,
                 lz1,lz2,lz3,kz1,kz2,kz3,zf);
-      assertEquals(zs,zf);
+      assertArrayEquals(zs,zf);
 
       xcorSimple(lx1,lx2,lx3,kx1,kx2,kx3,x,
                  ly1,ly2,ly3,ky1,ky2,ky3,y,
@@ -153,7 +152,7 @@ public class ConvTest extends TestCase {
       Conv.xcor(lx1,lx2,lx3,kx1,kx2,kx3,x,
                 ly1,ly2,ly3,ky1,ky2,ky3,y,
                 lz1,lz2,lz3,kz1,kz2,kz3,zf);
-      assertEquals(zs,zf);
+      assertArrayEquals(zs,zf);
     }
   }
 
@@ -314,22 +313,22 @@ public class ConvTest extends TestCase {
   }
 
   private static final float TOLERANCE = 1000.0f*FLT_EPSILON;
-  private static void assertEquals(float[] a, float[] b) {
+  private static void assertArrayEquals(float[] a, float[] b) {
     int n = a.length;
     for (int i=0; i<n; ++i) {
       assertEquals(a[i],b[i],TOLERANCE);
     }
   }
-  private static void assertEquals(float[][] a, float[][] b) {
+  private static void assertArrayEquals(float[][] a, float[][] b) {
     int n = a.length;
     for (int i=0; i<n; ++i) {
-      assertEquals(a[i],b[i]);
+      assertArrayEquals(a[i],b[i]);
     }
   }
-  private static void assertEquals(float[][][] a, float[][][] b) {
+  private static void assertArrayEquals(float[][][] a, float[][][] b) {
     int n = a.length;
     for (int i=0; i<n; ++i) {
-      assertEquals(a[i],b[i]);
+      assertArrayEquals(a[i],b[i]);
     }
   }
 }

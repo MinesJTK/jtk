@@ -16,20 +16,17 @@ package edu.mines.jtk.dsp;
 
 import static edu.mines.jtk.util.ArrayMath.*;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
 
 /**
  * Tests {@link edu.mines.jtk.dsp.LinearInterpolator}.
  * @author Dave Hale, Colorado School of Mines
  * @version 2011.02.27
  */
-public class LinearInterpolatorTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(LinearInterpolatorTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class LinearInterpolatorTest {
 
+  @Test
   public void testInterpolator1() {
     int nxu = 100;
     float dxu = 0.3f;
@@ -54,6 +51,7 @@ public class LinearInterpolatorTest extends TestCase {
     }
   }
 
+  @Test
   public void testInterpolator2() {
     int nx1u = 100, nx2u = 200;
     float dx1u = 0.3f, dx2u = 0.4f;
@@ -84,6 +82,7 @@ public class LinearInterpolatorTest extends TestCase {
     }
   }
 
+  @Test
   public void testInterpolator3() {
     int nx1u = 110, nx2u = 220, nx3u = 330;
     float dx1u = 0.3f, dx2u = 0.4f, dx3u = 0.5f;
@@ -122,6 +121,7 @@ public class LinearInterpolatorTest extends TestCase {
     }
   }
 
+  @Test
   public void testInterpolator1Zero() {
     float[] yu = {1.0f};
     LinearInterpolator li = new LinearInterpolator();
@@ -134,6 +134,7 @@ public class LinearInterpolatorTest extends TestCase {
     assertEquals(0.0f,li.interpolate( 2.0),0.0);
   }
 
+  @Test
   public void testInterpolator2Zero() {
     float[][] yu = {{1.0f}};
     LinearInterpolator li = new LinearInterpolator();
@@ -151,6 +152,7 @@ public class LinearInterpolatorTest extends TestCase {
     assertEquals(0.0f,li.interpolate( 0.0, 1.0),0.0);
   }
 
+  @Test
   public void testInterpolator3Zero() {
     float[][][] yu = {{{1.0f}}};
     LinearInterpolator li = new LinearInterpolator();

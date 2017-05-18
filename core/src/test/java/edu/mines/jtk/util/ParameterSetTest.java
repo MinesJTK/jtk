@@ -14,23 +14,21 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.util;
 
+import org.testng.annotations.Test;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.testng.Assert.assertTrue;
 
 /**
  * Tests {@link edu.mines.jtk.util.ParameterSet}.
  * @author Dave Hale, Colorado School of Mines
  * @version 02/21/2000, 08/24/2006.
  */
-public class ParameterSetTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(ParameterSetTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class ParameterSetTest {
 
+  @Test
   public void testClone() {
     ParameterSet root = new ParameterSet("root");
     String s1 = root.toString();
@@ -47,6 +45,7 @@ public class ParameterSetTest extends TestCase {
     }
   }
 
+  @Test
   public void testSpecialCharacters() {
     ParameterSet root = new ParameterSet("foo<&>\"\'\\ bar");
     Parameter foo = root.addParameter("foo");
@@ -76,6 +75,7 @@ public class ParameterSetTest extends TestCase {
     }
   }
 
+  @Test
   public void testGeneral() {
     ParameterSet psroot = new ParameterSet();
 
@@ -133,6 +133,7 @@ public class ParameterSetTest extends TestCase {
     }
   }
 
+  @Test
   public void testSetGet() {
     ParameterSet ps = new ParameterSet();
 
@@ -170,7 +171,8 @@ public class ParameterSetTest extends TestCase {
     assertTrue(s.equals("0.0"));
   }
 
-  public void disable_testFile() {
+  @Test(enabled = false)
+  public void testFile() {
     java.io.FileReader file = null;
     try {
       file = new java.io.FileReader("Input_Display.pwflow");
@@ -201,7 +203,8 @@ public class ParameterSetTest extends TestCase {
   }
 
   /*
-  public void disable_testIO() {
+  @Test(enabled = false)
+  public void testIO() {
     try {
       ParameterSet parset = ParameterSetIO.readFile("Input_Display.pwflow");
       System.out.println("parset read from file:\n"+parset.toString());

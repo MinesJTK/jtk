@@ -14,7 +14,8 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.dsp;
 
-import junit.framework.*;
+import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
 
 import static edu.mines.jtk.util.ArrayMath.*;
 
@@ -23,12 +24,9 @@ import static edu.mines.jtk.util.ArrayMath.*;
  * @author Dave Hale, Colorado School of Mines
  * @version 2005.03.21
  */
-public class FftRealTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(FftRealTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class FftRealTest {
 
+  @Test
   public void test1() {
     int nmax = 1000;
     for (int n=2; n<nmax; ++n) {
@@ -53,6 +51,7 @@ public class FftRealTest extends TestCase {
     }
   }
 
+  @Test
   public void test12() {
     int n1max = 26;
     int n2max = 26;
@@ -86,6 +85,7 @@ public class FftRealTest extends TestCase {
     }
   }
 
+  @Test
   public void test21() {
     int n1max = 26;
     int n2max = 26;
@@ -119,6 +119,7 @@ public class FftRealTest extends TestCase {
     }
   }
 
+  @Test
   public void test1Random() {
     int nmax = 1000;
     for (int n=2; n<nmax; ++n) {
@@ -135,6 +136,7 @@ public class FftRealTest extends TestCase {
     }
   }
 
+  @Test
   public void test12Random() {
     int n1max = 26;
     int n2max = 26;
@@ -159,6 +161,7 @@ public class FftRealTest extends TestCase {
     }
   }
 
+  @Test
   public void test21Random() {
     int n1max = 26;
     int n2max = 26;
@@ -193,12 +196,7 @@ public class FftRealTest extends TestCase {
     float tolerance = (float)(n1+n2)*FLT_EPSILON;
     for (int i2=0; i2<n2; ++i2) {
       for (int i1=0; i1<n1; ++i1)
-        try {
-          assertEquals(re[i2][i1],ra[i2][i1],tolerance);
-        } catch (AssertionFailedError e) {
-          System.out.println("index i1="+i1+" i2="+i2);
-          throw e;
-        }
+        assertEquals(re[i2][i1],ra[i2][i1],tolerance);
     }
   }
 
@@ -214,13 +212,8 @@ public class FftRealTest extends TestCase {
     float tolerance = (float)(n1+n2)*FLT_EPSILON;
     for (int i2=0; i2<n2; ++i2) {
       for (int i1=0; i1<n1; ++i1) {
-        try {
-          assertEquals(ce[i2][2*i1  ],ca[i2][2*i1  ],tolerance);
-          assertEquals(ce[i2][2*i1+1],ca[i2][2*i1+1],tolerance);
-        } catch (AssertionFailedError e) {
-          System.out.println("index i1="+i1+" i2="+i2);
-          throw e;
-        }
+        assertEquals(ce[i2][2*i1  ],ca[i2][2*i1  ],tolerance);
+        assertEquals(ce[i2][2*i1+1],ca[i2][2*i1+1],tolerance);
       }
     }
   }

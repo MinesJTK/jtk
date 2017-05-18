@@ -14,26 +14,23 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.opt;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
 
 import static edu.mines.jtk.util.MathPlus.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.AssertJUnit.assertTrue;
 
 /**
  * Tests {@link edu.mines.jtk.opt.LineSearch}.
  * @author Dave Hale, Colorado School of Mines
  * @version 2006.09.02
  */
-public class LineSearchTest extends TestCase {
-
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(LineSearchTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class LineSearchTest {
 
   /**
    * Mor'e and Thuente's test function 1.
    */
+  @Test
   public void testMT1() {
     trace("Function 1");
     LineSearch.Function func = new LineSearch.Function() {
@@ -55,6 +52,7 @@ public class LineSearchTest extends TestCase {
   /**
    * Mor'e and Thuente's test function 2.
    */
+  @Test
   public void testMT2() {
     trace("Function 2");
     LineSearch.Function func = new LineSearch.Function() {
@@ -76,6 +74,7 @@ public class LineSearchTest extends TestCase {
   /**
    * Mor'e and Thuente's test function 3.
    */
+  @Test
   public void testMT3() {
     trace("Function 3");
     LineSearch.Function func = new LineSearch.Function() {
@@ -110,6 +109,7 @@ public class LineSearchTest extends TestCase {
   /**
    * Mor'e and Thuente's test function 4.
    */
+  @Test
   public void testMT4() {
     trace("Function 4");
     LineSearch.Function func = new LineSearch.Function() {
@@ -134,6 +134,7 @@ public class LineSearchTest extends TestCase {
   /**
    * Mor'e and Thuente's test function 5.
    */
+  @Test
   public void testMT5() {
     trace("Function 5");
     LineSearch.Function func = new LineSearch.Function() {
@@ -158,6 +159,7 @@ public class LineSearchTest extends TestCase {
   /**
    * Mor'e and Thuente's test function 6.
    */
+  @Test
   public void testMT6() {
     trace("Function 6");
     LineSearch.Function func = new LineSearch.Function() {

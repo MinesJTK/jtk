@@ -14,8 +14,8 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.dsp;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
 
 import static edu.mines.jtk.util.ArrayMath.*;
 
@@ -24,12 +24,9 @@ import static edu.mines.jtk.util.ArrayMath.*;
  * @author Dave Hale, Colorado School of Mines
  * @version 2007.01.15
  */
-public class LocalCausalFilterTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(LocalCausalFilterTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class LocalCausalFilterTest {
 
+  @Test
   public void test1Random() {
     int[] lag1 = {0,1,2};
     final float[] ar = {  1.00f, -1.80f,  0.81f}; // (1-0.9z)(1-0.9z)
@@ -88,6 +85,7 @@ public class LocalCausalFilterTest extends TestCase {
     }
   }
 
+  @Test
   public void test2Random() {
     int[] lag1 = {
        0, 1, 2, 3, 4,
@@ -158,6 +156,7 @@ public class LocalCausalFilterTest extends TestCase {
     }
   }
 
+  @Test
   public void test3Random() {
     int[] lag1 = {
                    0, 1, 2,
@@ -302,6 +301,7 @@ public class LocalCausalFilterTest extends TestCase {
   }
 
   /*
+  @Test
   public void test1TwoPoles() {
     final int n = 1001;
     final float f = 0.0f;

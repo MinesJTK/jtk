@@ -14,22 +14,20 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.opt;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
 
 import static edu.mines.jtk.util.MathPlus.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.AssertJUnit.assertTrue;
 
 /**
- * Tests {@link edu.mines.jtk.util.BrentMinFinder}.
+ * Tests {@link edu.mines.jtk.opt.BrentMinFinder}.
  * @author Dave Hale, Colorado School of Mines
  * @version 2004.09.15, 2006.08.14
  */
-public class BrentMinFinderTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(BrentMinFinderTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class BrentMinFinderTest {
 
+  @Test
   public void testSimple() {
     BrentMinFinder bmf = new BrentMinFinder(new BrentMinFinder.Function() {
       public double evaluate(double x) {
@@ -123,6 +121,7 @@ public class BrentMinFinderTest extends TestCase {
     }
   }
 
+  @Test
   public void testMinFinder() {
     MinFunc1 f1 = new MinFunc1();
     f1.findMin(0.0,1.0);
@@ -135,12 +134,9 @@ public class BrentMinFinderTest extends TestCase {
   }
 
   private static void assertEqual(double x, double y) {
-    assertTrue(x+" = "+y,almostEqual(x,y));
-  }
-  
-  private static boolean almostEqual(double x, double y) {
     double ax = abs(x);
     double ay = abs(y);
-    return abs(x-y)<=0.0001*max(ax,ay);
+    assertTrue(abs(x-y)<=0.0001*max(ax,ay));
   }
+  
 }
