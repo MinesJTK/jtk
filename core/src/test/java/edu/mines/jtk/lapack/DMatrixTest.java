@@ -53,6 +53,7 @@ public class DMatrixTest {
     assertEqualExact(i1,i2);
   }
 
+  @Test
   public void testGetSet() {
     int m = 3;
     int n = 4;
@@ -112,6 +113,7 @@ public class DMatrixTest {
     assertEqualExact(r,s);
   }
 
+  @Test
   public void testOther() {
     int m = 3;
     int n = 4;

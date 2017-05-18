@@ -339,7 +339,8 @@ public class ArrayMathTest {
 
   }
 
-  @Test public void testByteArrays() {
+  @Test
+  public void testByteArrays() {
     int n3 = 3, n2 = 5, n1 = 7;
 
     byte val = (byte)1;
