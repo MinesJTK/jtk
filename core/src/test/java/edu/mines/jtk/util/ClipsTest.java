@@ -14,23 +14,20 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.util;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
 
 import static edu.mines.jtk.util.ArrayMath.FLT_EPSILON;
 import static edu.mines.jtk.util.ArrayMath.rampfloat;
+import static org.testng.Assert.assertEquals;
 
 /**
  * Tests {@link edu.mines.jtk.util.Clips}.
  * @author Dave Hale, Colorado School of Mines
  * @version 2007.01.19
  */
-public class ClipsTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(ClipsTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class ClipsTest {
 
+  @Test
   public void testPercentiles() {
     double tiny = 10.0f*FLT_EPSILON;
     int n = 101;
@@ -49,4 +46,5 @@ public class ClipsTest extends TestCase {
       assertEquals(imax,cmax,tiny);
     }
   }
+
 }

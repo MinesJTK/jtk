@@ -14,8 +14,8 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.dsp;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
 
 import static edu.mines.jtk.util.ArrayMath.*;
 
@@ -24,12 +24,9 @@ import static edu.mines.jtk.util.ArrayMath.*;
  * @author Dave Hale, Colorado School of Mines
  * @version 2007.02.12
  */
-public class LocalOrientFilterTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(LocalOrientFilterTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class LocalOrientFilterTest {
 
+  @Test
   public void test2() {
     double sigma = 8.0;
     int n1 = 1+4*(int)(3*sigma);
@@ -51,15 +48,16 @@ public class LocalOrientFilterTest extends TestCase {
       float[][] ev = new float[n2][n1];
       float[][] el = new float[n2][n1];
       lof.apply(x,theta,u1,u2,v1,v2,eu,ev,el);
-      assertEqual(dip,theta,0.01);
-      assertEqual(cos(dip),u1,0.01);
-      assertEqual(sin(dip),u2,0.01);
-      assertEqual(-sin(dip),v1,0.01);
-      assertEqual(cos(dip),v2,0.01);
-      assertEqual(1.0f,el,0.01);
+      assertEqualsLocal(dip,theta,0.01);
+      assertEqualsLocal(cos(dip),u1,0.01);
+      assertEqualsLocal(sin(dip),u2,0.01);
+      assertEqualsLocal(-sin(dip),v1,0.01);
+      assertEqualsLocal(cos(dip),v2,0.01);
+      assertEqualsLocal(1.0f,el,0.01);
     }
   }
 
+  @Test
   public void test3Planar() {
     double sigma = 6.0;
     int n1 = 1+2*(int)(3*sigma);
@@ -94,17 +92,18 @@ public class LocalOrientFilterTest extends TestCase {
         float[][][] ep = new float[n3][n2][n1];
         float[][][] el = new float[n3][n2][n1];
         lof.apply(x,theta,phi,u1,u2,u3,v1,v2,v3,w1,w2,w3,eu,ev,ew,ep,el);
-        assertEqual(dip,theta,0.02);
-        assertEqual(azi,phi,0.02);
-        assertEqual(cos(dip),u1,0.02);
-        assertEqual(sin(dip)*cos(azi),u2,0.02);
-        assertEqual(sin(dip)*sin(azi),u3,0.02);
-        assertEqual(1.0,ep,0.02);
-        assertEqual(0.0,el,0.02);
+        assertEqualsLocal(dip,theta,0.02);
+        assertEqualsLocal(azi,phi,0.02);
+        assertEqualsLocal(cos(dip),u1,0.02);
+        assertEqualsLocal(sin(dip)*cos(azi),u2,0.02);
+        assertEqualsLocal(sin(dip)*sin(azi),u3,0.02);
+        assertEqualsLocal(1.0,ep,0.02);
+        assertEqualsLocal(0.0,el,0.02);
       }
     }
   }
 
+  @Test
   public void test3Linear() {
     double sigma = 6.0;
     int n1 = 1+2*(int)(3*sigma);
@@ -165,19 +164,19 @@ public class LocalOrientFilterTest extends TestCase {
         assertAbsEqual(cos(dip),w1,0.10);
         assertAbsEqual(sin(dip)*cos(azi),w2,0.10);
         assertAbsEqual(sin(dip)*sin(azi),w3,0.10);
-        assertEqual(0.0,ep,0.2);
-        assertEqual(1.0,el,0.2);
+        assertEqualsLocal(0.0,ep,0.2);
+        assertEqualsLocal(1.0,el,0.2);
       }
     }
   }
 
-  private static void assertEqual(double e, float[][] a, double tol) {
+  private static void assertEqualsLocal(double e, float[][] a, double tol) {
     int n1 = a[0].length;
     int n2 = a.length;
     assertEquals(e,a[n2/2][n1/2],tol);
   }
 
-  private static void assertEqual(double e, float[][][] a, double tol) {
+  private static void assertEqualsLocal(double e, float[][][] a, double tol) {
     int n1 = a[0][0].length;
     int n2 = a[0].length;
     int n3 = a.length;

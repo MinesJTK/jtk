@@ -14,11 +14,12 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.util;
 
-import org.junit.Test;
 
-import static junit.framework.TestCase.assertFalse;
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertTrue;
+import org.testng.annotations.Test;
+
+import static org.testng.AssertJUnit.assertFalse;
+import static org.testng.AssertJUnit.assertTrue;
+import static org.testng.internal.junit.ArrayAsserts.assertArrayEquals;
 
 /**
  * Tests {@link edu.mines.jtk.util.ArgsParser}.
@@ -40,44 +41,44 @@ public class ArgsParserTest {
     assertFalse(ap.toBoolean(values[3]));
   }
 
-  @Test(expected = ArgsParser.OptionException.class)
+  @Test(expectedExceptions = ArgsParser.OptionException.class)
   public void testBooleanConverterShouldThrowException() throws Exception {
     ArgsParser.toBoolean("true"); // Should work
     ArgsParser.toBoolean("Foo");  // Shouldn't.
   }
 
-  @Test(expected = ArgsParser.OptionException.class)
+  @Test(expectedExceptions = ArgsParser.OptionException.class)
   public void testDoubleConverterShouldThrowException() throws Exception {
     ArgsParser.toDouble("1.986"); // Should work
     ArgsParser.toDouble("Foo");   // Shouldn't.
   }
 
-  @Test(expected = ArgsParser.OptionException.class)
+  @Test(expectedExceptions = ArgsParser.OptionException.class)
   public void testFloatConverterShouldThrowException() throws Exception {
     ArgsParser.toFloat("1.986"); // Should work
     ArgsParser.toFloat("Foo");   // Shouldn't.
   }
 
-  @Test(expected = ArgsParser.OptionException.class)
+  @Test(expectedExceptions = ArgsParser.OptionException.class)
   public void testIntConverterShouldThrowException() throws Exception {
     ArgsParser.toInt("1986"); // Should work.
     ArgsParser.toInt("Foo");  // Shouldn't.
   }
 
-  @Test(expected = ArgsParser.OptionException.class)
+  @Test(expectedExceptions = ArgsParser.OptionException.class)
   public void testLongConverterShouldThrowException() throws Exception {
     ArgsParser.toLong("1986"); // Should work.
     ArgsParser.toLong("Foo");  // Shouldn't.
   }
 
-  @Test(expected = ArgsParser.OptionException.class)
+  @Test(expectedExceptions = ArgsParser.OptionException.class)
   public void testShortOptionNoValueThrowsException() throws Exception {
     String[] args = { "-a3.14", "-b" };
     String shortOpts = "a:d";
     ArgsParser ap = new ArgsParser(args,shortOpts);
   }
 
-  @Test(expected = ArgsParser.OptionException.class)
+  @Test(expectedExceptions = ArgsParser.OptionException.class)
   public void testDoLongOptionNoValueThrowsException() throws Exception {
     String[] args = { "--alpha" };
     String shortOpts = "a:";
@@ -85,7 +86,7 @@ public class ArgsParserTest {
     ArgsParser ap = new ArgsParser(args,shortOpts,longOpts);
   }
 
-  @Test(expected = ArgsParser.OptionException.class)
+  @Test(expectedExceptions = ArgsParser.OptionException.class)
   public void testDoLongOptionUnexpectedValueThrowsException() throws Exception {
     String[] args = { "--a=3.14" };
     String shortOpts = "a";
@@ -93,14 +94,14 @@ public class ArgsParserTest {
     ArgsParser ap = new ArgsParser(args,shortOpts,longOpts);
   }
 
-  @Test(expected = ArgsParser.OptionException.class)
+  @Test(expectedExceptions = ArgsParser.OptionException.class)
   public void testDoShortOptionNoValueThrowsException() throws Exception {
     String[] args = { "-a" };
     String shortOpts = "a:";
     ArgsParser ap = new ArgsParser(args,shortOpts);
   }
 
-  @Test(expected = ArgsParser.OptionException.class)
+  @Test(expectedExceptions = ArgsParser.OptionException.class)
   public void testLongOptionNonUniquePrefixThrowsException() throws Exception {
     String[] args = { "--a=3.14", "--a=6.25" };
     String shortOpts = "a:a:";
@@ -108,7 +109,7 @@ public class ArgsParserTest {
     ArgsParser ap = new ArgsParser(args,shortOpts,longOpts);
   }
 
-  @Test(expected = ArgsParser.OptionException.class)
+  @Test(expectedExceptions = ArgsParser.OptionException.class)
   public void testLongOptionNotRecognizedThrowsException() throws Exception {
     String[] args = { "--a=3.14", "--b=6.25" };
     String shortOpts = "a:d:";

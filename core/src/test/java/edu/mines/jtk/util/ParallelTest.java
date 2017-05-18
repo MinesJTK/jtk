@@ -14,20 +14,23 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.util;
 
-import java.util.Random;
+import org.testng.annotations.Test;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import java.util.Random;
 
 import static edu.mines.jtk.util.ArrayMath.*;
 import static edu.mines.jtk.util.Parallel.*;
+import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertFalse;
+import static org.testng.AssertJUnit.assertTrue;
 
 /**
  * Tests {@link edu.mines.jtk.util.Parallel}.
  * @author Dave Hale, Colorado School of Mines
  * @version 2010.11.23
  */
-public class ParallelTest extends TestCase {
+public class ParallelTest {
+  /* TODO
   public static void main(String[] args) {
     if (args.length>0 && args[0].equals("bench")) {
       boolean parallel = (args.length>1 && args[1].equals("serial")) ?
@@ -37,7 +40,9 @@ public class ParallelTest extends TestCase {
     TestSuite suite = new TestSuite(ParallelTest.class);
     junit.textui.TestRunner.run(suite);
   }
+  */
 
+  @Test
   public void testRandom() {
     for (int ntest=0; ntest<1000; ++ntest) {
       oneRandomTest();
@@ -55,7 +60,7 @@ public class ParallelTest extends TestCase {
     float[] bp = zerofloat(n);
     sqrS(begin,end,step,a,bs);
     sqrP(begin,end,step,chunk,a,bp);
-    assertEquals(bs,bp,0.0f);
+    assertArrayEquals(bs,bp,0.0f);
     float ss = sumS(begin,end,step,a);
     float sp = sumP(begin,end,step,chunk,a);
     assertEquals(ss,sp,0.0001f*max(ss,sp));
@@ -93,6 +98,7 @@ public class ParallelTest extends TestCase {
     });
   }
 
+  @Test
   public void testUnsafe() {
     final Unsafe<Worker> nts = new Unsafe<Worker>();
     loop(20,new LoopInt() {
@@ -113,7 +119,7 @@ public class ParallelTest extends TestCase {
   }
   private static class Worker { // a simple class that is not thread safe
     public void work() { // should fail if entered from multiple threads
-      assertTrue(!_working);
+      assertFalse(_working);
       _working = true;
       try {
         Thread.sleep(10);
@@ -126,7 +132,7 @@ public class ParallelTest extends TestCase {
   }
 
 
-  private static void assertEquals(float[] e, float[] a, float t) {
+  private static void assertArrayEquals(float[] e, float[] a, float t) {
     int n = e.length;
     for (int i=0; i<n; ++i)
       assertEquals(e[i],a[i],t);

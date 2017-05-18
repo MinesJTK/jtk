@@ -14,11 +14,12 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.mesh;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
 
 import static edu.mines.jtk.util.MathPlus.FLT_EPSILON;
 import static edu.mines.jtk.util.MathPlus.FLT_PI;
+import static org.testng.Assert.assertTrue;
+
 import edu.mines.jtk.util.Stopwatch;
 
 /**
@@ -26,12 +27,9 @@ import edu.mines.jtk.util.Stopwatch;
  * @author Dave Hale, Colorado School of Mines
  * @version 2000.04.28, 2006.08.02
  */
-public class GeometryTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(GeometryTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class GeometryTest {
 
+  @Test
   public void testInCircle() {
   
     // Four co-circular points. We will perturb the point pd.

@@ -16,8 +16,8 @@ package edu.mines.jtk.interp;
 
 import java.util.Random;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
+import static org.junit.Assert.assertTrue;
 
 import static edu.mines.jtk.util.ArrayMath.*;
 
@@ -26,13 +26,9 @@ import static edu.mines.jtk.util.ArrayMath.*;
  * @author Dave Hale, Zachary Pember, Colorado School of Mines
  * @version 2000.02.21, 2006.08.22
  */
-public class CubicInterpolatorTest extends TestCase {
-  
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(CubicInterpolatorTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class CubicInterpolatorTest {
 
+  @Test
   public void testArrayMethods() {
     int nc = 10;
     int ni = 100;
@@ -44,19 +40,19 @@ public class CubicInterpolatorTest extends TestCase {
     float[] yi = zerofloat(ni);
     ci.interpolate(xi,yi);
     for (int i=0; i<ni; ++i)
-      assertEqual(yi[i],ci.interpolate(xi[i]));
+      assertNear(yi[i],ci.interpolate(xi[i]));
     ci.interpolate1(xi,yi);
     for (int i=0; i<ni; ++i)
-      assertEqual(yi[i],ci.interpolate1(xi[i]));
+      assertNear(yi[i],ci.interpolate1(xi[i]));
     ci.interpolate2(xi,yi);
     for (int i=0; i<ni; ++i)
-      assertEqual(yi[i],ci.interpolate2(xi[i]));
+      assertNear(yi[i],ci.interpolate2(xi[i]));
     ci.interpolate3(xi,yi);
     for (int i=0; i<ni; ++i)
-      assertEqual(yi[i],ci.interpolate3(xi[i]));
+      assertNear(yi[i],ci.interpolate3(xi[i]));
   }
 
-
+  @Test
   public void testLinearAndSpline() {
     //create set of data points
     int npoints = 100;
@@ -82,27 +78,28 @@ public class CubicInterpolatorTest extends TestCase {
       float yj0 = cl.interpolate(xj);       //=y(x1)
       float yj1 = cl.interpolate1(xj);      //=y'(x1)
       float[] abcd = computeCoefficients(xi, yi0, yi1, xj, yj0, yj1); 
-      assertEqual(deriv0(abcd, xpos-xi), cl.interpolate(xpos));
-      assertEqual(deriv1(abcd, xpos-xi), cl.interpolate1(xpos));
-      assertEqual(0.0f, cl.interpolate2(xpos));
-      assertEqual(0.0f, cl.interpolate3(xpos));
+      assertNear(deriv0(abcd, xpos-xi), cl.interpolate(xpos));
+      assertNear(deriv1(abcd, xpos-xi), cl.interpolate1(xpos));
+      assertNear(0.0f, cl.interpolate2(xpos));
+      assertNear(0.0f, cl.interpolate3(xpos));
       //test spline
       yi0 = cs.interpolate(xi);       //=y(x0)
       yi1 = cs.interpolate1(xi);      //=y'(x0)
       yj0 = cs.interpolate(xj);       //=y(x1)
       yj1 = cs.interpolate1(xj);      //=y'(x1)
       abcd = computeCoefficients(xi, yi0, yi1, xj, yj0, yj1); 
-      assertEqual(deriv0(abcd, xpos-xi), cs.interpolate(xpos));
-      assertEqual(deriv1(abcd, xpos-xi), cs.interpolate1(xpos));
-      assertEqual(deriv2(abcd, xpos-xi), cs.interpolate2(xpos));
-      assertEqual(deriv3(abcd, xpos-xi), cs.interpolate3(xpos));
+      assertNear(deriv0(abcd, xpos-xi), cs.interpolate(xpos));
+      assertNear(deriv1(abcd, xpos-xi), cs.interpolate1(xpos));
+      assertNear(deriv2(abcd, xpos-xi), cs.interpolate2(xpos));
+      assertNear(deriv3(abcd, xpos-xi), cs.interpolate3(xpos));
     }
     //Check extrapolation at ends
     float xinterval = 0.5f;
     checkExtrapolation(linear, cl, npoints, xinterval, x);
     checkExtrapolation(spline, cs, npoints, xinterval, x);
   }
-  
+
+  @Test
   public void testMonotonic() {
     //create set of monotonic data points
     int npoints = 100;
@@ -126,10 +123,10 @@ public class CubicInterpolatorTest extends TestCase {
       float yj0 = cm.interpolate(xj);   //=y(x1)
       float yj1 = cm.interpolate1(xj);  //=y'(x1)
       float[] abcd = computeCoefficients(xi, yi0, yi1, xj, yj0, yj1);
-      assertEqual(deriv0(abcd, xpos-xi), cm.interpolate(xpos));
-      assertEqual(deriv1(abcd, xpos-xi), cm.interpolate1(xpos));
-      assertEqual(deriv2(abcd, xpos-xi), cm.interpolate2(xpos));
-      assertEqual(deriv3(abcd, xpos-xi), cm.interpolate3(xpos));
+      assertNear(deriv0(abcd, xpos-xi), cm.interpolate(xpos));
+      assertNear(deriv1(abcd, xpos-xi), cm.interpolate1(xpos));
+      assertNear(deriv2(abcd, xpos-xi), cm.interpolate2(xpos));
+      assertNear(deriv3(abcd, xpos-xi), cm.interpolate3(xpos));
     }    
     //Check extrapolation at ends
     float xinterval = 0.5f;
@@ -149,14 +146,14 @@ public class CubicInterpolatorTest extends TestCase {
     float yj0 = ci.interpolate(xj);     //=y(x1)
     float yj1 = ci.interpolate1(xj);    //=y'(x1)
     float[] abcd = computeCoefficients(xi, yi0, yi1, xj, yj0, yj1);
-    assertEqual(deriv0(abcd, xpos-xi), ci.interpolate(xpos));
-    assertEqual(deriv1(abcd, xpos-xi), ci.interpolate1(xpos));
+    assertNear(deriv0(abcd, xpos-xi), ci.interpolate(xpos));
+    assertNear(deriv1(abcd, xpos-xi), ci.interpolate1(xpos));
     if(type==CubicInterpolator.Method.LINEAR){
-      assertEqual(0.0f, ci.interpolate2(xpos));
-      assertEqual(0.0f, ci.interpolate3(xpos));
+      assertNear(0.0f, ci.interpolate2(xpos));
+      assertNear(0.0f, ci.interpolate3(xpos));
     }else{
-      assertEqual(deriv2(abcd, xpos-xi), ci.interpolate2(xpos));
-      assertEqual(deriv3(abcd, xpos-xi), ci.interpolate3(xpos));
+      assertNear(deriv2(abcd, xpos-xi), ci.interpolate2(xpos));
+      assertNear(deriv3(abcd, xpos-xi), ci.interpolate3(xpos));
     }  
     //extrapolate beyond last knot
     xpos = x[npoints-1]+0.5f*xinterval;
@@ -167,14 +164,14 @@ public class CubicInterpolatorTest extends TestCase {
     yj0 = ci.interpolate(xj);     //=y(x1)
     yj1 = ci.interpolate1(xj);    //=y'(x1)
     abcd = computeCoefficients(xi, yi0, yi1, xj, yj0, yj1);
-    assertEqual(deriv0(abcd, xpos-xi), ci.interpolate(xpos));
-    assertEqual(deriv1(abcd, xpos-xi), ci.interpolate1(xpos));
+    assertNear(deriv0(abcd, xpos-xi), ci.interpolate(xpos));
+    assertNear(deriv1(abcd, xpos-xi), ci.interpolate1(xpos));
     if(type==CubicInterpolator.Method.LINEAR){
-      assertEqual(0.0f, ci.interpolate2(xpos));
-      assertEqual(0.0f, ci.interpolate3(xpos));
+      assertNear(0.0f, ci.interpolate2(xpos));
+      assertNear(0.0f, ci.interpolate3(xpos));
     }else{
-      assertEqual(deriv2(abcd, xpos-xi), ci.interpolate2(xpos));
-      assertEqual(deriv3(abcd, xpos-xi), ci.interpolate3(xpos));
+      assertNear(deriv2(abcd, xpos-xi), ci.interpolate2(xpos));
+      assertNear(deriv3(abcd, xpos-xi), ci.interpolate3(xpos));
     }  
   }
 
@@ -212,14 +209,10 @@ public class CubicInterpolatorTest extends TestCase {
     return (6.0f*abcd[0]);
   }
 
-  private static void assertEqual(float x, float y) {
-    assertTrue(x+" = "+y,almostEqual(x,y));
-  }
-  
-  private static boolean almostEqual(float x, float y) {
+  private static void assertNear(float x, float y) {
     float ax = abs(x);
     float ay = abs(y);
-    return abs(x-y)<=0.001f*max(ax,ay);
+    assertTrue(abs(x-y)<=0.001f*max(ax,ay));
   }
-
+  
 }

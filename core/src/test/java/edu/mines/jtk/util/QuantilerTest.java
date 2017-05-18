@@ -14,26 +14,29 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.util;
 
+import org.testng.annotations.Test;
+
 import java.util.Random;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
 import static edu.mines.jtk.util.ArrayMath.*;
+import static org.testng.AssertJUnit.assertTrue;
 
 /**
  * Tests {@link edu.mines.jtk.util.Quantiler}.
  * @author Dave Hale, Colorado School of Mines
  * @version 2000.10.01, 2006.07.13
  */
-public class QuantilerTest extends TestCase {
+public class QuantilerTest {
+  /* TODO move bench
   public static void main(String[] args) {
     if (args.length>0 && args[0].equals("bench"))
       bench();
     TestSuite suite = new TestSuite(QuantilerTest.class);
     junit.textui.TestRunner.run(suite);
   }
+  */
 
+  @Test
   public void testLinear() {
 
     int n = 101;
@@ -56,6 +59,7 @@ public class QuantilerTest extends TestCase {
     }
   }
 
+  @Test
   public void testRandom() {
     int n = 10000;
     float[] f = randfloat(new Random(314159),n);

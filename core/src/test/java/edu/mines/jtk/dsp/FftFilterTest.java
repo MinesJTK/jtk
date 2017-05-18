@@ -16,8 +16,8 @@ package edu.mines.jtk.dsp;
 
 import java.util.Random;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
 
 import static edu.mines.jtk.util.ArrayMath.*;
 
@@ -26,12 +26,9 @@ import static edu.mines.jtk.util.ArrayMath.*;
  * @author Dave Hale, Colorado School of Mines
  * @version 2009.12.17
  */
-public class FftFilterTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(FftFilterTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class FftFilterTest {
 
+  @Test
   public void test1Random() {
     int ntest = 1000;
     int nmin = 1;
@@ -49,10 +46,11 @@ public class FftFilterTest extends TestCase {
       FftFilter ff = new FftFilter(kh,h);
       ff.apply(x,y);
       Conv.conv(nh,-kh,h,nx,0,x,nz,0,z);
-      assertEquals(z,y);
+      assertArrayEquals(z,y);
     }
   }
 
+  @Test
   public void test2Random() {
     int ntest = 1000;
     int nmin = 1;
@@ -75,10 +73,11 @@ public class FftFilterTest extends TestCase {
       FftFilter ff = new FftFilter(kh1,kh2,h);
       ff.apply(x,y);
       Conv.conv(nh1,nh2,-kh1,-kh2,h,nx1,nx2,0,0,x,nz1,nz2,0,0,z);
-      assertEquals(z,y);
+      assertArrayEquals(z,y);
     }
   }
 
+  @Test
   public void test3Random() {
     int ntest = 100;
     int nmin = 1;
@@ -108,29 +107,29 @@ public class FftFilterTest extends TestCase {
       Conv.conv(nh1,nh2,nh3,-kh1,-kh2,-kh3,h,
                 nx1,nx2,nx3,0,0,0,x,
                 nz1,nz2,nz3,0,0,0,z);
-      assertEquals(z,y);
+      assertArrayEquals(z,y);
     }
   }
 
   private Random _random = new Random();
 
   private static final float TOLERANCE = 1000.0f*FLT_EPSILON;
-  private static void assertEquals(float[] a, float[] b) {
+  private static void assertArrayEquals(float[] a, float[] b) {
     int n = a.length;
     for (int i=0; i<n; ++i) {
       assertEquals(a[i],b[i],TOLERANCE);
     }
   }
-  private static void assertEquals(float[][] a, float[][] b) {
+  private static void assertArrayEquals(float[][] a, float[][] b) {
     int n = a.length;
     for (int i=0; i<n; ++i) {
-      assertEquals(a[i],b[i]);
+      assertArrayEquals(a[i],b[i]);
     }
   }
-  private static void assertEquals(float[][][] a, float[][][] b) {
+  private static void assertArrayEquals(float[][][] a, float[][][] b) {
     int n = a.length;
     for (int i=0; i<n; ++i) {
-      assertEquals(a[i],b[i]);
+      assertArrayEquals(a[i],b[i]);
     }
   }
 }

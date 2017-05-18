@@ -14,8 +14,8 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.lapack;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
+import static org.testng.Assert.assertFalse;
 
 import static edu.mines.jtk.lapack.DMatrixTest.assertEqualFuzzy;
 
@@ -24,12 +24,9 @@ import static edu.mines.jtk.lapack.DMatrixTest.assertEqualFuzzy;
  * @author Dave Hale, Colorado School of Mines
  * @version 2005.12.14
  */
-public class DMatrixQrdTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(DMatrixQrdTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class DMatrixQrdTest {
 
+  @Test
   public void testRankDeficient() {
     DMatrix a = new DMatrix(new double[][]{
       {0.0,  0.0},
@@ -39,6 +36,7 @@ public class DMatrixQrdTest extends TestCase {
     assertFalse(qrd.isFullRank());
   }
 
+  @Test
   public void testSimple() {
     test(new DMatrix(new double[][]{
       {0.0,  2.0},
@@ -51,6 +49,7 @@ public class DMatrixQrdTest extends TestCase {
     }));
   }
 
+  @Test
   public void testRandom() {
     test(DMatrix.random(100,100));
     test(DMatrix.random(101,100));

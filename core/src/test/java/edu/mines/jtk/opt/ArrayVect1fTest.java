@@ -19,18 +19,18 @@ import java.io.ObjectOutputStream;
 import java.util.Arrays;
 import java.util.logging.Logger;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
 import edu.mines.jtk.util.Almost;
+import org.testng.annotations.Test;
 
-/** Unit tests for edu.mines.jtk.opt.ArrayVect1f.
-*/
-public class ArrayVect1fTest extends TestCase {
+import static org.testng.AssertJUnit.assertTrue;
+
+/**
+ * Tests {@link edu.mines.jtk.opt.ArrayVect1f}.
+ */
+public class ArrayVect1fTest {
   private static final Logger LOG = Logger.getLogger("edu.mines.jtk.opt.test");
 
-  /** Run test code.
-   * @throws Exception any test failure */
+  @Test
   public void testAll () throws Exception {
     { // check Vect properties
       float[] a = new float[31];
@@ -45,8 +45,8 @@ public class ArrayVect1fTest extends TestCase {
       v = new ArrayVect1f(a, 0, 3.);
       Vect w = v.clone();
       w.multiplyInverseCovariance();
-      assert Almost.FLOAT.equal(1./3., v.dot(w));
-      assert Almost.FLOAT.equal(1./3., v.magnitude());
+      assertTrue(Almost.FLOAT.equal(1./3., v.dot(w)));
+      assertTrue(Almost.FLOAT.equal(1./3., v.magnitude()));
     }
 
     { // test size of serialization
@@ -75,41 +75,8 @@ public class ArrayVect1fTest extends TestCase {
         writeObjectSize = result.length;
         LOG.fine("writeObject size = "+writeObjectSize);
       }
-      assert externalSize <= minimumSize + 308 :
-        externalSize+" <= "+(minimumSize + 308 );
-      assert writeObjectSize <= minimumSize + 308 :
-        writeObjectSize +"<="+ (minimumSize + 308);
+      assertTrue(externalSize <= minimumSize + 308);
+      assertTrue(writeObjectSize <= minimumSize + 308);
     }
-  }
-
-  // OPTIONAL OPTIONAL OPTIONAL OPTIONAL OPTIONAL OPTIONAL OPTIONAL
-
-  /* Initialize objects used by all test methods */
-  @Override protected void setUp() throws Exception { super.setUp();}
-
-  /* Destruction of stuff used by all tests: rarely necessary */
-  @Override protected void tearDown() throws Exception { super.tearDown();}
-
-  // NO NEED TO CHANGE THE FOLLOWING
-
-  /** Standard constructor calls TestCase(name) constructor
-      @param name Name of junit Test.
-   */
-  public ArrayVect1fTest(String name) {super (name);}
-
-  /** This automatically generates a suite of all "test" methods.
-      @return A suite of all junit tests as a Test.
-   */
-  public static junit.framework.Test suite() {
-    try {assert false; throw new IllegalStateException("need -ea");}
-    catch (AssertionError e) {}
-    return new TestSuite(ArrayVect1fTest.class);
-  }
-
-  /** Run all tests with text gui if this class main is invoked
-      @param args Command-line arguments.
-   */
-  public static void main (String[] args) {
-    junit.textui.TestRunner.run (suite());
   }
 }

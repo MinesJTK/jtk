@@ -14,8 +14,9 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.dsp;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
+
 
 import java.util.Random;
 import edu.mines.jtk.util.*;
@@ -26,7 +27,8 @@ import static edu.mines.jtk.util.ArrayMath.*;
  * @author Dave Hale, Colorado School of Mines
  * @version 2010.11.25
  */
-public class RecursiveGaussianFilterTest extends TestCase {
+public class RecursiveGaussianFilterTest {
+  /*
   public static void main(String[] args) {
     if (args.length>0 && args[0].equals("bench")) {
       boolean parallel = (args.length>1 && args[1].equals("serial")) ?
@@ -36,7 +38,9 @@ public class RecursiveGaussianFilterTest extends TestCase {
     TestSuite suite = new TestSuite(RecursiveGaussianFilterTest.class);
     junit.textui.TestRunner.run(suite);
   }
+  */
 
+  @Test
   public void test1() {
     float sigma = 10.0f;
     int n = 1+2*(int)(sigma*4.0f);
@@ -53,6 +57,7 @@ public class RecursiveGaussianFilterTest extends TestCase {
     }
   }
 
+  @Test
   public void test2() {
     float sigma = 10.0f;
     int n1 = 1+2*(int)(sigma*4.0f);
@@ -73,6 +78,7 @@ public class RecursiveGaussianFilterTest extends TestCase {
     }
   }
 
+  @Test
   public void test3() {
     float sigma = 10.0f;
     int n1 = 1+2*(int)(sigma*4.0f);

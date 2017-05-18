@@ -14,20 +14,22 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.util;
 
+import org.testng.annotations.Test;
+
 import java.util.logging.*;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.testng.AssertJUnit.assertTrue;
 
-/** Wrap edu.mines.jtk.util.CleanFormatter for junit testing.
-   (junit.jar must be in CLASSPATH)
-*/
-public class CleanFormatterTest extends TestCase {
+
+/**
+ * Tests {@link edu.mines.jtk.util.CleanFormatter}.
+ */
+public class CleanFormatterTest {
 
   /** Line separator */
   private static final String NL = System.getProperty("line.separator");
 
-  /** Unit tests */
+  @Test
   public void testFormatter() {
     CleanHandler.setDefaultHandler();
     Logger logger = Logger.getLogger("edu.mines.jtk.util.CleanFormatter");
@@ -43,47 +45,16 @@ public class CleanFormatterTest extends TestCase {
       assertTrue(s[i].endsWith(messages[i]+NL));
       logger.fine("|"+s[i]+"|");
     }
-    assert s[0].equals("one"+NL): s[0];
-    assert s[1].equals("WARNING: two"+NL) : s[1];
-    assert s[2].matches("^\\*\\*\\*\\* SEVERE WARNING \\*\\*\\*\\* "+
+    assertTrue(s[0].equals("one"+NL));
+    assertTrue(s[1].equals("WARNING: two"+NL));
+    assertTrue(s[2].matches("^\\*\\*\\*\\* SEVERE WARNING \\*\\*\\*\\* "+
                         "\\(Class.method \\d+-\\d+ #.*\\)"+NL+
-                        "SEVERE: three"+NL+"$") :s[2];
+                        "SEVERE: three"+NL+"$"));
   }
 
-  /** Test prependToLines method */
+  @Test
   public void testPrepend() {
     String lines = CleanFormatter.prependToLines("a","bbb"+NL+"ccc");
-    assert (lines.equals("abbb"+NL+"accc"));
-  }
-
-  // OPTIONAL OPTIONAL OPTIONAL OPTIONAL OPTIONAL OPTIONAL OPTIONAL
-
-  /* Initialize objects used by all test methods */
-  @Override protected void setUp() throws Exception { super.setUp();}
-
-  /* Destruction of stuff used by all tests: rarely necessary */
-  @Override protected void tearDown() throws Exception { super.tearDown();}
-
-  // NO NEED TO CHANGE THE FOLLOWING
-
-  /** Standard constructor calls TestCase(name) constructor
-      @param name Name of junit Test.
-   */
-  public CleanFormatterTest(String name) {super (name);}
-
-  /** This automatically generates a suite of all "test" methods.
-      @return A suite of all junit tests as a Test.
-   */
-  public static junit.framework.Test suite() {
-    try {assert false; throw new IllegalStateException("need -ea");}
-    catch (AssertionError e) {}
-    return new TestSuite(CleanFormatterTest.class);
-  }
-
-  /** Run all tests with text gui if this class main is invoked
-      @param args Command-line arguments.
-   */
-  public static void main (String[] args) {
-    junit.textui.TestRunner.run (suite());
+    assertTrue(lines.equals("abbb"+NL+"accc"));
   }
 }

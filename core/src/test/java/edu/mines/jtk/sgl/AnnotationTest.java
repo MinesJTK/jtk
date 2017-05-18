@@ -1,24 +1,20 @@
 package edu.mines.jtk.sgl;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-import org.junit.Assert;
+import org.testng.annotations.Test;
 
 import java.awt.*;
 import java.util.Random;
 
+import static org.testng.Assert.assertEquals;
+
 /**
  * Tests {@link edu.mines.jtk.sgl.Annotation}.
- *
  * @author Chris Engelsma
  * @version 2017.03.15
  */
-public class AnnotationTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(Annotation.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class AnnotationTest {
 
+  @Test
   public void testConstructorsAllEqual() {
     Random r = new Random();
     int x = (int)(r.nextFloat()*100);
@@ -33,15 +29,16 @@ public class AnnotationTest extends TestCase {
     ans[3] = new Annotation(p,"");
 
     for (int i=0; i<ans.length; ++i) {
-      Assert.assertEquals(Color.WHITE,ans[i].getColor());
-      Assert.assertEquals(p,ans[i].getLocation());
-      Assert.assertEquals("",ans[i].getText());
-      Assert.assertEquals(Annotation.Alignment.EAST,ans[i].getAlignment());
-      Assert.assertEquals(
+      assertEquals(Color.WHITE,ans[i].getColor());
+      assertEquals(p,ans[i].getLocation());
+      assertEquals("",ans[i].getText());
+      assertEquals(Annotation.Alignment.EAST,ans[i].getAlignment());
+      assertEquals(
         new Font("SansSerif",Font.PLAIN,18),ans[i].getFont());
     }
   }
 
+  @Test
   public void testParametersGetSet() {
     Random r = new Random();
     int x = (int)(r.nextFloat()*100);
@@ -55,11 +52,11 @@ public class AnnotationTest extends TestCase {
     actual.setText("Hello World");
     actual.setAlignment(Annotation.Alignment.NORTH);
 
-    Assert.assertEquals(new Point3(x,y,z),actual.getLocation());
-    Assert.assertEquals(Color.RED,actual.getColor());
-    Assert.assertEquals(new Font("Impact",Font.BOLD,24),actual.getFont());
-    Assert.assertEquals("Hello World", actual.getText());
-    Assert.assertEquals(Annotation.Alignment.NORTH,actual.getAlignment());
+    assertEquals(new Point3(x,y,z),actual.getLocation());
+    assertEquals(Color.RED,actual.getColor());
+    assertEquals(new Font("Impact",Font.BOLD,24),actual.getFont());
+    assertEquals("Hello World", actual.getText());
+    assertEquals(Annotation.Alignment.NORTH,actual.getAlignment());
   }
 
 }

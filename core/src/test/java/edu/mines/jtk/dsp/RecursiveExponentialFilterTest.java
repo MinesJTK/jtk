@@ -14,8 +14,9 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.dsp;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 import static edu.mines.jtk.util.ArrayMath.*;
 
@@ -24,12 +25,9 @@ import static edu.mines.jtk.util.ArrayMath.*;
  * @author Dave Hale, Colorado School of Mines
  * @version 2011.08.11
  */
-public class RecursiveExponentialFilterTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(RecursiveExponentialFilterTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class RecursiveExponentialFilterTest {
 
+  @Test
   public void testInPlace() {
     int n1 = 101;
     int n2 = 102;
@@ -52,13 +50,14 @@ public class RecursiveExponentialFilterTest extends TestCase {
     RecursiveExponentialFilter ref = new RecursiveExponentialFilter(40.0);
     for (RecursiveExponentialFilter.Edges edges:edgesAll) {
       ref.setEdges(edges);
-      copy(x1,z1); ref.apply(x1,y1); ref.apply(z1,z1); assertEqual(y1,z1);
-      copy(x2,z2); ref.apply(x2,y2); ref.apply(z2,z2); assertEqual(y2,z2);
-      copy(x3,z3); ref.apply(x3,y3); ref.apply(z3,z3); assertEqual(y3,z3);
+      copy(x1,z1); ref.apply(x1,y1); ref.apply(z1,z1); assertArrayEquals(y1,z1);
+      copy(x2,z2); ref.apply(x2,y2); ref.apply(z2,z2); assertArrayEquals(y2,z2);
+      copy(x3,z3); ref.apply(x3,y3); ref.apply(z3,z3); assertArrayEquals(y3,z3);
     }
   }
 
   // Compare low-frequency response with that for Gaussian.
+  @Test
   public void testFrequencyResponse() {
     int n = 501;
     double sigma = 4.0;
@@ -87,6 +86,7 @@ public class RecursiveExponentialFilterTest extends TestCase {
   }
 
   // Check for symmetric positive-definite, or not.
+  @Test
   public void testSpd() {
     RecursiveExponentialFilter.Edges[] edgesAll = {
       RecursiveExponentialFilter.Edges.INPUT_ZERO_VALUE,
@@ -176,20 +176,20 @@ public class RecursiveExponentialFilterTest extends TestCase {
     }
   }
 
-  private void assertEqual(float[] e, float[] a) {
+  private void assertArrayEquals(float[] e, float[] a) {
     int n = e.length;
     for (int i=0; i<n; ++i)
       assertEquals(e[i],a[i],0.0);
   }
-  private void assertEqual(float[][] e, float[][] a) {
+  private void assertArrayEquals(float[][] e, float[][] a) {
     int n = e.length;
     for (int i=0; i<n; ++i)
-      assertEqual(e[i],a[i]);
+      assertArrayEquals(e[i],a[i]);
   }
-  private void assertEqual(float[][][] e, float[][][] a) {
+  private void assertArrayEquals(float[][][] e, float[][][] a) {
     int n = e.length;
     for (int i=0; i<n; ++i)
-      assertEqual(e[i],a[i]);
+      assertArrayEquals(e[i],a[i]);
   }
 
   /*

@@ -14,8 +14,9 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.la;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
+import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.assertFalse;
 
 import static edu.mines.jtk.la.DMatrixTest.assertEqualFuzzy;
 
@@ -24,12 +25,9 @@ import static edu.mines.jtk.la.DMatrixTest.assertEqualFuzzy;
  * @author Dave Hale, Colorado School of Mines
  * @version 2006.09.15
  */
-public class DMatrixLudTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(DMatrixLudTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class DMatrixLudTest {
 
+  @Test
   public void testSingular() {
     DMatrix a = new DMatrix(new double[][]{
       {0.0,  0.0},
@@ -40,6 +38,7 @@ public class DMatrixLudTest extends TestCase {
     assertFalse(lud.isNonSingular());
   }
 
+  @Test
   public void testSimple() {
     test(new DMatrix(new double[][]{
       {0.0,  2.0},
@@ -52,6 +51,7 @@ public class DMatrixLudTest extends TestCase {
     }));
   }
 
+  @Test
   public void testRandom() {
     test(DMatrix.random(100,100));
     test(DMatrix.random(101,100));

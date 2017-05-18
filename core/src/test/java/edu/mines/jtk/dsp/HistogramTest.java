@@ -14,8 +14,8 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.dsp;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
 
 import static edu.mines.jtk.util.ArrayMath.*;
 
@@ -24,12 +24,9 @@ import static edu.mines.jtk.util.ArrayMath.*;
  * @author Dave Hale, Colorado School of Mines
  * @version 2005.10.18
  */
-public class HistogramTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(HistogramTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class HistogramTest {
 
+  @Test
   public void testConstant() {
     int n = 1001;
     float vfill = 2.0f;
@@ -100,6 +97,7 @@ public class HistogramTest extends TestCase {
     assertEquals(0,h.getHighCount());
   }
 
+  @Test
   public void testRamp() {
     int n = 1001;
     float[] v = rampfloat(0.0f,1.0f,n);

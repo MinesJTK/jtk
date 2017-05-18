@@ -14,8 +14,8 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.dsp;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.testng.Assert.assertEquals;
+import org.testng.annotations.Test;
 
 import static edu.mines.jtk.util.ArrayMath.*;
 
@@ -24,12 +24,9 @@ import static edu.mines.jtk.util.ArrayMath.*;
  * @author Dave Hale, Colorado School of Mines
  * @version 2007.01.16
  */
-public class CausalFilterTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(CausalFilterTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class CausalFilterTest {
 
+  @Test
   public void test1Random() {
     int[] lag1 = {0,1,2};
     final float[] a = {  1.00f, -1.80f,  0.81f}; // (1-0.9z)(1-0.9z)
@@ -78,6 +75,7 @@ public class CausalFilterTest extends TestCase {
     }
   }
 
+  @Test
   public void test2Random() {
     int[] lag1 = {
        0, 1, 2, 3, 4,
@@ -137,6 +135,7 @@ public class CausalFilterTest extends TestCase {
     }
   }
 
+  @Test
   public void test3Random() {
     int[] lag1 = {
                    0, 1, 2,
@@ -209,6 +208,7 @@ public class CausalFilterTest extends TestCase {
     }
   }
 
+  @Test
   public void testFactorFomelExample() {
     float[] r = {24.0f,242.0f,867.0f,1334.0f,867.0f,242.0f,24.0f};
     int[] lag1 = {0,1,2,3};
@@ -221,6 +221,7 @@ public class CausalFilterTest extends TestCase {
     assertEquals( 1.0f,a[3],10*FLT_EPSILON);
   }
 
+  @Test
   public void testFactorLaplacian2() {
     float[][] r = {
       { 0.000f,-0.999f, 0.000f},
@@ -253,6 +254,7 @@ public class CausalFilterTest extends TestCase {
     //dump(s);
   }
 
+  @Test
   public void testFactorLaplacian3() {
     float[][][] r = {
       {
@@ -307,7 +309,8 @@ public class CausalFilterTest extends TestCase {
     //dump(s);
   }
 
-  public void xtestFactorPlane2Filter() {
+  @Test(enabled = false)
+  public void testFactorPlane2Filter() {
     int[] lag1 = {
                 0, 1, 2, 3,
       -3,-2,-1, 0, 1
@@ -352,7 +355,8 @@ public class CausalFilterTest extends TestCase {
     }
   }
 
-  public static void xtestFactorPlane3Filter() {
+  @Test(enabled = false)
+  public static void testFactorPlane3Filter() {
     /*
     int[] lag1 = {
                 0, 1, 2,
@@ -560,7 +564,8 @@ public class CausalFilterTest extends TestCase {
   // EXPERIMENTAL
 
   /*
-  private void xtestGaussian() {
+  @Test(enabled = false)
+  private void testGaussian() {
     float sigma = 2.0f;
     int n = 1+2*(int)(8*sigma);
     int k = (n-1)/2;

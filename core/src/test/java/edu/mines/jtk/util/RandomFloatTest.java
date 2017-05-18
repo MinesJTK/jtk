@@ -14,24 +14,26 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.util;
 
-import java.util.Random;
+import org.testng.annotations.Test;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import java.util.Random;
 
 /**
  * Tests {@link edu.mines.jtk.util.RandomFloat}.
  * @author Dave Hale, Zachary Pember, Colorado School of Mines
  * @version 2001.02.05, 2006.08.23
  */
-public class RandomFloatTest extends TestCase {
+public class RandomFloatTest {
+  /* TODO Move bench test
   public static void main(String[] args) {
     if (args.length>0 && args[0].equals("bench"))
       bench();
     TestSuite suite = new TestSuite(RandomFloatTest.class);
     junit.textui.TestRunner.run(suite);
   }
+ */
 
+  @Test(enabled = false)
   public void testNothing() {
   }
 

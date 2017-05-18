@@ -14,22 +14,19 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.util;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
 
 import static edu.mines.jtk.util.MathPlus.*;
+import static org.testng.Assert.assertEquals;
 
 /**
  * Tests {@link edu.mines.jtk.util.AxisTics}.
  * @author Dave Hale, Colorado School of Mines 
  * @version 2004.12.14
  */
-public class AxisTicsTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(AxisTicsTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class AxisTicsTest {
 
+  @Test
   public void test180() {
     check(-180.0,180.0,4, 3,100.0,-100.0, 37,10.0,-180.0);
     check(-180.0,180.0,5, 3,100.0,-100.0, 37,10.0,-180.0);
@@ -79,15 +76,15 @@ public class AxisTicsTest extends TestCase {
     int nmajor, double dmajor, double fmajor,
     int nminor, double dminor, double fminor)
   {
-    assertEquals(nmajor,at.getCountMajor());
-    assertEquals(dmajor,at.getDeltaMajor());
-    assertEquals(fmajor,at.getFirstMajor());
-    assertEquals(nminor,at.getCountMinor());
-    assertEquals(dminor,at.getDeltaMinor());
-    assertEquals(fminor,at.getFirstMinor());
+    assertNear(nmajor,at.getCountMajor());
+    assertNear(dmajor,at.getDeltaMajor());
+    assertNear(fmajor,at.getFirstMajor());
+    assertNear(nminor,at.getCountMinor());
+    assertNear(dminor,at.getDeltaMinor());
+    assertNear(fminor,at.getFirstMinor());
   }
 
-  private void assertEquals(double e, double a) {
+  private void assertNear(double e, double a) {
     double tiny = max(abs(e),abs(a))*100.0*DBL_EPSILON;
     assertEquals(e,a,tiny);
   }

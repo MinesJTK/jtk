@@ -18,8 +18,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.ByteOrder;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
 
 import static edu.mines.jtk.util.ArrayMath.*;
 
@@ -28,16 +28,14 @@ import static edu.mines.jtk.util.ArrayMath.*;
  * @author Dave Hale, Colorado School of Mines
  * @version 2006.01.14
  */
-public class ArrayFileTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(ArrayFileTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class ArrayFileTest {
 
+  @Test
   public void testBigEndian() throws IOException {
     test(ByteOrder.BIG_ENDIAN);
   }
 
+  @Test
   public void testLittleEndian() throws IOException {
     test(ByteOrder.LITTLE_ENDIAN);
   }

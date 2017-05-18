@@ -16,8 +16,9 @@ package edu.mines.jtk.dsp;
 
 import java.util.Random;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 import static edu.mines.jtk.util.ArrayMath.*;
 import edu.mines.jtk.util.Stopwatch;
@@ -27,16 +28,9 @@ import edu.mines.jtk.util.Stopwatch;
  * @author Dave Hale, Colorado School of Mines
  * @version 2006.01.31
  */
-public class EigenTest extends TestCase {
-  public static void main(String[] args) {
-    if (args.length>0 && args[0].equals("bench")) {
-      benchSymmetric33();
-    } else {
-      TestSuite suite = new TestSuite(EigenTest.class);
-      junit.textui.TestRunner.run(suite);
-    }
-  }
+public class EigenTest {
 
+  @Test
   public void testSymmetric22() {
     int nrand = 10000;
     double[][] v = new double[2][2];
@@ -49,6 +43,7 @@ public class EigenTest extends TestCase {
     }
   }
 
+  @Test
   public void testSymmetric33() {
     double[][] v = new double[3][3];
     double[] d = new double[3];
@@ -62,6 +57,7 @@ public class EigenTest extends TestCase {
     }
   }
 
+  @Test
   public void testSymmetric33Special() {
     double[][] v = new double[3][3];
     double[] d = new double[3];
@@ -195,6 +191,7 @@ public class EigenTest extends TestCase {
     return new double[]{a*s,b*s,c*s};
   }
 
+  /* TODO Hook this up */
   private static void benchSymmetric33() {
     int nrand = 10000;
     double[][][] a = new double[nrand][][];

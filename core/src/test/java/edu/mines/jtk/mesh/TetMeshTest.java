@@ -16,22 +16,21 @@ package edu.mines.jtk.mesh;
 
 import java.io.*;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import edu.mines.jtk.util.Stopwatch;
+import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertEquals;
+import static org.testng.AssertJUnit.assertTrue;
 
 /**
  * Tests {@link edu.mines.jtk.mesh.TetMesh}.
  * @author Dave Hale, Colorado School of Mines
  * @version 2003.08.26, 2006.08.02
  */
-public class TetMeshTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(TetMeshTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class TetMeshTest {
 
+  @Test
   public void testNabors() {
     TetMesh tm = new TetMesh();
     TetMesh.Node n0 = new TetMesh.Node(1.0f,0.0f,0.0f);

@@ -14,16 +14,16 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.opt;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
 import edu.mines.jtk.util.Almost;
+import org.testng.annotations.Test;
+
+import static org.testng.AssertJUnit.assertTrue;
 
 /** Unit tests for edu.mines.jtk.opt.ArrayVect3f.
 */
-public class ArrayVect3fTest extends TestCase {
+public class ArrayVect3fTest {
 
-  /** Run test code. */
+  @Test
   public void testAll () {
     float[][][] a = new float[13][17][11];
     for (int i=0; i<a.length; ++i) {
@@ -47,38 +47,7 @@ public class ArrayVect3fTest extends TestCase {
     v = new ArrayVect3f(a, 7.);
     Vect w = v.clone();
     w.multiplyInverseCovariance();
-    assert Almost.FLOAT.equal(1./7., v.dot(w));
-    assert Almost.FLOAT.equal(1./7., v.magnitude());
-  }
-
-  // OPTIONAL OPTIONAL OPTIONAL OPTIONAL OPTIONAL OPTIONAL OPTIONAL
-
-  /* Initialize objects used by all test methods */
-  @Override protected void setUp() throws Exception { super.setUp();}
-
-  /* Destruction of stuff used by all tests: rarely necessary */
-  @Override protected void tearDown() throws Exception { super.tearDown();}
-
-  // NO NEED TO CHANGE THE FOLLOWING
-
-  /** Standard constructor calls TestCase(name) constructor 
-      @param name Name of junit Test.
-   */
-  public ArrayVect3fTest(String name) {super (name);}
-
-  /** This automatically generates a suite of all "test" methods.
-      @return A suite of all junit tests as a Test.
-   */
-  public static junit.framework.Test suite() {
-    try {assert false; throw new IllegalStateException("need -ea");}
-    catch (AssertionError e) {}
-    return new TestSuite(ArrayVect3fTest.class);
-  }
-
-  /** Run all tests with text gui if this class main is invoked 
-      @param args Command-line arguments.
-   */
-  public static void main (String[] args) {
-    junit.textui.TestRunner.run (suite());
+    assertTrue(Almost.FLOAT.equal(1./7., v.dot(w)));
+    assertTrue(Almost.FLOAT.equal(1./7., v.magnitude()));
   }
 }

@@ -14,21 +14,18 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.dsp;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 /**
  * Tests {@link edu.mines.jtk.dsp.Sampling}.
  * @author Dave Hale, Colorado School of Mines
  * @version 2005.03.10
  */
-public class SamplingTest extends TestCase {
+public class SamplingTest {
 
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(SamplingTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
-
+  @Test
   public void testUniform() {
     int n = 1000;
     double d = 1.0/3.0;
@@ -114,6 +111,7 @@ public class SamplingTest extends TestCase {
     assertEquals(f,si.getFirst(),tiny);
   }
 
+  @Test
   public void testBoundsAndForUniform() {
     Sampling s = new Sampling(11,1.0,0.0);
     assertEquals(s.isInBoundsExtended(-0.5001),false);

@@ -16,8 +16,8 @@ package edu.mines.jtk.interp;
 
 import javax.swing.*;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
 
 import edu.mines.jtk.awt.ColorMap;
 import edu.mines.jtk.dsp.Sampling;
@@ -29,7 +29,9 @@ import static edu.mines.jtk.util.ArrayMath.*;
  * @author Dave Hale, Colorado School of Mines
  * @version 2009.06.13
  */
-public class SibsonInterpolator2Test extends TestCase {
+public class SibsonInterpolator2Test {
+
+  /* TODO move to demo package
   public static void main(String[] args) {
     if (args.length>=1 && args[0].equals("demo")) {
       demo();
@@ -38,6 +40,7 @@ public class SibsonInterpolator2Test extends TestCase {
     TestSuite suite = new TestSuite(SibsonInterpolator2Test.class);
     junit.textui.TestRunner.run(suite);
   }
+  */
 
   // Bounds on sample coordinates x1 and x2.
   private static final float XMIN = 0.0f;
@@ -60,6 +63,7 @@ public class SibsonInterpolator2Test extends TestCase {
   private static SibsonInterpolator2.Method WS = 
     SibsonInterpolator2.Method.WATSON_SAMBRIDGE;
 
+  @Test
   public void testSimpleTri() {
     testSimpleTri(HL);
     testSimpleTri(BS);
@@ -76,6 +80,7 @@ public class SibsonInterpolator2Test extends TestCase {
     assertValue(si, 0.0f, 0.0f, 0.0f);
   }
 
+  @Test
   public void testSimpleSquare() {
     testSimpleSquare(HL);
     testSimpleSquare(BS);
@@ -94,6 +99,7 @@ public class SibsonInterpolator2Test extends TestCase {
     assertValue(si, 0.5f, 0.5f, 1.0f);
   }
 
+  @Test
   public void testLinear() {
     testLinear(HL);
     testLinear(BS);
@@ -113,20 +119,17 @@ public class SibsonInterpolator2Test extends TestCase {
       for (int i1=0; i1<n1; ++i1) {
         float x1i = (float)s1.getValue(i1);
         float fe = tf.f(x1i,x2i);
-        assertEquals(fe,g[i2][i1]);
+        assertEquals(fe,g[i2][i1],1.0E-6);
       }
     }
   }
 
   private static final double TOLERANCE = 1.0e-5;
-  private void assertEquals(float e, float a) {
-    assertEquals(e,a,TOLERANCE);
-  }
   private void assertValue(
     SibsonInterpolator2 si, float x1, float x2, float f) 
   {
     float g = si.interpolate(x1,x2);
-    assertEquals(f,g);
+    assertEquals(f,g,TOLERANCE);
   }
 
   ///////////////////////////////////////////////////////////////////////////

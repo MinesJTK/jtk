@@ -14,24 +14,21 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.sgl;
 
+import org.testng.annotations.Test;
+
 import java.util.Random;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
 import static edu.mines.jtk.util.MathPlus.DBL_EPSILON;
+import static org.testng.AssertJUnit.assertTrue;
 
 /**
  * Tests classes for bounding box and sphere.
  * @author Dave Hale
  * @version 2005.05.23
  */
-public class BoundingTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(BoundingTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class BoundingTest {
 
+  @Test
   public void testBox() {
     BoundingBox bb = new BoundingBox();
     bb.expandBy(0,0,0);
@@ -58,6 +55,7 @@ public class BoundingTest extends TestCase {
     assertTrue(!bb.contains(new Point3(b,b,b)));
   }
 
+  @Test
   public void testBoxExpand() {
     int ntrial = 100;
     for (int itrial=0; itrial<ntrial; ++itrial) {
@@ -80,6 +78,7 @@ public class BoundingTest extends TestCase {
     }
   }
 
+  @Test
   public void testSphere() {
     BoundingSphere bs = new BoundingSphere();
     bs.expandBy(0,0,0);
@@ -106,6 +105,7 @@ public class BoundingTest extends TestCase {
     assertTrue(!bs.contains(new Point3(b,b,b)));
   }
 
+  @Test
   public void testSphereExpand() {
     int ntrial = 100;
     for (int itrial=0; itrial<ntrial; ++itrial) {
@@ -137,8 +137,6 @@ public class BoundingTest extends TestCase {
 
   private static Random _random = new Random(314159);
 
-  //private static final double TOLERANCE = 100*DBL_EPSILON;
-
   private static double randomDouble() {
     return _random.nextDouble();
   }
@@ -150,15 +148,4 @@ public class BoundingTest extends TestCase {
     return new Point3(x,y,z);
   }
 
-  /*
-  private static void assertEquals(Tuple3 e, Tuple3 a) {
-    assertEquals(e.x,a.x,TOLERANCE);
-    assertEquals(e.y,a.y,TOLERANCE);
-    assertEquals(e.z,a.z,TOLERANCE);
-  }
-
-  private static void assertEquals(double e, double a) {
-    assertEquals(e,a,TOLERANCE);
-  }
-  */
 }

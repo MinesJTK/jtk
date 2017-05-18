@@ -14,48 +14,45 @@
  ****************************************************************************/
 package edu.mines.jtk.sgl;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-import org.junit.Assert;
+import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertEquals;
 
 /**
  * Tests {@link edu.mines.jtk.sgl.ArrayStack}.
  * @author Chris Engelsma
  * @version 2017.05.02
  */
-public class ArrayStackTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(ArrayStackTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class ArrayStackTest {
 
+  @Test
   public void testStandardFunctionality() {
     int np = 10;
     ArrayStack<Integer> as = new ArrayStack<>();
-    Assert.assertEquals(0,as.size());
+    assertEquals(0,as.size());
 
     // Test push
     for (int i=0; i<np; ++i) {
-      Assert.assertEquals(i,as.push(i).intValue());
+      assertEquals(i,as.push(i).intValue());
     }
-    Assert.assertEquals(np,as.size());
+    assertEquals(np,as.size());
 
     // Test get
     for (int i=0; i<np; ++i) {
-      Assert.assertEquals(i,as.get(i).intValue());
+      assertEquals(i,as.get(i).intValue());
     }
-    Assert.assertEquals(np,as.size());
+    assertEquals(np,as.size());
 
     // Test peek
-    Assert.assertEquals((Integer)(np-1),as.peek());
-    Assert.assertEquals(np, as.size()); // No size change.
+    assertEquals((Integer)(np-1),as.peek());
+    assertEquals(np, as.size()); // No size change.
 
     // Test pop
     for (int i=0; i<np; ++i) {
       int j = as.pop();
       int expected = np-i-1;
-      Assert.assertEquals(expected,j);
-      Assert.assertEquals(np-i-1,as.size());
+      assertEquals(expected,j);
+      assertEquals(np-i-1,as.size());
     }
   }
 

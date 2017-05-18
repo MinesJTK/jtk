@@ -14,8 +14,9 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.lapack;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 import static edu.mines.jtk.lapack.DMatrixTest.assertEqualExact;
 import static edu.mines.jtk.lapack.DMatrixTest.assertEqualFuzzy;
@@ -25,12 +26,9 @@ import static edu.mines.jtk.lapack.DMatrixTest.assertEqualFuzzy;
  * @author Dave Hale, Colorado School of Mines
  * @version 2005.12.12
  */
-public class DMatrixChdTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(DMatrixChdTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class DMatrixChdTest {
 
+  @Test
   public void testSimple() {
     DMatrix a = new DMatrix(new double[][]{
       {1.0,  1.0},
@@ -41,6 +39,7 @@ public class DMatrixChdTest extends TestCase {
     assertEqualFuzzy(3.0,chd.det());
   }
 
+  @Test
   public void testSimple2() {
     DMatrix a = new DMatrix(new double[][]{
       {4.0, 1.0, 1.0},
@@ -50,6 +49,7 @@ public class DMatrixChdTest extends TestCase {
     test(a);
   }
 
+  @Test
   public void testNotPositiveDefinite() {
     DMatrix a = new DMatrix(new double[][]{
       {0.0, 1.0, 1.0},
@@ -61,6 +61,7 @@ public class DMatrixChdTest extends TestCase {
     assertEqualExact(0.0,chd.det());
   }
 
+  @Test
   public void testRandom() {
     int n = 10;
     DMatrix a = DMatrix.random(n,n);

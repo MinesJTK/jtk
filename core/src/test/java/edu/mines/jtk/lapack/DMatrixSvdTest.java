@@ -14,8 +14,7 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.lapack;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
 
 import static edu.mines.jtk.lapack.DMatrixTest.assertEqualExact;
 import static edu.mines.jtk.lapack.DMatrixTest.assertEqualFuzzy;
@@ -26,12 +25,9 @@ import static edu.mines.jtk.util.ArrayMath.*;
  * @author Dave Hale, Colorado School of Mines
  * @version 2005.12.15
  */
-public class DMatrixSvdTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(DMatrixSvdTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class DMatrixSvdTest {
 
+  @Test
   public void testSimple() {
     test(new DMatrix(new double[][]{
       {1.0, 0.0},
@@ -49,12 +45,14 @@ public class DMatrixSvdTest extends TestCase {
     }));
   }
 
+  @Test
   public void testRandom() {
     test(DMatrix.random(100,100));
     test(DMatrix.random(10,100));
     test(DMatrix.random(100,10));
   }
 
+  @Test
   public void testCond() {
     DMatrix a = new DMatrix(new double[][]{
       {1.0, 3.0},
@@ -72,6 +70,7 @@ public class DMatrixSvdTest extends TestCase {
     assertEqualExact(smax/smin,cond);
   }
 
+  @Test
   public void testRank() {
     DMatrix a = new DMatrix(new double[][]{
       {1.0, 3.0},

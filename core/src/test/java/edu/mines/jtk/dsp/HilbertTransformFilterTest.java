@@ -15,8 +15,8 @@ limitations under the License.
 package edu.mines.jtk.dsp;
 
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
+import static org.testng.Assert.assertTrue;
 
 import static edu.mines.jtk.util.ArrayMath.*;
 
@@ -25,12 +25,9 @@ import static edu.mines.jtk.util.ArrayMath.*;
  * @author Dave Hale, Colorado School of Mines
  * @version 2010.06.01
  */
-public class HilbertTransformFilterTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(HilbertTransformFilterTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class HilbertTransformFilterTest {
 
+  @Test
   public void testApply() {
     int[] nmax_test   = {NMAX_DEFAULT,100000,100000,100000,100000};
     float[] emax_test = {EMAX_DEFAULT,0.010f,0.010f,0.001f,0.001f};
@@ -75,7 +72,7 @@ public class HilbertTransformFilterTest extends TestCase {
                          " length="+lhtf +
                          " error="+error);
       */
-      assertTrue("actual error less than maximum expected error",error<=emax);
+      assertTrue(error<=emax,"actual error less than maximum expected error");
     }
   }
 

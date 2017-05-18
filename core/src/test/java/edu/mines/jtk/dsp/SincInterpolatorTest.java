@@ -17,8 +17,9 @@ package edu.mines.jtk.dsp;
 import static java.lang.Math.*;
 import java.util.Random;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 /**
  * Tests {@link SincInterpolator}.
@@ -26,16 +27,13 @@ import junit.framework.TestSuite;
  * @author Bill Harlan, Landmark Graphics
  * @version 2012.12.21
  */
-public class SincInterpolatorTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(SincInterpolatorTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class SincInterpolatorTest {
 
   private double[] _emaxs = {0.1,0.01,0.001};
   private double[] _fmaxs = {0.10,0.30,0.40,0.45};
   private int[] _lmaxs = {8,10,12,14,16};
 
+  @Test
   public void testExtrapolation() {
     SincInterpolator si = new SincInterpolator();
     Random random = new Random();
@@ -70,6 +68,7 @@ public class SincInterpolatorTest extends TestCase {
       assertEquals(yo[ix],yt[ix],0.0);
   }
 
+  @Test
   public void testComplex() {
     SincInterpolator si = new SincInterpolator();
     Random random = new Random();
@@ -107,6 +106,7 @@ public class SincInterpolatorTest extends TestCase {
     }
   }
 
+  @Test
   public void testErrorAndFrequency() {
     for (double emax:_emaxs) {
       for (double fmax:_fmaxs) {
@@ -117,6 +117,7 @@ public class SincInterpolatorTest extends TestCase {
     }
   }
 
+  @Test
   public void testErrorAndLength() {
     for (double emax:_emaxs) {
       for (int lmax:_lmaxs) {
@@ -127,6 +128,7 @@ public class SincInterpolatorTest extends TestCase {
     }
   }
 
+  @Test
   public void testFrequencyAndLength() {
     for (double fmax:_fmaxs) {
       for (int lmax:_lmaxs) {
@@ -139,6 +141,7 @@ public class SincInterpolatorTest extends TestCase {
     }
   }
 
+  @Test
   public void testAccumulate() {
     // test that accumulate is a true transpose of interpolate
     Random random = new Random(123456); // avoid unreasonable accidents
@@ -187,7 +190,8 @@ public class SincInterpolatorTest extends TestCase {
         String message =
           "yu.ya="+yuYa+" y.yi="+yYi+" ratio="+ratio;
         trace(message);
-        assert ratio > 0.99999 && ratio < 1.00001 : message;
+        assertTrue(ratio > 0.99999);
+        assertTrue(ratio < 1.00001);
       }
     }
   }

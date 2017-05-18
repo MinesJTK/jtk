@@ -14,26 +14,29 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.util;
 
+import org.testng.annotations.Test;
+
 import java.util.Random;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-
 import static edu.mines.jtk.util.ArrayMath.*;
+import static org.testng.AssertJUnit.assertEquals;
 
 /**
  * Tests {@link edu.mines.jtk.util.MedianFinder}.
  * @author Dave Hale, Colorado School of Mines
  * @version 2010.10.10
  */
-public class MedianFinderTest extends TestCase {
+public class MedianFinderTest {
+  /* TODO
   public static void main(String[] args) {
     if (args.length>0 && args[0].equals("bench"))
       bench();
     TestSuite suite = new TestSuite(MedianFinderTest.class);
     junit.textui.TestRunner.run(suite);
   }
+  */
 
+  @Test
   public void testUnweighted() {
     Random r = new Random();
     int ntest = 100;
@@ -48,10 +51,11 @@ public class MedianFinderTest extends TestCase {
       MedianFinder mf = new MedianFinder(n);
       float ew = mf.findMedian(w,f);
       float eu = mf.findMedian(f);
-      assertTrue(ew==eu);
+      assertEquals(ew,eu);
     }
   }
 
+  @Test
   public void testWeighted() {
     Random r = new Random();
     int ntest = 100;
@@ -74,7 +78,7 @@ public class MedianFinderTest extends TestCase {
       MedianFinder mf = new MedianFinder(n);
       float qfast = mf.findMedian(w,f);
 
-      assertTrue(qslow==qfast);
+      assertEquals(qslow,qfast);
     }
   }
 

@@ -14,8 +14,8 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.dsp;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
 
 import static edu.mines.jtk.util.ArrayMath.*;
 
@@ -24,12 +24,9 @@ import static edu.mines.jtk.util.ArrayMath.*;
  * @author Dave Hale, Colorado School of Mines
  * @version 2007.01.15
  */
-public class LocalShiftFinderTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(LocalShiftFinderTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class LocalShiftFinderTest {
 
+  @Test
   public void testCosine() {
     float w = 0.02f*2.0f*FLT_PI;
     int n1 = 1001;

@@ -14,8 +14,8 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.la;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
 
 import static edu.mines.jtk.util.ArrayMath.*;
 
@@ -24,12 +24,9 @@ import static edu.mines.jtk.util.ArrayMath.*;
  * @author Dave Hale, Colorado School of Mines
  * @version 2006.12.12
  */
-public class TridiagonalFMatrixTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(TridiagonalFMatrixTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class TridiagonalFMatrixTest {
 
+  @Test
   public void testSolve() {
     int n = 100;
     float[] a = randfloat(n);

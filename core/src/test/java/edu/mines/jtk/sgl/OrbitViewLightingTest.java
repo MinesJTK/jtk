@@ -14,23 +14,21 @@
  ****************************************************************************/
 package edu.mines.jtk.sgl;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
 
 import static edu.mines.jtk.sgl.OrbitViewLighting.*;
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotEquals;
+import static org.testng.AssertJUnit.assertTrue;
+import static org.testng.internal.junit.ArrayAsserts.assertArrayEquals;
 
 /**
  * Tests {@link OrbitViewLighting}.
  * @author Chris Engelsma
  * @version 2017.01.18
  */
-public class OrbitViewLightingTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(OrbitViewLightingTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class OrbitViewLightingTest {
 
   /**
    * To maintain functionality with the legacy l in the JTK, the
@@ -40,6 +38,7 @@ public class OrbitViewLightingTest extends TestCase {
    * 3. Diffuse light set to (1,1,1,1)
    * 4. Specular light set to (1,1,1,1)
    */
+  @Test
   public void testDefaultParameters() {
     OrbitViewLighting l = new OrbitViewLighting();
 

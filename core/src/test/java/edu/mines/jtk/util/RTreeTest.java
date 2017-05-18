@@ -14,25 +14,23 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.util;
 
-import java.util.*;
+import org.testng.annotations.Test;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import java.util.*;
 
 import static edu.mines.jtk.util.MathPlus.abs;
 import static edu.mines.jtk.util.MathPlus.sin;
+import static org.testng.Assert.assertEquals;
+import static org.testng.AssertJUnit.assertTrue;
 
 /**
  * Tests {@link edu.mines.jtk.util.RTree}.
  * @author Dave Hale, Colorado School of Mines
  * @version 2003.05.02, 2006.07.13
  */
-public class RTreeTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(RTreeTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class RTreeTest {
 
+  @Test
   public void testRandom() {
     RTree rt = new RTree(3,4,12);
     STree st = new STree(3);
@@ -59,6 +57,7 @@ public class RTreeTest extends TestCase {
     }
   }
 
+  @Test
   public void testNearest() {
     RTree rt = new RTree(3,4,12);
     STree st = new STree(3);
@@ -84,6 +83,7 @@ public class RTreeTest extends TestCase {
     }
   }
 
+  @Test
   public void testIterator() {
     RTree rt = new RTree(3,4,12);
     int n = 100;
@@ -110,7 +110,8 @@ public class RTreeTest extends TestCase {
     }
   }
 
-  public void xtestTriangle() {
+  @Test(enabled = false)
+  public void testTriangle() {
     RTree rt = new RTree(3,6,12);
     STree st = new STree(3);
 
@@ -127,7 +128,6 @@ public class RTreeTest extends TestCase {
     Point[] pr = makeRandomPoints(np);
     Point[][] psr = {ps,pr};
 
-    System.out.println();
     Stopwatch sw = new Stopwatch();
     double time = 3.0;
     float[] point = new float[3];
@@ -142,18 +142,10 @@ public class RTreeTest extends TestCase {
         rt.add(ts[it]);
     }
     sw.stop();
-    System.out.println(
-      "RTree added "+rt.size()+" triangles at " +
-      (int)(rt.size()/sw.time())+" triangle/sec");
-    System.out.println(
-      "  leaf area="+rt.getLeafArea()+" volume="+rt.getLeafVolume());
     sw.restart();
     for (int it=0; it<nt; ++it)
       st.add(ts[it]);
     sw.stop();
-    System.out.println(
-      "STree added "+st.size()+" triangles at " +
-      (int)(st.size()/sw.time())+" triangle/sec");
     assertEquals(rt.size(),st.size());
     for (int ip=0; ip<100; ++ip) {
       Point p = ps[ip%np];
@@ -162,17 +154,9 @@ public class RTreeTest extends TestCase {
       Object[] sb = st.findInSphere(point,radius);
       assertEquals(sb.length,rb.length);
     }
-    System.out.println(
-      "RTree has "+rt.size()+" objects in "+rt.getLevels()+" levels.");
-
     // Points on surfaces, then random points.
     for (int isr=0; isr<2; ++isr) {
       Point[] pp = psr[isr];
-      if (isr==0) {
-        System.out.println("Points on surfaces:");
-      } else {
-        System.out.println("Random points:");
-      }
 
       // Find triangles nearest to points.
       int nr = 0;
@@ -182,7 +166,6 @@ public class RTreeTest extends TestCase {
         rt.findNearest(point);
       }
       sw.stop();
-      System.out.println("  RTree findNearest/sec = "+(int)(nr/sw.time()));
       int ns = 0;
       for (sw.restart(); sw.time()<time;  ++ns) {
         Point p = pp[nr%np];
@@ -190,7 +173,6 @@ public class RTreeTest extends TestCase {
         st.findNearest(point);
       }
       sw.stop();
-      System.out.println("  STree findNearest/sec = "+(int)(ns/sw.time()));
 
       // Find triangles inside a sphere.
       nr = 0;
@@ -200,7 +182,6 @@ public class RTreeTest extends TestCase {
         rt.findInSphere(point,radius);
       }
       sw.stop();
-      System.out.println("  RTree findInSphere/sec = "+(int)(nr/sw.time()));
       ns = 0;
       for (sw.restart(); sw.time()<time;  ++ns) {
         Point p = ps[nr%np];
@@ -208,11 +189,11 @@ public class RTreeTest extends TestCase {
         st.findInSphere(point,radius);
       }
       sw.stop();
-      System.out.println("  STree findInSphere/sec = "+(int)(ns/sw.time()));
     }
   }
 
-  public void xtestPoint() {
+  @Test(enabled = false)
+  public void testPoint() {
     RTree rt = new RTree(3,6,12);
     STree st = new STree(3);
     int n = 100000;
@@ -220,19 +201,16 @@ public class RTreeTest extends TestCase {
     for (int i=0; i<n; ++i) {
       ps[i] = new Point();
     }
-    System.out.println();
     Stopwatch sw = new Stopwatch();
     sw.restart();
     for (int i=0; i<n; ++i)
       rt.add(ps[i]);
     sw.stop();
-    System.out.println("RTree add points/sec="+(int)(n/sw.time()));
     sw.restart();
     for (int i=0; i<n; ++i)
       st.add(ps[i]);
     sw.stop();
     float radius = 0.1f;
-    System.out.println("STree add points/sec="+(int)(n/sw.time()));
     for (int i=0; i<100; ++i) {
       float[] point = randomPoint();
       Object[] rb = rt.findInSphere(point,radius);
@@ -248,7 +226,6 @@ public class RTreeTest extends TestCase {
       rt.findInSphere(point,radius);
     }
     sw.stop();
-    System.out.println("RTree findInSphere/sec = "+(int)(nr/sw.time()));
     int ns = 0;
     for (sw.restart(); sw.time()<time;  ++ns) {
       Point p = ps[nr%n];
@@ -256,7 +233,6 @@ public class RTreeTest extends TestCase {
       st.findInSphere(point,radius);
     }
     sw.stop();
-    System.out.println("STree findInSphere/sec = "+(int)(ns/sw.time()));
   }
 
   ///////////////////////////////////////////////////////////////////////////
@@ -344,7 +320,6 @@ public class RTreeTest extends TestCase {
   private static Random _random = new Random();
   static {
     int seed = _random.nextInt();
-    //System.out.println("seed="+seed);
     _random.setSeed(seed);
   }
 

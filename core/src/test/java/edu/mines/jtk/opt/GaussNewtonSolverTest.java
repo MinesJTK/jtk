@@ -19,14 +19,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import edu.mines.jtk.util.Almost;
+import org.testng.annotations.Test;
 
-/** Solve least-squares inverse of a Transform.
-    @author W.S. Harlan, Landmark Graphics
-*/
-public class GaussNewtonSolverTest extends TestCase {
+import static org.testng.AssertJUnit.assertTrue;
+
+/**
+ *  Tests {@link edu.mines.jtk.opt.GaussNewtonSolver}.
+ */
+public class GaussNewtonSolverTest {
 
   private static final Logger LOG = Logger.getLogger("edu.mines.jtk.opt");
   private static boolean printedUndisposed = false;
@@ -126,9 +127,7 @@ public class GaussNewtonSolverTest extends TestCase {
     }
   }
 
-  /** Unit test code.
-      @throws Exception all errors
-  */
+  @Test
   public void testMain() throws Exception {
     GaussNewtonSolver.setExpensiveDebug(true);
     /* fit straight line to points (0,0) (1,8) (3,8) (4,20) */
@@ -170,8 +169,8 @@ public class GaussNewtonSolverTest extends TestCase {
       LOG.fine("model = "+model);
       LOG.fine("result = "+result);
 
-      assert (new Almost(4)).equal(1., result.getData()[0]):"result="+result;
-      assert (new Almost(5)).equal(4., result.getData()[1]):"result="+result;
+      assertTrue((new Almost(4)).equal(1., result.getData()[0]));
+      assertTrue((new Almost(5)).equal(4., result.getData()[1]));
 
       model.dispose();
       result.dispose();
@@ -189,8 +188,8 @@ public class GaussNewtonSolverTest extends TestCase {
       LOG.fine("result = "+result);
 
       dampPerturb = result.getData();
-      assert (new Almost(4)).equal(1., result.getData()[0]):"result="+result;
-      assert (new Almost(5)).equal(4., result.getData()[1]):"result="+result;
+      assertTrue((new Almost(4)).equal(1., result.getData()[0]));
+      assertTrue((new Almost(5)).equal(4., result.getData()[1]));
       model.dispose();
       result.dispose();
     }
@@ -206,10 +205,10 @@ public class GaussNewtonSolverTest extends TestCase {
       LOG.fine("result = "+result);
 
       double[] dampAll = result.getData();
-      assert (new Almost(4)).equal(1., result.getData()[0]):"result="+result;
-      assert (new Almost(5)).equal(4., result.getData()[1]):"result="+result;
-      assert dampAll[0] > dampPerturb[0];
-      assert dampAll[1] < dampPerturb[1];
+      assertTrue((new Almost(4)).equal(1., result.getData()[0]));
+      assertTrue((new Almost(5)).equal(4., result.getData()[1]));
+      assertTrue(dampAll[0] > dampPerturb[0]);
+      assertTrue(dampAll[1] < dampPerturb[1]);
       { //
         double dampAll2 = 0.;
         double dampPerturb2 = 0.;
@@ -218,12 +217,12 @@ public class GaussNewtonSolverTest extends TestCase {
           dampPerturb2 += dampPerturb[i]*dampPerturb[i];
         }
         LOG.fine ("dampAll2="+dampAll2+" dampPerturb2="+dampPerturb2);
-        assert dampAll2 < dampPerturb2;
+        assertTrue(dampAll2 < dampPerturb2);
       }
       model.dispose();
       result.dispose();
     }
-    assert TestVect.max <=10 : "max="+TestVect.max;
+    assertTrue(TestVect.max <=10);
     // use full interface
     for (int twice=0; twice<2; ++twice) {
       boolean project = (twice==1);
@@ -245,8 +244,8 @@ public class GaussNewtonSolverTest extends TestCase {
         LOG.fine("data = "+data);
         LOG.fine("model = "+model);
         LOG.fine("result = "+result);
-        assert (new Almost(3)).equal(1., result.getData()[0]):"result="+result;
-        assert (new Almost(4)).equal(4., result.getData()[1]):"result="+result;
+        assertTrue((new Almost(3)).equal(1., result.getData()[0]));
+        assertTrue((new Almost(4)).equal(4., result.getData()[1]));
         model.dispose();
         result.dispose();
       }
@@ -269,8 +268,8 @@ public class GaussNewtonSolverTest extends TestCase {
         LOG.fine("model = "+model);
         LOG.fine("result = "+result);
 
-        assert (new Almost(4)).equal(1., result.getData()[0]):"result="+result;
-        assert (new Almost(5)).equal(4., result.getData()[1]):"result="+result;
+        assertTrue((new Almost(4)).equal(1., result.getData()[0]));
+        assertTrue((new Almost(5)).equal(4., result.getData()[1]));
         model.dispose();
         result.dispose();
       }
@@ -281,39 +280,10 @@ public class GaussNewtonSolverTest extends TestCase {
     if (TestVect.undisposed.size() > 0) {
       throw new IllegalStateException(TestVect.getTraces());
     }
-    assert TestVect.max <=10 : "max="+TestVect.max;
+    assertTrue(TestVect.max <=10);
 
-    assert projectWasTested;
+    assertTrue(projectWasTested);
 
     GaussNewtonSolver.setExpensiveDebug(false);
-  }
-
-  // OPTIONAL OPTIONAL OPTIONAL OPTIONAL OPTIONAL OPTIONAL OPTIONAL
-
-  /* Initialize objects used by all test methods */
-  @Override protected void setUp() throws Exception { super.setUp();}
-
-  /* Destruction of stuff used by all tests: rarely necessary */
-  @Override protected void tearDown() throws Exception { super.tearDown();}
-
-  // NO NEED TO CHANGE THE FOLLOWING
-
-  /** Standard constructor calls TestCase(name) constructor
-   * @param name name of test case*/
-  public GaussNewtonSolverTest(String name) {super (name);}
-
-  /** This automatically generates a suite of all "test" methods
-   * @return junit test */
-  public static junit.framework.Test suite() {
-    try {assert false; throw new IllegalStateException("need -ea");}
-    catch (AssertionError e) {}
-    return new TestSuite(GaussNewtonSolverTest.class);
-  }
-
-  /** Run all tests with text gui if this class main is invoked
-   * @param args command-line arguments
-   * */
-  public static void main (String[] args) {
-    junit.textui.TestRunner.run (suite());
   }
 }

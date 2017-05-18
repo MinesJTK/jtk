@@ -15,21 +15,18 @@ limitations under the License.
 package edu.mines.jtk.lapack;
 
 import static java.lang.Math.*;
+import static org.testng.Assert.*;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
 
 /**
  * Tests {@link edu.mines.jtk.lapack.DMatrix}.
  * @author Dave Hale, Colorado School of Mines
  * @version 2005.12.12
  */
-public class DMatrixTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(DMatrixTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class DMatrixTest {
 
+  @Test
   public void testConstruct() {
     int m = 3;
     int n = 4;

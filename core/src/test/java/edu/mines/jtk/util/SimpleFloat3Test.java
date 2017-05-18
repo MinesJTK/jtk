@@ -14,25 +14,22 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.util;
 
-import java.util.Random;
+import org.testng.annotations.Test;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import java.util.Random;
 
 import static edu.mines.jtk.util.ArrayMath.copy;
 import static edu.mines.jtk.util.ArrayMath.randfloat;
+import static org.testng.Assert.assertEquals;
 
 /**
  * Tests {@link edu.mines.jtk.util.SimpleFloat3}.
  * @author Dave Hale, Colorado School of Mines
  * @version 2006.05.24
  */
-public class SimpleFloat3Test extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(SimpleFloat3Test.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class SimpleFloat3Test {
 
+  @Test
   public void test123() {
     int n1 = 10;
     int n2 = 11;
@@ -45,6 +42,7 @@ public class SimpleFloat3Test extends TestCase {
     test3(sf3,c);
   }
 
+  @Test
   public void testRandom() {
     int n1 = 10;
     int n2 = 11;

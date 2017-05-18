@@ -14,10 +14,11 @@
  ****************************************************************************/
 package edu.mines.jtk.util;
 
+import org.testng.annotations.Test;
+
 import java.util.Random;
 
-import static org.junit.Assert.*;
-import org.junit.Test;
+import static org.testng.Assert.assertEquals;
 
 /**
  * Tests {@link edu.mines.jtk.util.AtomicDouble}.

@@ -14,49 +14,60 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.util;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNull;
+import static org.testng.AssertJUnit.assertTrue;
 
 /**
  * Tests {@link edu.mines.jtk.util.Parameter}.
  * @author Dave Hale, Colorado School of Mines
  * @version 02/21/2000, 08/24/2006.
  */
-public class ParameterTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(ParameterTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class ParameterTest {
 
+  @Test
   public void testParameter() {
     Parameter par = new Parameter("fo<o","Hello");
-    assertTrue(par.getString().equals("Hello"));
+    assertEquals("Hello",par.getString());
+
     par.setString("true");
     assertTrue(par.getBoolean());
+
     par.setString("3141");
-    assertTrue(par.getInt()==3141);
+    assertEquals(3141,par.getInt());
+
     par.setString("3141.0");
-    assertTrue(par.getFloat()==3141.0f);
+    assertEquals(3141.0f,par.getFloat());
+
     par.setString("3.141");
-    assertTrue(par.getDouble()==3.141);
+    assertEquals(3.141,par.getDouble());
+
     double[] empty = new double[0];
     par.setDoubles(empty);
-    assertTrue(par.getType()==Parameter.DOUBLE);
+    assertEquals(Parameter.DOUBLE,par.getType());
+
     par.setFloats(null);
-    assertTrue(par.getType()==Parameter.FLOAT);
+    assertEquals(Parameter.FLOAT,par.getType());
     float[] fvalues = {1.2f,3.4f};
+
     par.setFloats(fvalues);
     fvalues = par.getFloats();
-    assertTrue(fvalues[0]==1.2f);
-    assertTrue(fvalues[1]==3.4f);
+    assertEquals(1.2f,fvalues[0]);
+    assertEquals(3.4f,fvalues[1]);
+
     par.setUnits("km/s");
-    assertTrue(par.getUnits().equals("km/s"));
+    assertEquals("km/s",par.getUnits());
+
     boolean[] bvalues = {true,false};
     par.setBooleans(bvalues);
     bvalues = par.getBooleans();
     assertTrue(bvalues[0]);
-    assertTrue(!bvalues[1]);
+    assertFalse(bvalues[1]);
+
     par.setUnits(null);
-    assertTrue(par.getUnits()==null);
+    assertNull(par.getUnits());
   }
 }

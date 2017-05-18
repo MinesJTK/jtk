@@ -14,22 +14,19 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.opt;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.testng.annotations.Test;
 
 import static edu.mines.jtk.util.MathPlus.*;
+import static org.testng.AssertJUnit.assertTrue;
 
 /**
- * Tests {@link edu.mines.jtk.util.BrentZeroFinder}.
+ * Tests {@link edu.mines.jtk.opt.BrentZeroFinder}.
  * @author Dave Hale, Colorado School of Mines
  * @version 2001.07.10, 2006.07.12
  */
-public class BrentZeroFinderTest extends TestCase {
-  public static void main(String[] args) {
-    TestSuite suite = new TestSuite(BrentZeroFinderTest.class);
-    junit.textui.TestRunner.run(suite);
-  }
+public class BrentZeroFinderTest {
 
+  @Test
   public void testForsythe() {
     ZeroFunc1 f1 = new ZeroFunc1();
     f1.findZero(2.0,3.0);
@@ -104,12 +101,8 @@ public class BrentZeroFinderTest extends TestCase {
   }
 
   private static void assertEqual(double x, double y) {
-    assertTrue(x+" = "+y,almostEqual(x,y));
-  }
-  
-  private static boolean almostEqual(double x, double y) {
     double ax = abs(x);
     double ay = abs(y);
-    return abs(x-y)<=0.0001*max(ax,ay);
+    assertTrue(abs(x-y)<=0.0001*max(ax,ay));
   }
 }
