@@ -20,6 +20,7 @@ import java.util.Random;
 
 import static org.testng.Assert.assertEquals;
 
+
 /**
  * Tests {@link edu.mines.jtk.util.AtomicDouble}.
  * @author Chris Engelsma
