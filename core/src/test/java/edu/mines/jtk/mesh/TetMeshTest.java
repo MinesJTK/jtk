@@ -85,6 +85,7 @@ public class TetMeshTest {
     assertEquals(3,tm.getNodeNabors(n4).length);
   }
 
+  @Test
   public void testIO() throws IOException,ClassNotFoundException {
 
     // Make tet mesh.
@@ -152,6 +153,7 @@ public class TetMeshTest {
     assertEquals(7,((Integer)map.get(n111)).intValue());
   }
 
+  @Test
   public void testTetListener() {
     TetMesh tm = new TetMesh();
     tm.addNode(new TetMesh.Node(0.0f,0.0f,0.0f));
@@ -185,6 +187,7 @@ public class TetMeshTest {
     private int _nremoved;
   }
 
+  @Test
   public void testFinds() {
     TetMesh tm = new TetMesh();
     TetMesh.Node n0 = new TetMesh.Node(0.0f,0.0f,0.0f);
@@ -256,6 +259,7 @@ public class TetMeshTest {
     assertTrue(null==tm.findFace(n0,n3,n4));
   }
 
+  @Test
   public void testSimple() {
     TetMesh tm = new TetMesh();
     TetMesh.Node n0 = new TetMesh.Node(1.0f,0.0f,0.0f);
@@ -272,6 +276,7 @@ public class TetMeshTest {
     tm.validate();
   }
 
+  @Test
   public void testLine() {
     TetMesh tm = new TetMesh();
     int n = 100;
@@ -293,6 +298,7 @@ public class TetMeshTest {
     tm.validate();
   }
 
+  @Test
   public void testCube() {
     TetMesh tm = new TetMesh();
     TetMesh.Node n0 = new TetMesh.Node(0.0f,0.0f,0.0f);
@@ -322,6 +328,7 @@ public class TetMeshTest {
     tm.validate();
   }
 
+  @Test
   public void testAddFindRemove() {
     java.util.Random random = new java.util.Random();
     TetMesh tm = new TetMesh();

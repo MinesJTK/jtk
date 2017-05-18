@@ -68,6 +68,7 @@ public class OrbitViewLightingTest {
   /**
    * Passing no parameters only affects the primary light source.
    */
+  @Test
   public void testPrimaryLightFunctions() {
     OrbitViewLighting l = new OrbitViewLighting();
     float[] newpos = new float[] { 5.0f, 5.0f, 5.0f };
@@ -102,6 +103,7 @@ public class OrbitViewLightingTest {
     assertEquals(l.getLightSourceType(2),ld);
   }
 
+  @Test
   public void testEquality() {
     OrbitViewLighting sl0 = new OrbitViewLighting();
     OrbitViewLighting sl1 = new OrbitViewLighting();
@@ -139,6 +141,7 @@ public class OrbitViewLightingTest {
     assertEquals(sl0,sl1);
   }
 
+  @Test
   public void testLightToggle() {
     OrbitViewLighting l = new OrbitViewLighting();
     assertTrue(l.isLightOn());

@@ -36,6 +36,7 @@ public class AxisTicsTest {
     check(-180.0,180.0,9, 7, 50.0,-150.0, 37,10.0,-180.0);
   }
 
+  @Test
   public void testAll() {
 
     check(0.0, 10.0, 1.0,  11, 1.0,   0.0,  101, 0.1,   0.0);

@@ -67,6 +67,7 @@ public class GeometryTest {
     assertTrue(ra<0.0);
   }
 
+  @Test
   public void testInSphere() {
   
     // Five co-spherical points. We will perturb the point pe.
@@ -106,6 +107,7 @@ public class GeometryTest {
     assertTrue(ra<0.0);
   }
 
+  @Test
   public void testLeftOfLine() {
   
     // Three co-linear points. We will perturb the point pc.
@@ -143,6 +145,7 @@ public class GeometryTest {
     assertTrue(ra<0.0);
   }
 
+  @Test
   public void testLeftOfPlane() {
   
     // Four co-planar points. We will perturb the point pd.
@@ -181,6 +184,7 @@ public class GeometryTest {
     assertTrue(ra<0.0);
   }
 
+  @Test
   public void testLeftOfPlaneSpecial() {
     double[] pa = {99.50000003392293,125.85383672388726,4.712236446160304};
     double[] pb = {91.50000003119546,125.85383641401195,4.712236443259705};
@@ -192,6 +196,7 @@ public class GeometryTest {
     assertTrue(rf!=0.0);
   }
 
+  @Test
   public void testLeftOfPlaneSpecial2() {
     double[] pa = {111.50000056515266,125.85385176546224,4.712249324321081};
     double[] pb = {123.50000062597627,125.85385229716680,4.712249325708733};
@@ -203,7 +208,8 @@ public class GeometryTest {
     assertTrue(rf!=0.0);
   }
 
-  public void xtestInSphereSpeed() {
+  @Test
+  public void testInSphereSpeed() {
     float pa[] = {1.0f,0.0f,0.0f};
     float pb[] = {0.0f,1.0f,0.0f};
     float pc[] = {0.0f,0.0f,1.0f};
@@ -256,7 +262,8 @@ public class GeometryTest {
 
   }
 
-  public void xtestLeftOfPlaneSpeed() {
+  @Test
+  public void testLeftOfPlaneSpeed() {
     float pa[] = {1.0f,0.0f,0.0f};
     float pb[] = {0.0f,1.0f,0.0f};
     float pc[] = {0.0f,0.0f,1.0f};
@@ -296,6 +303,7 @@ public class GeometryTest {
     trace("leftOfPlaneFast: plane/s = "+(int)(nplane/sw.time()));
   }
 
+  @Test
   public void testCenterCircle3D() {
     double[] po = {0.0,0.0,0.0};
     Geometry.centerCircle3D(0,1,0,

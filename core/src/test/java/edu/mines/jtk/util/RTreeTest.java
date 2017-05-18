@@ -110,7 +110,7 @@ public class RTreeTest {
     }
   }
 
-  @Test(enabled = false)
+  @Test
   public void testTriangle() {
     RTree rt = new RTree(3,6,12);
     STree st = new STree(3);
@@ -192,7 +192,7 @@ public class RTreeTest {
     }
   }
 
-  @Test(enabled = false)
+  @Test
   public void testPoint() {
     RTree rt = new RTree(3,6,12);
     STree st = new STree(3);

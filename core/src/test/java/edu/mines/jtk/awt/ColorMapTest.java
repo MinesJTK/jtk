@@ -44,7 +44,8 @@ public class ColorMapTest {
       assertEquals(expected[2],test[2],0);
     }
   }
- 
+
+  @Test
   public void testHslToRgb() {
     float r,g,b;
     float h,s,l;
@@ -62,7 +63,8 @@ public class ColorMapTest {
       assertEquals(expected[2],test[2],0);
     }
   }
- 
+
+  @Test
   public void testRgbToCieLab() {
     float r,g,b;
     float Ls,as,bs;
@@ -81,6 +83,7 @@ public class ColorMapTest {
     }
   }
 
+  @Test
   public void testCieLabToRgb() {
     float r,g,b;
     float Ls,as,bs;
