@@ -1,6 +1,6 @@
 # The Mines Java Toolkit
 
-[![Build Status](https://img.shields.io/travis/MinesJTK/jtk/master.svg)](https://travis-ci.org/MinesJTK/jtk) [![Codecov](https://img.shields.io/codecov/c/github/MinesJTK/jtk.svg)](https://codecov.io/gh/MinesJTK/jtk) [![license](https://img.shields.io/github/license/MinesJTK/jtk.svg)](https://github.com/MinesJTK/jtk/blob/master/license.txt) [![GitHub release](https://img.shields.io/github/release/MinesJTK/jtk.svg)](https://github.com/MinesJTK/jtk/releases)
+[![Build Status](https://img.shields.io/travis/MinesJTK/jtk/master.svg)](https://travis-ci.org/MinesJTK/jtk) [![Codecov](https://img.shields.io/codecov/c/github/MinesJTK/jtk.svg)](https://codecov.io/gh/MinesJTK/jtk) [![license](https://img.shields.io/github/license/MinesJTK/jtk.svg)](https://github.com/MinesJTK/jtk/blob/master/license.txt) [![GitHub release](https://img.shields.io/github/release/MinesJTK/jtk.svg)](https://github.com/MinesJTK/jtk/releases) [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
 
 The Mines Java Toolkit (Mines JTK) is a set of Java packages and native (non-Java) software libraries for science and engineering. Applications currently include digital signal processing, linear algebra, optimization, meshing, interpolation, and 2D and 3D graphics.
 
