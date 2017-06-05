@@ -20,8 +20,8 @@ import java.util.Random;
  * Utilities for arrays plus math methods for floats and doubles.
  * <p>
  * The math methods mirror those in the standard {@link java.lang.Math}, 
- * but include overloaded methods that return floats when passed float 
- * arguments. This eliminates tedious and ugly casts when using floats. 
+ * but include overloaded methods that return floats when passed float
+ * arguments. This eliminates tedious and ugly casts when using floats.
  * <p>
  * This class also provides utility functions for working with arrays of 
  * primitive types, including arrays of real numbers (floats and doubles)
@@ -53,7 +53,7 @@ import java.util.Random;
  * Methods are overloaded for 1-D arrays, 2-D arrays (arrays of arrays), 
  * and 3-D arrays (arrays of arrays of arrays). Multi-dimensional arrays 
  * can be regular or ragged. For example, the dimensions of a regular 3-D 
- * array float[n3][n2][n1] are n1, n2, and n3, where n1 is the fastest 
+ * array float[n3][n2][n1] are n1, n2, and n3, where n1 is the fastest
  * dimension, and n3 is the slowest dimension. In contrast, the lengths 
  * of arrays within a ragged array of arrays (of arrays) may vary.
  * <p>
@@ -70,7 +70,7 @@ import java.util.Random;
  * arrays of complex elements, and arguments with names like ca and cb 
  * denote complex values. 
  * <p>
- * Because complex numbers are packed into arrays of the same types (float 
+ * Because complex numbers are packed into arrays of the same types (float
  * or double) as real arrays, method overloading cannot distinguish methods 
  * with real array arguments from those with complex array arguments.
  * Therefore, all methods with at least one complex array argument are
@@ -115,7 +115,7 @@ import java.util.Random;
  * etc.
  * @see java.lang.Math
  * @author Dave Hale and Chris Engelsma, Colorado School of Mines
- * @version 2009.06.23
+ * @version 2017.05.31
  */
 public class ArrayMath {
 
@@ -148,7 +148,7 @@ public class ArrayMath {
   public static final double PI = Math.PI;  
   
  /**
-   * The float value that is closer than any other to <i>pi</i>, 
+   * The float value that is closer than any other to <i>pi</i>,
    * the ratio of the circumference of a circle to its diameter.
    */
   public static final float FLT_PI = (float)PI;
@@ -1071,6 +1071,7 @@ public class ArrayMath {
   /**
    * Returns a new array of zeros.
    * @param n1 1st array dimension.
+   * @return an array[n1] of zero bytes.
    */
   public static byte[] zerobyte(int n1) {
     return new byte[n1];
@@ -1080,6 +1081,7 @@ public class ArrayMath {
    * Returns a new array of zeros.
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
+   * @return an array[n2][n1] of zero bytes.
    */
   public static byte[][] zerobyte(int n1, int n2) {
     return new byte[n2][n1];
@@ -1090,6 +1092,7 @@ public class ArrayMath {
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
    * @param n3 3rd array dimension.
+   * @return an array[n3][n2][n1] of zero bytes.
    */
   public static byte[][][] zerobyte(int n1, int n2, int n3) {
     return new byte[n3][n2][n1];
@@ -1128,6 +1131,7 @@ public class ArrayMath {
   /**
    * Returns a new array of zeros.
    * @param n1 1st array dimension.
+   * @return an array[n1] of zero shorts.
    */
   public static short[] zeroshort(int n1) {
     return new short[n1];
@@ -1137,6 +1141,7 @@ public class ArrayMath {
    * Returns a new array of zeros.
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
+   * @return an array[n2][n1] of zero shorts.
    */
   public static short[][] zeroshort(int n1, int n2) {
     return new short[n2][n1];
@@ -1147,6 +1152,7 @@ public class ArrayMath {
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
    * @param n3 3rd array dimension.
+   * @return an array[n3][n2][n1] of zero shorts.
    */
   public static short[][][] zeroshort(int n1, int n2, int n3) {
     return new short[n3][n2][n1];
@@ -1185,6 +1191,7 @@ public class ArrayMath {
   /**
    * Returns a new array of zeros.
    * @param n1 1st array dimension.
+   * @return an array[n1] of zero integers.
    */
   public static int[] zeroint(int n1) {
     return new int[n1];
@@ -1194,6 +1201,7 @@ public class ArrayMath {
    * Returns a new array of zeros.
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
+   * @return an array[n2][n1] of zero integers.
    */
   public static int[][] zeroint(int n1, int n2) {
     return new int[n2][n1];
@@ -1204,6 +1212,7 @@ public class ArrayMath {
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
    * @param n3 3rd array dimension.
+   * @return an array[n3][n2][n1] of zero integers.
    */
   public static int[][][] zeroint(int n1, int n2, int n3) {
     return new int[n3][n2][n1];
@@ -1242,6 +1251,7 @@ public class ArrayMath {
   /**
    * Returns a new array of zeros.
    * @param n1 1st array dimension.
+   * @return an array[n1] of zero longs.
    */
   public static long[] zerolong(int n1) {
     return new long[n1];
@@ -1251,6 +1261,7 @@ public class ArrayMath {
    * Returns a new array of zeros.
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
+   * @return an array[n2][n1] of zero longs.
    */
   public static long[][] zerolong(int n1, int n2) {
     return new long[n2][n1];
@@ -1261,6 +1272,7 @@ public class ArrayMath {
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
    * @param n3 3rd array dimension.
+   * @return an array[n3][n2][n1] of zero longs.
    */
   public static long[][][] zerolong(int n1, int n2, int n3) {
     return new long[n3][n2][n1];
@@ -1299,6 +1311,7 @@ public class ArrayMath {
   /**
    * Returns a new array of zeros.
    * @param n1 1st array dimension.
+   * @return an array[n1] of zero floats.
    */
   public static float[] zerofloat(int n1) {
     return new float[n1];
@@ -1308,6 +1321,7 @@ public class ArrayMath {
    * Returns a new array of zeros.
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
+   * @return an array[n2][n1] of zero floats.
    */
   public static float[][] zerofloat(int n1, int n2) {
     return new float[n2][n1];
@@ -1318,6 +1332,7 @@ public class ArrayMath {
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
    * @param n3 3rd array dimension.
+   * @return an array[n3][n2][n1] of zero floats.
    */
   public static float[][][] zerofloat(int n1, int n2, int n3) {
     return new float[n3][n2][n1];
@@ -1356,6 +1371,7 @@ public class ArrayMath {
   /**
    * Returns a new array of zeros.
    * @param n1 1st array dimension.
+   * @return an array[2*n1] of zero complex floats.
    */
   public static float[] czerofloat(int n1) {
     return new float[2*n1];
@@ -1365,6 +1381,7 @@ public class ArrayMath {
    * Returns a new array of zeros.
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
+   * @return an array[n2][2*n1] of zero complex floats.
    */
   public static float[][] czerofloat(int n1, int n2) {
     return new float[n2][2*n1];
@@ -1375,6 +1392,7 @@ public class ArrayMath {
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
    * @param n3 3rd array dimension.
+   * @return an array[n3][n2][2*n1] of zero complex floats.
    */
   public static float[][][] czerofloat(int n1, int n2, int n3) {
     return new float[n3][n2][2*n1];
@@ -1407,6 +1425,7 @@ public class ArrayMath {
   /**
    * Returns a new array of zeros.
    * @param n1 1st array dimension.
+   * @return an array[n1] of zero doubles.
    */
   public static double[] zerodouble(int n1) {
     return new double[n1];
@@ -1416,6 +1435,7 @@ public class ArrayMath {
    * Returns a new array of zeros.
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
+   * @return an array[n2][n1] of zero doubles.
    */
   public static double[][] zerodouble(int n1, int n2) {
     return new double[n2][n1];
@@ -1426,6 +1446,7 @@ public class ArrayMath {
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
    * @param n3 3rd array dimension.
+   * @return an array[n3][n2][n1] of zero doubles.
    */
   public static double[][][] zerodouble(int n1, int n2, int n3) {
     return new double[n3][n2][n1];
@@ -1464,6 +1485,7 @@ public class ArrayMath {
   /**
    * Returns a new array of zeros.
    * @param n1 1st array dimension.
+   * @return an array[2*n1] of zero complex doubles.
    */
   public static double[] czerodouble(int n1) {
     return new double[2*n1];
@@ -1473,6 +1495,7 @@ public class ArrayMath {
    * Returns a new array of zeros.
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
+   * @return an array[n2][2*n1] of zero complex doubles.
    */
   public static double[][] czerodouble(int n1, int n2) {
     return new double[n2][2*n1];
@@ -1483,6 +1506,7 @@ public class ArrayMath {
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
    * @param n3 3rd array dimension.
+   * @return an array[n3][n2][2*n1] of zero complex doubles.
    */
   public static double[][][] czerodouble(int n1, int n2, int n3) {
     return new double[n3][n2][2*n1];
@@ -1518,6 +1542,7 @@ public class ArrayMath {
   /**
    * Returns a new array of random values.
    * @param n1 1st array dimension.
+   * @return an array[n1] of random integers.
    */
   public static int[] randint(int n1) {
     return randint(_random,n1);
@@ -1527,6 +1552,7 @@ public class ArrayMath {
    * Returns a new array of random values.
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
+   * @return an array[n2][n1] of random integers.
    */
   public static int[][] randint(int n1, int n2) {
     return randint(_random,n1,n2);
@@ -1537,6 +1563,7 @@ public class ArrayMath {
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
    * @param n3 3rd array dimension.
+   * @return an array[n3][n2][n1] of random integers.
    */
   public static int[][][] randint(int n1, int n2, int n3) {
     return randint(_random,n1,n2,n3);
@@ -1546,6 +1573,7 @@ public class ArrayMath {
    * Returns a new array of random values.
    * @param random random number generator.
    * @param n1 1st array dimension.
+   * @return an array[n1] of random integers.
    */
   public static int[] randint(Random random, int n1) {
     int[] rx = new int[n1];
@@ -1558,6 +1586,7 @@ public class ArrayMath {
    * @param random random number generator.
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
+   * @return an array[n2][n1] of random integers.
    */
   public static int[][] randint(Random random, int n1, int n2) {
     int[][] rx = new int[n2][n1];
@@ -1571,6 +1600,7 @@ public class ArrayMath {
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
    * @param n3 3rd array dimension.
+   * @return an array[n3][n2][n1] of random integers.
    */
   public static int[][][] randint(Random random, int n1, int n2, int n3) {
     int[][][] rx = new int[n3][n2][n1];
@@ -1638,6 +1668,7 @@ public class ArrayMath {
   /**
    * Returns a new array of random values.
    * @param n1 1st array dimension.
+   * @return an array[n1] of random longs.
    */
   public static long[] randlong(int n1) {
     return randlong(_random,n1);
@@ -1647,6 +1678,7 @@ public class ArrayMath {
    * Returns a new array of random values.
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
+   * @return an array[n2][n1] of random longs.
    */
   public static long[][] randlong(int n1, int n2) {
     return randlong(_random,n1,n2);
@@ -1657,6 +1689,7 @@ public class ArrayMath {
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
    * @param n3 3rd array dimension.
+   * @return an array[n3][n2][n1] of random longs.
    */
   public static long[][][] randlong(int n1, int n2, int n3) {
     return randlong(_random,n1,n2,n3);
@@ -1666,6 +1699,7 @@ public class ArrayMath {
    * Returns a new array of random values.
    * @param random random number generator.
    * @param n1 1st array dimension.
+   * @return an array[n1] of random longs.
    */
   public static long[] randlong(Random random, int n1) {
     long[] rx = new long[n1];
@@ -1678,6 +1712,7 @@ public class ArrayMath {
    * @param random random number generator.
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
+   * @return an array[n2][n1] of random longs.
    */
   public static long[][] randlong(Random random, int n1, int n2) {
     long[][] rx = new long[n2][n1];
@@ -1691,6 +1726,7 @@ public class ArrayMath {
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
    * @param n3 3rd array dimension.
+   * @return an array[n3][n2][n1] of random longs.
    */
   public static long[][][] randlong(Random random, int n1, int n2, int n3) {
     long[][][] rx = new long[n3][n2][n1];
@@ -5289,7 +5325,7 @@ public class ArrayMath {
    */
   public static void copy(
     int n1, 
-    int j1x, float[] rx, 
+    int j1x, float[] rx,
     int j1y, float[] ry) {
     for (int i1=0,ix=j1x,iy=j1y; i1<n1; ++i1)
       ry[iy++] = rx[ix++];
@@ -5308,7 +5344,7 @@ public class ArrayMath {
    */
   public static void copy(
     int n1, int n2, 
-    int j1x, int j2x, float[][] rx, 
+    int j1x, int j2x, float[][] rx,
     int j1y, int j2y, float[][] ry) {
     for (int i2=0; i2<n2; ++i2)
       copy(n1,j1x,rx[j2x+i2],j1y,ry[j2y+i2]);
@@ -5330,7 +5366,7 @@ public class ArrayMath {
    */
   public static void copy(
     int n1, int n2, int n3,
-    int j1x, int j2x, int j3x, float[][][] rx, 
+    int j1x, int j2x, int j3x, float[][][] rx,
     int j1y, int j2y, int j3y, float[][][] ry) {
     for (int i3=0; i3<n3; ++i3)
       copy(n1,n2,j1x,j2x,rx[j3x+i3],j1y,j2y,ry[j3y+i3]);
@@ -5348,7 +5384,7 @@ public class ArrayMath {
    */
   public static void copy(
     int n1, 
-    int j1x, int k1x, float[] rx, 
+    int j1x, int k1x, float[] rx,
     int j1y, int k1y, float[] ry) {
     for (int i1=0,ix=j1x,iy=j1y; i1<n1; ++i1,ix+=k1x,iy+=k1y)
       ry[iy] = rx[ix];
@@ -5371,7 +5407,7 @@ public class ArrayMath {
    */
   public static void copy(
     int n1, int n2, 
-    int j1x, int j2x, int k1x, int k2x, float[][] rx, 
+    int j1x, int j2x, int k1x, int k2x, float[][] rx,
     int j1y, int j2y, int k1y, int k2y, float[][] ry) {
     for (int i2=0; i2<n2; ++i2)
       copy(n1,j1x,k1x,rx[j2x+i2*k2x],j1y,k1y,ry[j2y+i2*k2y]);
@@ -5399,7 +5435,7 @@ public class ArrayMath {
    */
   public static void copy(
     int n1, int n2, int n3,
-    int j1x, int j2x, int j3x, int k1x, int k2x, int k3x, float[][][] rx, 
+    int j1x, int j2x, int j3x, int k1x, int k2x, int k3x, float[][][] rx,
     int j1y, int j2y, int j3y, int k1y, int k2y, int k3y, float[][][] ry) {
     for (int i3=0; i3<n3; ++i3)
       copy(n1,n2,j1x,j2x,k1x,k2x,rx[j3x+i3*k3x],j1y,j2y,k1y,k2y,ry[j3y+i3*k3y]);
@@ -5664,7 +5700,7 @@ public class ArrayMath {
    */
   public static void ccopy(
     int n1, 
-    int j1x, float[] cx, 
+    int j1x, float[] cx,
     int j1y, float[] cy) {
     for (int i1=0,ix=2*j1x,iy=2*j1y; i1<n1; ++i1) {
       cy[iy++] = cx[ix++];
@@ -5685,7 +5721,7 @@ public class ArrayMath {
    */
   public static void ccopy(
     int n1, int n2, 
-    int j1x, int j2x, float[][] cx, 
+    int j1x, int j2x, float[][] cx,
     int j1y, int j2y, float[][] cy) {
     for (int i2=0; i2<n2; ++i2)
       ccopy(n1,j1x,cx[j2x+i2],j1y,cy[j2y+i2]);
@@ -5707,7 +5743,7 @@ public class ArrayMath {
    */
   public static void ccopy(
     int n1, int n2, int n3,
-    int j1x, int j2x, int j3x, float[][][] cx, 
+    int j1x, int j2x, int j3x, float[][][] cx,
     int j1y, int j2y, int j3y, float[][][] cy) {
     for (int i3=0; i3<n3; ++i3)
       ccopy(n1,n2,j1x,j2x,cx[j3x+i3],j1y,j2y,cy[j3y+i3]);
@@ -5725,7 +5761,7 @@ public class ArrayMath {
    */
   public static void ccopy(
     int n1, 
-    int j1x, int k1x, float[] cx, 
+    int j1x, int k1x, float[] cx,
     int j1y, int k1y, float[] cy) {
     int k1x2 = k1x*2;
     int k1y2 = k1y*2;
@@ -5752,7 +5788,7 @@ public class ArrayMath {
    */
   public static void ccopy(
     int n1, int n2, 
-    int j1x, int j2x, int k1x, int k2x, float[][] cx, 
+    int j1x, int j2x, int k1x, int k2x, float[][] cx,
     int j1y, int j2y, int k1y, int k2y, float[][] cy) {
     for (int i2=0; i2<n2; ++i2)
       ccopy(n1,j1x,k1x,cx[j2x+i2*k2x],j1y,k1y,cy[j2y+i2*k2y]);
@@ -5780,7 +5816,7 @@ public class ArrayMath {
    */
   public static void ccopy(
     int n1, int n2, int n3,
-    int j1x, int j2x, int j3x, int k1x, int k2x, int k3x, float[][][] cx, 
+    int j1x, int j2x, int j3x, int k1x, int k2x, int k3x, float[][][] cx,
     int j1y, int j2y, int j3y, int k1y, int k2y, int k3y, float[][][] cy) {
     for (int i3=0; i3<n3; ++i3)
       ccopy(n1,n2,
@@ -7955,7 +7991,8 @@ public class ArrayMath {
     return equal(tolerance,cx,cy);
   }
   private static boolean equal(float tolerance, float ra, float rb) {
-    return (ra<rb)?rb-ra<=tolerance:ra-rb<=tolerance;
+    float val = abs(ra-rb);
+    return val<=tolerance || Float.isNaN(val);
   }
 
   /**
@@ -8122,7 +8159,8 @@ public class ArrayMath {
     return equal(tolerance,cx,cy);
   }
   private static boolean equal(double tolerance, double ra, double rb) {
-    return (ra<rb)?rb-ra<=tolerance:ra-rb<=tolerance;
+    double val = abs(ra-rb);
+    return val<=tolerance || Double.isNaN(val);
   }
 
   ///////////////////////////////////////////////////////////////////////////
@@ -11806,7 +11844,7 @@ public class ArrayMath {
     return ry;
   }
   public static void clip(
-    float rxmin, float rxmax, float[] rx, float[] ry) 
+    float rxmin, float rxmax, float[] rx, float[] ry)
   {
     int n1 = rx.length;
     for (int i1=0; i1<n1; ++i1) {
@@ -11815,14 +11853,14 @@ public class ArrayMath {
     }
   }
   public static void clip(
-    float rxmin, float rxmax, float[][] rx, float[][] ry) 
+    float rxmin, float rxmax, float[][] rx, float[][] ry)
   {
     int n2 = rx.length;
     for (int i2=0; i2<n2; ++i2)
       clip(rxmin,rxmax,rx[i2],ry[i2]);
   }
   public static void clip(
-    float rxmin, float rxmax, float[][][] rx, float[][][] ry) 
+    float rxmin, float rxmax, float[][][] rx, float[][][] ry)
   {
     int n3 = rx.length;
     for (int i3=0; i3<n3; ++i3)
