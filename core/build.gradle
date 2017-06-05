@@ -30,7 +30,7 @@ distributions {
 test {
   useTestNG() {
     options {
-      parallel="methods"
+      parallel="classes"
       threadCount=5
     }
   }

@@ -23,8 +23,7 @@ import static edu.mines.jtk.util.ArrayMath.*;
 import static org.testng.Assert.*;
 
 /**
- * Tests simple byte array operations in
- * {@link ArrayMath}.
+ * Tests byte array operations in {@link edu.mines.jtk.util.ArrayMath}.
  * @author Chris Engelsma
  * @version 2017.05.31
  */
@@ -32,7 +31,6 @@ public class ArrayMathTestByte extends ArrayMathTest {
 
   @BeforeMethod
   public void setUp() {
-    n3 = 8; n2 = 6; n1 = 4;
     a1 = rampbyte((byte)0,(byte)1,n1);
     a2 = rampbyte((byte)0,(byte)1,(byte)10,n1,n2);
     a3 = rampbyte((byte)0,(byte)1,(byte)10,(byte)100,n1,n2,n3);
@@ -200,9 +198,9 @@ public class ArrayMathTestByte extends ArrayMathTest {
 
   @Test
   public void testMinMax() {
-    Random r = new Random();
     byte min = (byte)(-128);
     byte max = (byte)( 127);
+    Random r = new Random();
     int j3 = r.nextInt(n3-1)+1;
     int j2 = r.nextInt(n2-1)+1;
     int j1 = r.nextInt(n1-1)+1;
@@ -266,43 +264,43 @@ public class ArrayMathTestByte extends ArrayMathTest {
     assertFalse(isMonotonic(a1));
   }
 
-  protected static void assertOnlyContains(byte val,byte[][][] a) {
+  private static void assertOnlyContains(byte val,byte[][][] a) {
     for (int i3=0; i3<a.length; ++i3)
       assertOnlyContains(val,a[i3]);
   }
 
-  protected static void assertOnlyContains(byte val,byte[][] a) {
+  private static void assertOnlyContains(byte val,byte[][] a) {
     for (int i2=0; i2<a.length; ++i2)
       assertOnlyContains(val,a[i2]);
   }
 
-  protected static void assertOnlyContains(byte val,byte[] a) {
+  private static void assertOnlyContains(byte val,byte[] a) {
     for (int i1=0; i1<a.length; ++i1)
       assertEquals(val,a[i1]);
   }
 
-  protected static void assertArraySize(byte[][][] a,int n1,int n2,int n3) {
+  private static void assertArraySize(byte[][][] a,int n1,int n2,int n3) {
     assertEquals(n3,a.length);
     assertEquals(n2,a[0].length);
     assertEquals(n1,a[0][0].length);
   }
 
-  protected static void assertArraySize(byte[][] a,int n1,int n2) {
+  private static void assertArraySize(byte[][] a,int n1,int n2) {
     assertEquals(n2,a.length);
     assertEquals(n1,a[0].length);
   }
 
-  protected static void assertArraySize(byte[] a,int n) {
+  private static void assertArraySize(byte[] a,int n) {
     assertEquals(n,a.length);
   }
 
 
-  protected byte[]     a1;
-  protected byte[][]   a2;
-  protected byte[][][] a3;
+  private byte[]     a1;
+  private byte[][]   a2;
+  private byte[][][] a3;
 
-  protected byte[]     b1;
-  protected byte[][]   b2;
-  protected byte[][][] b3;
+  private byte[]     b1;
+  private byte[][]   b2;
+  private byte[][][] b3;
 
 }

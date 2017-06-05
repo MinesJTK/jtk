@@ -794,9 +794,9 @@ public class ArrayMathTest {
 //////////////////////////////////////////////////////////////////////////////
 // protected
 
-  protected static int n3;
-  protected static int n2;
-  protected static int n1;
+  static final int n3 = 8;
+  static final int n2 = 6;
+  static final int n1 = 4;
 
   protected void assertEq(float expected, float actual) {
     float small = 1.0e-6f*max(abs(expected),abs(actual),1.0f);

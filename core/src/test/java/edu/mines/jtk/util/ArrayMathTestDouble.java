@@ -23,8 +23,7 @@ import static edu.mines.jtk.util.ArrayMath.*;
 import static org.testng.Assert.*;
 
 /**
- * Tests simple double array operations in
- * {@link edu.mines.jtk.util.ArrayMath}.
+ * Tests double array operations in {@link edu.mines.jtk.util.ArrayMath}.
  * @author Chris Engelsma
  * @version 2017.05.31
  */
@@ -32,7 +31,6 @@ public class ArrayMathTestDouble extends ArrayMathTest {
 
   @BeforeMethod
   public void setUp() {
-    n3 = 8; n2 = 6; n1 = 4;
     a1 = rampdouble(0d,1d,n1);
     a2 = rampdouble(0d,1d,10d,n1,n2);
     a3 = rampdouble(0d,1d,10d,100d,n1,n2,n3);
@@ -439,43 +437,43 @@ public class ArrayMathTestDouble extends ArrayMathTest {
     assertFalse(isMonotonic(a1));
   }
 
-  protected static void assertOnlyContains(double val,double[][][] a) {
+  private static void assertOnlyContains(double val,double[][][] a) {
     for (int i3=0; i3<a.length; ++i3)
       assertOnlyContains(val,a[i3]);
   }
 
-  protected static void assertOnlyContains(double val,double[][] a) {
+  private static void assertOnlyContains(double val,double[][] a) {
     for (int i2=0; i2<a.length; ++i2)
       assertOnlyContains(val,a[i2]);
   }
 
-  protected static void assertOnlyContains(double val,double[] a) {
+  private static void assertOnlyContains(double val,double[] a) {
     for (int i1=0; i1<a.length; ++i1)
       assertEquals(val,a[i1]);
   }
 
-  protected static void assertArraySize(double[][][] a,int n1,int n2,int n3) {
+  private static void assertArraySize(double[][][] a,int n1,int n2,int n3) {
     assertEquals(n3,a.length);
     assertEquals(n2,a[0].length);
     assertEquals(n1,a[0][0].length);
   }
 
-  protected static void assertArraySize(double[][] a,int n1,int n2) {
+  private static void assertArraySize(double[][] a,int n1,int n2) {
     assertEquals(n2,a.length);
     assertEquals(n1,a[0].length);
   }
 
-  protected static void assertArraySize(double[] a,int n) {
+  private static void assertArraySize(double[] a,int n) {
     assertEquals(n,a.length);
   }
 
 
-  protected double[]     a1;
-  protected double[][]   a2;
-  protected double[][][] a3;
+  private double[]     a1;
+  private double[][]   a2;
+  private double[][][] a3;
 
-  protected double[]     b1;
-  protected double[][]   b2;
-  protected double[][][] b3;
+  private double[]     b1;
+  private double[][]   b2;
+  private double[][][] b3;
 
 }
