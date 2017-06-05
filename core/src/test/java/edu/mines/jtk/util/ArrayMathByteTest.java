@@ -21,13 +21,18 @@ import java.util.Random;
 
 import static edu.mines.jtk.util.ArrayMath.*;
 import static org.testng.Assert.*;
+import static edu.mines.jtk.util.ArrayMathTest.*;
 
 /**
  * Tests byte array operations in {@link edu.mines.jtk.util.ArrayMath}.
  * @author Chris Engelsma
  * @version 2017.05.31
  */
-public class ArrayMathTestByte extends ArrayMathTest {
+public class ArrayMathByteTest {
+
+  private static final int n3 = 8;
+  private static final int n2 = 6;
+  private static final int n1 = 4;
 
   @BeforeMethod
   public void setUp() {
@@ -198,6 +203,10 @@ public class ArrayMathTestByte extends ArrayMathTest {
 
   @Test
   public void testMinMax() {
+    a1 = rampbyte((byte)0,(byte)1,n1);
+    a2 = rampbyte((byte)0,(byte)1,(byte)1,n1,n2);
+    a3 = rampbyte((byte)0,(byte)1,(byte)1,(byte)1,n1,n2,n3);
+
     byte min = (byte)(-128);
     byte max = (byte)( 127);
     Random r = new Random();
@@ -214,6 +223,10 @@ public class ArrayMathTestByte extends ArrayMathTest {
     a3[j3][j2][j1] = min; a3[j3][j2][k1] = max;
     a2[j2][j1]     = min; a2[j2][k1]     = max;
     a1[j1]         = min; a1[k1]         = max;
+
+    dump(a3);
+    dump(a2);
+    dump(a1);
 
     byte min3 = min(a3,imin3); byte max3 = max(a3,imax3);
     byte min2 = min(a2,imin2); byte max2 = max(a2,imax2);

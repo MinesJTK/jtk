@@ -794,125 +794,121 @@ public class ArrayMathTest {
 //////////////////////////////////////////////////////////////////////////////
 // protected
 
-  static final int n3 = 8;
-  static final int n2 = 6;
-  static final int n1 = 4;
-
-  protected void assertEq(float expected, float actual) {
+  protected static void assertEq(float expected, float actual) {
     float small = 1.0e-6f*max(abs(expected),abs(actual),1.0f);
     assertEquals(expected,actual,small);
   }
 
-  protected void assertEq(double expected, double actual) {
+  protected static void assertEq(double expected, double actual) {
     double small = 1.0e-12f*max(abs(expected),abs(actual),1.0d);
     assertEquals(expected,actual,small);
   }
 
-  protected void assertEq(byte expected, byte actual) {
+  protected static void assertEq(byte expected, byte actual) {
+    assertTrue(expected==actual);
+  }
+
+  protected static void assertEq(int expected, int actual) {
     assertEquals(expected,actual);
   }
 
-  protected void assertEq(int expected, int actual) {
+  protected static void assertEq(long expected, long actual) {
     assertEquals(expected,actual);
   }
 
-  protected void assertEq(long expected, long actual) {
-    assertEquals(expected,actual);
-  }
-
-  protected void assertEqual(float[] rx, float[] ry) {
+  protected static void assertEqual(float[] rx, float[] ry) {
     assertTrue(equal(rx,ry));
   }
 
-  protected void assertEqual(float[][] rx, float[][] ry) {
+  protected static void assertEqual(float[][] rx, float[][] ry) {
     assertTrue(equal(rx,ry));
   }
 
-  protected void assertEqual(float[][][] rx, float[][][] ry) {
+  protected static void assertEqual(float[][][] rx, float[][][] ry) {
     assertTrue(equal(rx,ry));
   }
 
-  protected void assertEqual(double[] rx, double[] ry) {
+  protected static void assertEqual(double[] rx, double[] ry) {
     assertTrue(equal(rx,ry));
   }
 
-  protected void assertEqual(double[][] rx, double[][] ry) {
+  protected static void assertEqual(double[][] rx, double[][] ry) {
     assertTrue(equal(rx,ry));
   }
 
-  protected void assertEqual(double[][][] rx, double[][][] ry) {
+  protected static void assertEqual(double[][][] rx, double[][][] ry) {
     assertTrue(equal(rx,ry));
   }
 
-  protected void assertEqual(int[] rx, int[] ry) {
+  protected static void assertEqual(int[] rx, int[] ry) {
     assertTrue(equal(rx,ry));
   }
 
-  protected void assertEqual(int[][] rx, int[][] ry) {
+  protected static void assertEqual(int[][] rx, int[][] ry) {
     assertTrue(equal(rx,ry));
   }
 
-  protected void assertEqual(int[][][] rx, int[][][] ry) {
+  protected static void assertEqual(int[][][] rx, int[][][] ry) {
     assertTrue(equal(rx,ry));
   }
 
-  protected void assertEqual(long[] rx, long[] ry) {
+  protected static void assertEqual(long[] rx, long[] ry) {
     assertTrue(equal(rx,ry));
   }
 
-  protected void assertEqual(long[][] rx, long[][] ry) {
+  protected static void assertEqual(long[][] rx, long[][] ry) {
     assertTrue(equal(rx,ry));
   }
 
-  protected void assertEqual(long[][][] rx, long[][][] ry) {
+  protected static void assertEqual(long[][][] rx, long[][][] ry) {
     assertTrue(equal(rx,ry));
   }
 
-  protected void assertEqual(short[] rx, short[] ry) {
+  protected static void assertEqual(short[] rx, short[] ry) {
     assertTrue(equal(rx,ry));
   }
 
-  protected void assertEqual(short[][] rx, short[][] ry) {
+  protected static void assertEqual(short[][] rx, short[][] ry) {
     assertTrue(equal(rx,ry));
   }
 
-  protected void assertEqual(short[][][] rx, short[][][] ry) {
+  protected static void assertEqual(short[][][] rx, short[][][] ry) {
     assertTrue(equal(rx,ry));
   }
 
-  protected void assertEqual(byte[] rx, byte[] ry) {
+  protected static void assertEqual(byte[] rx, byte[] ry) {
     assertTrue(equal(rx,ry));
   }
 
-  protected void assertEqual(byte[][] rx, byte[][] ry) {
+  protected static void assertEqual(byte[][] rx, byte[][] ry) {
     assertTrue(equal(rx,ry));
   }
 
-  protected void assertEqual(byte[][][] rx, byte[][][] ry) {
+  protected static void assertEqual(byte[][][] rx, byte[][][] ry) {
     assertTrue(equal(rx,ry));
   }
 
-  protected void assertAlmostEqual(float[][][] rx, float[][][] ry) {
+  protected static void assertAlmostEqual(float[][][] rx, float[][][] ry) {
     assertTrue(equal(FLT_TOLERANCE,rx,ry));
   }
 
-  protected void assertAlmostEqual(float[][] rx, float[][] ry) {
+  protected static void assertAlmostEqual(float[][] rx, float[][] ry) {
     assertTrue(equal(FLT_TOLERANCE,rx,ry));
   }
 
-  protected void assertAlmostEqual(float[] rx, float[] ry) {
+  protected static void assertAlmostEqual(float[] rx, float[] ry) {
     assertTrue(equal(FLT_TOLERANCE,rx,ry));
   }
 
-  protected void assertAlmostEqual(double[][][] rx, double[][][] ry) {
+  protected static void assertAlmostEqual(double[][][] rx, double[][][] ry) {
     assertTrue(equal(DBL_TOLERANCE,rx,ry));
   }
 
-  protected void assertAlmostEqual(double[][] rx, double[][] ry) {
+  protected static void assertAlmostEqual(double[][] rx, double[][] ry) {
     assertTrue(equal(DBL_TOLERANCE,rx,ry));
   }
 
-  protected void assertAlmostEqual(double[] rx, double[] ry) {
+  protected static void assertAlmostEqual(double[] rx, double[] ry) {
     assertTrue(equal(DBL_TOLERANCE,rx,ry));
   }
 

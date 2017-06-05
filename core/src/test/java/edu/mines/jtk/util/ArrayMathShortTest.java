@@ -22,12 +22,18 @@ import java.util.Random;
 import static edu.mines.jtk.util.ArrayMath.*;
 import static org.testng.Assert.*;
 
+import static edu.mines.jtk.util.ArrayMathTest.*;
+
 /**
  * Tests short array operations in {@link edu.mines.jtk.util.ArrayMath}.
  * @author Chris Engelsma
  * @version 2017.05.31
  */
-public class ArrayMathTestShort extends ArrayMathTest {
+public class ArrayMathShortTest {
+
+  private static final int n3 = 8;
+  private static final int n2 = 6;
+  private static final int n1 = 4;
 
   @BeforeMethod
   public void setUp() {
