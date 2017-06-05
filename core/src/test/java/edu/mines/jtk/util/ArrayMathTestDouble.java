@@ -99,18 +99,19 @@ public class ArrayMathTestDouble extends ArrayMathTest {
 
   @Test
   public void testRand() {
-    // Rand
-    rand(a1); b1 = copy(a1);
-    rand(a2); b2 = copy(a2);
-    rand(a3); b3 = copy(a3);
+    rand(a1); rand(a2); rand(a3);
 
-    assertTrue(equal(a1,b1));
-    assertTrue(equal(a2,b2));
-    assertTrue(equal(a3,b3));
+    assertArraySize(a1,n1);
+    assertArraySize(a2,n1,n2);
+    assertArraySize(a3,n1,n2,n3);
 
     b1 = randdouble(n1);
     b2 = randdouble(n1,n2);
     b3 = randdouble(n1,n2,n3);
+
+    assertArraySize(b1,n1);
+    assertArraySize(b2,n1,n2);
+    assertArraySize(b3,n1,n2,n3);
 
     assertFalse(equal(a1,b1));
     assertFalse(equal(a2,b2));
@@ -338,9 +339,9 @@ public class ArrayMathTestDouble extends ArrayMathTest {
       a3[i3] = copy(a2);
     }
 
-    assertEqual(b1,sqrt(a1));  assertAlmostEqual(a1,mul(b1,b1));
-    assertEqual(b2,sqrt(a2));  assertAlmostEqual(a2,mul(b2,b2));
-    assertEqual(b3,sqrt(a3));  assertAlmostEqual(a3,mul(b3,b3));
+    assertAlmostEqual(b1,sqrt(a1));  assertAlmostEqual(a1,mul(b1,b1));
+    assertAlmostEqual(b2,sqrt(a2));  assertAlmostEqual(a2,mul(b2,b2));
+    assertAlmostEqual(b3,sqrt(a3));  assertAlmostEqual(a3,mul(b3,b3));
   }
 
   @Test
@@ -365,9 +366,9 @@ public class ArrayMathTestDouble extends ArrayMathTest {
       a3[i3] = copy(a2);
     }
 
-    assertEqual(b1,pow(a1,2.0d)); assertAlmostEqual(a1,sqrt(b1));
-    assertEqual(b2,pow(a2,2.0d)); assertAlmostEqual(a2,sqrt(b2));
-    assertEqual(b3,pow(a3,2.0d)); assertAlmostEqual(a3,sqrt(b3));
+    assertAlmostEqual(b1,pow(a1,2.0d)); assertAlmostEqual(a1,sqrt(b1));
+    assertAlmostEqual(b2,pow(a2,2.0d)); assertAlmostEqual(a2,sqrt(b2));
+    assertAlmostEqual(b3,pow(a3,2.0d)); assertAlmostEqual(a3,sqrt(b3));
   }
 
   @Test

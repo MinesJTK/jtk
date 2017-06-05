@@ -26,8 +26,6 @@ distributions {
 }
 // end::distributions[]
 
-
-
 // tag::test[]
 test {
   useTestNG() {
@@ -38,7 +36,6 @@ test {
   }
 }
 // end::test[]
-
 
 // tag::javadoc[]
 javadoc {
@@ -55,14 +52,6 @@ jacocoTestReport {
 }
 check.dependsOn jacocoTestReport
 // end::jacocoTestReport[]
-
-// tag::deps[]
-task deps(type: Sync) {
-  description = "Copies all dependencies into core/build/deps/."
-  from configurations.runtime
-  into "${buildDir}/deps"
-}
-// end::deps[]
 
 // tag::javadocJar[]
 task javadocJar(type: Jar, dependsOn: javadoc) {

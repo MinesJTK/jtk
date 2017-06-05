@@ -612,7 +612,6 @@ public class ArrayMathTest {
     assertEquals(0, Double.doubleToLongBits(abs(0.0d)));
   }
 
-
   @Test void testMax() {
     assertEq(4,max(1,3,4,2));
     assertEq(4L,max(1L,3L,4L,2L));

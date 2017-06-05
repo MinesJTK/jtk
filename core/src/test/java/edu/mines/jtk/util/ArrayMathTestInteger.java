@@ -95,18 +95,19 @@ public class ArrayMathTestInteger extends ArrayMathTest {
 
   @Test
   public void testRand() {
-    // Rand
-    rand(a1); b1 = copy(a1);
-    rand(a2); b2 = copy(a2);
-    rand(a3); b3 = copy(a3);
+    rand(a1); rand(a2); rand(a3);
 
-    assertTrue(equal(a1,b1));
-    assertTrue(equal(a2,b2));
-    assertTrue(equal(a3,b3));
+    assertArraySize(a1,n1);
+    assertArraySize(a2,n1,n2);
+    assertArraySize(a3,n1,n2,n3);
 
     b1 = randint(n1);
     b2 = randint(n1,n2);
     b3 = randint(n1,n2,n3);
+
+    assertArraySize(b1,n1);
+    assertArraySize(b2,n1,n2);
+    assertArraySize(b3,n1,n2,n3);
 
     assertFalse(equal(a1,b1));
     assertFalse(equal(a2,b2));
