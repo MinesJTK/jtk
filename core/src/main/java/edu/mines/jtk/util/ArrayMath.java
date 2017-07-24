@@ -1794,6 +1794,7 @@ public class ArrayMath {
   /**
    * Returns a new array of random values.
    * @param n1 1st array dimension.
+   * @return an array[n1] of random floats.
    */
   public static float[] randfloat(int n1) {
     return randfloat(_random,n1);
@@ -1803,6 +1804,7 @@ public class ArrayMath {
    * Returns a new array of random values.
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
+   * @return an array[n2][n1] of random floats.
    */
   public static float[][] randfloat(int n1, int n2) {
     return randfloat(_random,n1,n2);
@@ -1813,6 +1815,7 @@ public class ArrayMath {
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
    * @param n3 3rd array dimension.
+   * @return an array[n3][n2][n1] of random floats.
    */
   public static float[][][] randfloat(int n1, int n2, int n3) {
     return randfloat(_random,n1,n2,n3);
@@ -1822,6 +1825,7 @@ public class ArrayMath {
    * Returns a new array of random values.
    * @param random random number generator.
    * @param n1 1st array dimension.
+   * @return an array[n1] of random floats.
    */
   public static float[] randfloat(Random random, int n1) {
     float[] rx = new float[n1];
@@ -1834,6 +1838,7 @@ public class ArrayMath {
    * @param random random number generator.
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
+   * @return an array[n2][n1] of random floats.
    */
   public static float[][] randfloat(Random random, int n1, int n2) {
     float[][] rx = new float[n2][n1];
@@ -1847,6 +1852,7 @@ public class ArrayMath {
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
    * @param n3 3rd array dimension.
+   * @return an array[n3][n2][n1] of random floats.
    */
   public static float[][][] randfloat(Random random, int n1, int n2, int n3) {
     float[][][] rx = new float[n3][n2][n1];
@@ -1914,6 +1920,7 @@ public class ArrayMath {
   /**
    * Returns a new array of random values.
    * @param n1 1st array dimension.
+   * @return an array[2*n1] of random complex floats.
    */
   public static float[] crandfloat(int n1) {
     return crandfloat(_random,n1);
@@ -1923,6 +1930,7 @@ public class ArrayMath {
    * Returns a new array of random values.
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
+   * @return an array[n2][2*n1] of random complex floats.
    */
   public static float[][] crandfloat(int n1, int n2) {
     return crandfloat(_random,n1,n2);
@@ -1933,6 +1941,7 @@ public class ArrayMath {
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
    * @param n3 3rd array dimension.
+   * @return an array[n3][n2][2*n1] of random complex floats.
    */
   public static float[][][] crandfloat(int n1, int n2, int n3) {
     return crandfloat(_random,n1,n2,n3);
@@ -1942,6 +1951,7 @@ public class ArrayMath {
    * Returns a new array of random values.
    * @param random random number generator.
    * @param n1 1st array dimension.
+   * @return an array[2*n1] of random complex floats.
    */
   public static float[] crandfloat(Random random, int n1) {
     float[] cx = new float[2*n1];
@@ -1954,6 +1964,7 @@ public class ArrayMath {
    * @param random random number generator.
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
+   * @return an array[n2][2*n1] of random complex floats.
    */
   public static float[][] crandfloat(Random random, int n1, int n2) {
     float[][] cx = new float[n2][2*n1];
@@ -1967,6 +1978,7 @@ public class ArrayMath {
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
    * @param n3 3rd array dimension.
+   * @return an array[n3][n2][2*n1] of random complex floats.
    */
   public static float[][][] crandfloat(Random random, int n1, int n2, int n3) {
     float[][][] cx = new float[n3][n2][2*n1];
@@ -2028,6 +2040,7 @@ public class ArrayMath {
   /**
    * Returns a new array of random values.
    * @param n1 1st array dimension.
+   * @return an array[n1] of random doubles.
    */
   public static double[] randdouble(int n1) {
     return randdouble(_random,n1);
@@ -2037,6 +2050,7 @@ public class ArrayMath {
    * Returns a new array of random values.
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
+   * @return an array[n2][n1] of random doubles.
    */
   public static double[][] randdouble(int n1, int n2) {
     return randdouble(_random,n1,n2);
@@ -2047,6 +2061,7 @@ public class ArrayMath {
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
    * @param n3 3rd array dimension.
+   * @return an array[n3][n2][n1] of random doubles.
    */
   public static double[][][] randdouble(int n1, int n2, int n3) {
     return randdouble(_random,n1,n2,n3);
@@ -2056,6 +2071,7 @@ public class ArrayMath {
    * Returns a new array of random values.
    * @param random random number generator.
    * @param n1 1st array dimension.
+   * @return an array[n1] of random doubles.
    */
   public static double[] randdouble(Random random, int n1) {
     double[] rx = new double[n1];
@@ -2068,6 +2084,7 @@ public class ArrayMath {
    * @param random random number generator.
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
+   * @return an array[n2][n1] of random doubles.
    */
   public static double[][] randdouble(Random random, int n1, int n2) {
     double[][] rx = new double[n2][n1];
@@ -2081,6 +2098,7 @@ public class ArrayMath {
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
    * @param n3 3rd array dimension.
+   * @return an array[n3][n2][n1] of random doubles.
    */
   public static double[][][] randdouble(Random random, int n1, int n2, int n3) {
     double[][][] rx = new double[n3][n2][n1];
@@ -2148,6 +2166,7 @@ public class ArrayMath {
   /**
    * Returns a new array of random values.
    * @param n1 1st array dimension.
+   * @return an array[2*n1] of random doubles.
    */
   public static double[] cranddouble(int n1) {
     return cranddouble(_random,n1);
@@ -2157,6 +2176,7 @@ public class ArrayMath {
    * Returns a new array of random values.
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
+   * @return an array[n2][2*n1] of random doubles.
    */
   public static double[][] cranddouble(int n1, int n2) {
     return cranddouble(_random,n1,n2);
@@ -2167,6 +2187,7 @@ public class ArrayMath {
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
    * @param n3 3rd array dimension.
+   * @return an array[n3][n2][2*n1] of random doubles.
    */
   public static double[][][] cranddouble(int n1, int n2, int n3) {
     return cranddouble(_random,n1,n2,n3);
@@ -2176,6 +2197,7 @@ public class ArrayMath {
    * Returns a new array of random values.
    * @param random random number generator.
    * @param n1 1st array dimension.
+   * @return an array[2*n1] of random doubles.
    */
   public static double[] cranddouble(Random random, int n1) {
     double[] cx = new double[2*n1];
@@ -2188,6 +2210,7 @@ public class ArrayMath {
    * @param random random number generator.
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
+   * @return an array[n2][2*n1] of random doubles.
    */
   public static double[][] cranddouble(Random random, int n1, int n2) {
     double[][] cx = new double[n2][2*n1];
@@ -2201,6 +2224,7 @@ public class ArrayMath {
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
    * @param n3 3rd array dimension.
+   * @return an array[n3][n2][2*n1] of random doubles.
    */
   public static double[][][] cranddouble(Random random, int n1, int n2, int n3) {
     double[][][] cx = new double[n3][n2][2*n1];
@@ -2267,6 +2291,7 @@ public class ArrayMath {
    * Returns an array initialized to a specified value.
    * @param ra the value.
    * @param n1 1st array dimension.
+   * @return an array[n1] of bytes.
    */
   public static byte[] fillbyte(byte ra, int n1) {
     byte[] rx = new byte[n1];
@@ -2279,6 +2304,7 @@ public class ArrayMath {
    * @param ra the value.
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
+   * @return an array[n2][n1] of bytes.
    */
   public static byte[][] fillbyte(byte ra, int n1, int n2) {
     byte[][] rx = new byte[n2][n1];
@@ -2292,6 +2318,7 @@ public class ArrayMath {
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
    * @param n3 3rd array dimension.
+   * @return an array[n3][n2][n1] of bytes.
    */
   public static byte[][][] fillbyte(byte ra, int n1, int n2, int n3) {
     byte[][][] rx = new byte[n3][n2][n1];
@@ -2336,6 +2363,7 @@ public class ArrayMath {
    * Returns an array initialized to a specified value.
    * @param ra the value.
    * @param n1 1st array dimension.
+   * @return an array[n1] of shorts.
    */
   public static short[] fillshort(short ra, int n1) {
     short[] rx = new short[n1];
@@ -2348,6 +2376,7 @@ public class ArrayMath {
    * @param ra the value.
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
+   * @return an array[n2][n1] of shorts.
    */
   public static short[][] fillshort(short ra, int n1, int n2) {
     short[][] rx = new short[n2][n1];
@@ -2361,6 +2390,7 @@ public class ArrayMath {
    * @param n1 1st array dimension.
    * @param n2 2nd array dimension.
    * @param n3 3rd array dimension.
+   * @return an array[n3][n2][n1] of shorts.
    */
   public static short[][][] fillshort(short ra, int n1, int n2, int n3) {
     short[][][] rx = new short[n3][n2][n1];

@@ -414,14 +414,13 @@ public class Almost implements Serializable, Comparator<Number> {
             bottom = -bottom;
         }
 
-        if (bottom >= 1.0                      // Might underflow, but don't care.
-                || top < bottom * 0.1 * Float.MAX_VALUE) { // bottom<1 won't overflow
-            return sign * top / bottom;                 // safe
+        if (bottom >= 1.0 || top < bottom * 0.1 * Float.MAX_VALUE) {
+            return sign * top / bottom;    // safe
         } else if (equal(top, bottom)) {
-            if (zero(top)) {                           // define 0/0 = limit
+            if (zero(top)) {               // define 0/0 = limit
                 return limit;
             }
-            return sign;                  // ratio is within precision of unity
+            return sign;        // ratio is within precision of unity
         } else {                // clip overflow
             return sign * 0.01 * Float.MAX_VALUE;
         }

@@ -15,6 +15,7 @@ limitations under the License.
 package edu.mines.jtk.util;
 
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
@@ -25,49 +26,121 @@ import static org.testng.AssertJUnit.assertTrue;
 /**
  * Tests {@link edu.mines.jtk.util.Almost}.
  * @author W.S. Harlan
+ * @author Chris Engelsma
+ * @version 2017.06.06
  */
 public class AlmostTest {
 
-  @Test
-  public void testEverything () {
-    Almost a = new Almost();
+  private Almost a;
 
-    // should obviously succeed.  No precision involved
-    assertTrue  (a.between(1., 0., 2.));
-    assertTrue  (a.between(-1., 0., -2.));
-    assertTrue  (a.between(-1., -0.5, -2.));
+  @BeforeMethod
+  public void setUp() {
+    a = new Almost();
+  }
+
+  @Test
+  public void testLessThanAndLessEquals() {
+    assertTrue (a.lt(1.0,2.0));
+    assertFalse(a.lt(2.0,2.0));
+    assertFalse(a.lt(3.0,2.0));
+
+    assertTrue (a.le(1.0,2.0));
+    assertTrue (a.le(2.0,2.0));
+    assertFalse(a.le(3.0,1.0));
+  }
+
+  @Test
+  public void testGreaterThanAndGreaterEquals() {
+    assertTrue (a.gt(2.0,1.0));
+    assertFalse(a.gt(1.0,1.0));
+    assertFalse(a.gt(0.0,1.0));
+
+    assertTrue (a.ge(2.0,1.0));
+    assertTrue (a.ge(1.0,1.0));
+    assertFalse(a.ge(0.0,1.0));
+  }
+
+  @Test
+  public void testSafeDivision() {
+    double big = 0.01 * Float.MAX_VALUE;
+    assertEquals(-0.5, a.divide(-1.0, 2.0, 0.0));
+    assertEquals(-0.5, a.divide( 1.0,-2.0, 0.0));
+    assertEquals( 1.0, a.divide( 0.0, 0.0, 1.0));
+    assertEquals( 1.0, a.divide(-1.0,-1.0, 1.0));
+    assertEquals( 1.0, a.divide(-1.0,-1.0, true));
+    assertEquals( 1.0, a.divide(1.0E-18,1.0E-18,1.0));
+    assertEquals( big, a.divide( 1.0, 0.0, 1.0));
+
+  }
+
+  @Test
+  public void testReciprocal() {
+    assertEquals(0.5, a.reciprocal(2.0));
+  }
+
+  @Test
+  public void testBetween() {
+    assertTrue(a.between(1., 0., 2.));
+    assertTrue(a.between(-1., 0., -2.));
+    assertTrue(a.between(-1., -0.5, -2.));
+    assertTrue(a.between(1., 1.000000000001, 2.));
+    assertTrue(a.between(-1., -1.000000000001, -2.));
+  }
+
+  @Test
+  public void testOutside() {
     assertEquals(0,a.outside(1., 0., 2.));
     assertEquals(0,a.outside(1., 0.5, 2.));
     assertEquals(0,a.outside(-1., 0., -2.));
     assertEquals(0,a.outside(-1., -0.5, -2.));
+    assertEquals(-1,a.outside(-1., -1.1, -2.));
+    assertEquals( 1,a.outside(-1., -0.5, -0.9));
+    assertEquals(0,a.outside(1., 1.000000000001, 2.));
+  }
+
+  @Test
+  public void testCompare() {
     assertTrue  (a.cmp(1., 0.) > 0);
     assertTrue  (a.cmp(0., 1.) < 0);
     assertEquals(0,a.cmp(1., 1.));
     assertEquals(0,a.cmp(0., 0.));
-    assertTrue  (a.equal(3.,3.));
-    assertTrue  (a.equal(0.,0.));
-    assertTrue  (a.zero(0.));
+    assertEquals(0,a.cmp(1., 1.000000000001));
 
-    // Succeed if precision handled correctly
-    assertTrue     (a.zero(a.getMinValue()/2.));
-    assertFalse    (a.zero(a.getMinValue()*2.));
-    assertNotEquals(1.,1.+a.getEpsilon());
-    assertNotEquals(1.,1.-a.getEpsilon());
-    assertNotEquals(0.,a.getMinValue());
-    assertTrue     (a.equal(1., 1.+a.getEpsilon()/2.));
-    assertFalse    (a.equal(1., 1.+a.getEpsilon()*2.1));
-    assertTrue     (a.equal(1., 1.000000000001));
-    assertTrue     (a.getMinValue()/2.>0.);
-    assertTrue     (a.equal(0., a.getMinValue()/2.));
-    assertTrue     (a.between(1., 1.000000000001, 2.));
-    assertTrue     (a.between(-1., -1.000000000001, -2.));
-    assertEquals   (0,a.outside(1., 1.000000000001, 2.));
-    assertEquals   (0,a.cmp(1., 1.000000000001));
+    Integer i = 1;
+    Integer j = 1;
+    assertEquals(0,a.compare(i,j));
   }
 
-  /**
-     test the hash code algorithm
-   */
+  @Test
+  public void testEquality() {
+    assertTrue (a.equal(3.,3.));
+    assertTrue (a.equal(0.,0.));
+    assertTrue (a.equal(1., 1.+a.getEpsilon()/2.));
+    assertFalse(a.equal(1., 1.+a.getEpsilon()*2.1));
+    assertTrue (a.equal(1., 1.000000000001));
+    assertTrue (a.equal(0., a.getMinValue()/2.));
+    assertTrue(a.equals(a));
+  }
+
+  @Test
+  public void testZero() {
+    assertTrue (a.zero(0.));
+    assertTrue (a.zero(a.getMinValue()/2.));
+    assertFalse(a.zero(a.getMinValue()*2.));
+  }
+
+  @Test
+  public void testEpsilon() {
+    assertNotEquals(1.,1.+a.getEpsilon());
+    assertNotEquals(1.,1.-a.getEpsilon());
+  }
+
+  @Test
+  public void testGetMinValue() {
+    assertNotEquals(0.,a.getMinValue());
+    assertTrue     (a.getMinValue()/2.>0.);
+  }
+
   @Test
   public void testHashCode () {
     Almost a = new Almost(0.001,0.000001);
@@ -111,14 +184,21 @@ public class AlmostTest {
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testEpsilonTooLargeThrowsException() {
+    new Almost(0.10001);
+  }
+
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testNegativeSignificantDigitsThrowsException() {
+    new Almost(-5);
+  }
+
+  @Test(expectedExceptions = IllegalArgumentException.class)
   public void testNaNsThrowsException() {
     Almost.FLOAT.equal(0,Float.NaN);
     Almost.FLOAT.equal(0,Double.NaN);
   }
 
-  /**
-     test Object methods
-   */
   @Test
   public void testAlmostObjectMethod() {
     Almost af1= new Almost(10*MathPlus.FLT_EPSILON, 100*Float.MIN_VALUE);

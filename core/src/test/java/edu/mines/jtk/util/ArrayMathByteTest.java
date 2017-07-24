@@ -224,10 +224,6 @@ public class ArrayMathByteTest {
     a2[j2][j1]     = min; a2[j2][k1]     = max;
     a1[j1]         = min; a1[k1]         = max;
 
-    dump(a3);
-    dump(a2);
-    dump(a1);
-
     byte min3 = min(a3,imin3); byte max3 = max(a3,imax3);
     byte min2 = min(a2,imin2); byte max2 = max(a2,imax2);
     byte min1 = min(a1,imin1); byte max1 = max(a1,imax1);
