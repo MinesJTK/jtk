@@ -8,7 +8,7 @@ The Mines JTK is licensed under the [Apache License, Version 2.0](http://www.apa
 
 ### Using the Mines JTK 
 
-To use the Mines JTK, simply include its JAR (Java archive) among any other external dependencies for your project. For example, ```edu-mines-jtk-1.1.0.jar``` can be found by [searching Maven Central](https://search.maven.org). Most build tools can be easily configured to automatically download dependencies from this repository, which also holds JAR files containing documentation (javadoc) and source code for the Mines JTK.
+To use the Mines JTK, simply include its JAR (Java archive) among any other external dependencies for your project. For example, ```edu-mines-jtk-1.0.0.jar``` can be found by [searching Maven Central](https://search.maven.org). Most build tools can be easily configured to automatically download dependencies from this repository, which also holds JAR files containing documentation (javadoc) and source code for the Mines JTK.
 
 ### Getting the source code
 
