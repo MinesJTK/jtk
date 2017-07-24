@@ -14,11 +14,15 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.util;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.NoSuchElementException;
 import java.util.Random;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.AssertJUnit.assertFalse;
+import static org.testng.AssertJUnit.assertTrue;
 
 /**
  * Tests {@link edu.mines.jtk.util.ArrayQueue}.
@@ -27,9 +31,61 @@ import static org.testng.Assert.assertEquals;
  */
 public class ArrayQueueTest {
 
+  private ArrayQueue<Integer> aq;
+
+  @BeforeMethod
+  public void setUp() {
+    aq = new ArrayQueue<>();
+  }
+
+  @Test
+  public void testConstructorWithInitialCapacity() {
+    aq = new ArrayQueue<>(10);
+    assertTrue(aq.isEmpty());
+    assertEquals(aq.size(),0);
+  }
+
+  @Test(expectedExceptions = NoSuchElementException.class)
+  public void testEmptyQueueFirstElementThrowsException() {
+    aq.first();
+  }
+
+  @Test(expectedExceptions = NoSuchElementException.class)
+  public void testEmptyQueueRemoveElementThrowsException() {
+    aq.remove();
+  }
+
+  @Test
+  public void testSizingBehavior() {
+    aq = new ArrayQueue<>(10);
+
+    assertTrue(aq.isEmpty());
+    assertEquals(aq.size(),0);
+
+    aq.ensureCapacity(10);
+
+    for (int i=0; i<10; ++i) {
+      aq.add(i);
+      assertEquals(aq.size(),i+1);
+    }
+
+    for (int i=10; i>0; --i) {
+      aq.remove();
+      assertEquals(aq.size(), i-1);
+    }
+
+    aq.add(999);
+    assertEquals(aq.size(),1);
+
+    aq.add(999);
+    aq.trimToSize();
+    assertEquals(aq.size(),2);
+
+    assertEquals(aq.first().intValue(),999);
+  }
+
   @Test
   public void testRandom() {
-    ArrayQueue<Integer> aq = new ArrayQueue<Integer>();
     Random r = new Random();
     int niter = 1000;
     int nadd = 0;

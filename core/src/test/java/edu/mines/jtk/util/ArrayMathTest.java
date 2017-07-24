@@ -481,14 +481,132 @@ public class ArrayMathTest {
 
   @Test
   public void testSin() {
-    assertEq(0.0f,sin(FLT_PI));
-    assertEq(0.0d,sin(DBL_PI));
+    assertEq(0f,sin(FLT_PI));
+    assertEq(0d,sin(DBL_PI));
+
+    float[]     f1 = rampfloat(0,4,5);
+    float[][]   f2 = rampfloat(0,4,4,5,5);
+    float[][][] f3 = rampfloat(0,4,4,4,5,5,5);
+
+    float[]     g1 = zerofloat(5);
+    float[][]   g2 = zerofloat(5,5);
+    float[][][] g3 = zerofloat(5,5,5);
+
+    double[]     d1 = rampdouble(0,4,5);
+    double[][]   d2 = rampdouble(0,4,4,5,5);
+    double[][][] d3 = rampdouble(0,4,4,4,5,5,5);
+
+    double[]     e1 = zerodouble(5);
+    double[][]   e2 = zerodouble(5,5);
+    double[][][] e3 = zerodouble(5,5,5);
+
+    sin(f1,g1); sin(f2,g2); sin(f3,g3);
+    sin(d1,e1); sin(d2,e2); sin(d3,e3);
+
+    assertEqual(g1,sin(f1));
+    assertEqual(g2,sin(f2));
+    assertEqual(g3,sin(f3));
+
+    assertEqual(e1,sin(d1));
+    assertEqual(e2,sin(d2));
+    assertEqual(e3,sin(d3));
+
+    Cfloat f0 = new Cfloat(0);
+    Cfloat f4 = new Cfloat(4);
+    Cdouble d0 = new Cdouble(0);
+    Cdouble d4 = new Cdouble(4);
+
+    f1 = crampfloat(f0,f4,5);
+    f2 = crampfloat(f0,f4,f4,5,5);
+    f3 = crampfloat(f0,f4,f4,f4,5,5,5);
+
+    g1 = czerofloat(5);
+    g2 = czerofloat(5,5);
+    g3 = czerofloat(5,5,5);
+
+    d1 = crampdouble(d0,d4,5);
+    d2 = crampdouble(d0,d4,d4,5,5);
+    d3 = crampdouble(d0,d4,d4,d4,5,5,5);
+
+    e1 = czerodouble(5);
+    e2 = czerodouble(5,5);
+    e3 = czerodouble(5,5,5);
+
+    csin(f1,g1); csin(f2,g2); csin(f3,g3);
+    csin(d1,e1); csin(d2,e2); csin(d3,e3);
+
+    assertEqual(g1,csin(f1));
+    assertEqual(g2,csin(f2));
+    assertEqual(g3,csin(f3));
+
+    assertEqual(e1,csin(d1));
+    assertEqual(e2,csin(d2));
+    assertEqual(e3,csin(d3));
   }
 
   @Test
   public void testCos() {
-    assertEq(1.0f,cos(2.0f*FLT_PI));
-    assertEq(1.0d,cos(2.0d*DBL_PI));
+    assertEq(1f,cos(2.0f*FLT_PI));
+    assertEq(1d,cos(2.0d*DBL_PI));
+
+    float[]     g1 = zerofloat(5);
+    float[][]   g2 = zerofloat(5,5);
+    float[][][] g3 = zerofloat(5,5,5);
+
+    float[]     f1 = rampfloat(0,4,5);
+    float[][]   f2 = rampfloat(0,4,4,5,5);
+    float[][][] f3 = rampfloat(0,4,4,4,5,5,5);
+
+    double[]     e1 = zerodouble(5);
+    double[][]   e2 = zerodouble(5,5);
+    double[][][] e3 = zerodouble(5,5,5);
+
+    double[]     d1 = rampdouble(0,4,5);
+    double[][]   d2 = rampdouble(0,4,4,5,5);
+    double[][][] d3 = rampdouble(0,4,4,4,5,5,5);
+
+    cos(f1,g1); cos(f2,g2); cos(f3,g3);
+    cos(d1,e1); cos(d2,e2); cos(d3,e3);
+
+    assertEqual(g1,cos(f1));
+    assertEqual(g2,cos(f2));
+    assertEqual(g3,cos(f3));
+
+    assertEqual(e1,cos(d1));
+    assertEqual(e2,cos(d2));
+    assertEqual(e3,cos(d3));
+
+    Cfloat f0 = new Cfloat(0);
+    Cfloat f4 = new Cfloat(4);
+    Cdouble d0 = new Cdouble(0);
+    Cdouble d4 = new Cdouble(4);
+
+    f1 = crampfloat(f0,f4,5);
+    f2 = crampfloat(f0,f4,f4,5,5);
+    f3 = crampfloat(f0,f4,f4,f4,5,5,5);
+
+    g1 = czerofloat(5);
+    g2 = czerofloat(5,5);
+    g3 = czerofloat(5,5,5);
+
+    d1 = crampdouble(d0,d4,5);
+    d2 = crampdouble(d0,d4,d4,5,5);
+    d3 = crampdouble(d0,d4,d4,d4,5,5,5);
+
+    e1 = czerodouble(5);
+    e2 = czerodouble(5,5);
+    e3 = czerodouble(5,5,5);
+
+    ccos(f1,g1); ccos(f2,g2); ccos(f3,g3);
+    ccos(d1,e1); ccos(d2,e2); ccos(d3,e3);
+
+    assertEqual(g1,ccos(f1));
+    assertEqual(g2,ccos(f2));
+    assertEqual(g3,ccos(f3));
+
+    assertEqual(e1,ccos(d1));
+    assertEqual(e2,ccos(d2));
+    assertEqual(e3,ccos(d3));
   }
 
   @Test
@@ -604,12 +722,67 @@ public class ArrayMathTest {
     assertEq(2L,abs(2L));
     assertEq(2.0f,abs(2.0f));
     assertEq(2.0d,abs(2.0d));
+
     assertEq(2,abs(-2));
     assertEq(2L,abs(-2L));
     assertEq(2.0f,abs(-2.0f));
     assertEq(2.0d,abs(-2.0d));
+
     assertEquals(0, Float.floatToIntBits(abs(0.0f)));
     assertEquals(0, Double.doubleToLongBits(abs(0.0d)));
+
+    assertEqual(    rampfloat(0, 4,5),
+                abs(rampfloat(0,-4,5)));
+    assertEqual(    rampfloat(0, 4, 4,5,5),
+                abs(rampfloat(0,-4,-4,5,5)));
+    assertEqual(    rampfloat(0, 4, 4, 4,5,5,5),
+                abs(rampfloat(0,-4,-4,-4,5,5,5)));
+
+    assertEqual(    rampdouble(0, 4,5),
+                abs(rampdouble(0,-4,5)));
+    assertEqual(    rampdouble(0, 4, 4,5,5),
+                abs(rampdouble(0,-4,-4,5,5)));
+    assertEqual(    rampdouble(0, 4, 4, 4,5,5,5),
+                abs(rampdouble(0,-4,-4,-4,5,5,5)));
+
+    Cfloat  f0 = new Cfloat( 0);  Cfloat  f4 = new Cfloat(-4);
+    Cdouble d0 = new Cdouble( 0); Cdouble d4 = new Cdouble(-4);
+
+    float[]     f1 = zerofloat(5);
+    float[][]   f2 = zerofloat(5,5);
+    float[][][] f3 = zerofloat(5,5,5);
+
+    double[]     d1 = zerodouble(5);
+    double[][]   d2 = zerodouble(5,5);
+    double[][][] d3 = zerodouble(5,5,5);
+
+    float[]     cf1 = crampfloat(f0,f4,5);
+    float[][]   cf2 = crampfloat(f0,f4,f4,5,5);
+    float[][][] cf3 = crampfloat(f0,f4,f4,f4,5,5,5);
+
+    double[]     cd1 = crampdouble(d0,d4,5);
+    double[][]   cd2 = crampdouble(d0,d4,d4,5,5);
+    double[][][] cd3 = crampdouble(d0,d4,d4,d4,5,5,5);
+
+    cabs(cf1,f1); cabs(cf2,f2); cabs(cf3,f3);
+    cabs(cd1,d1); cabs(cd2,d2); cabs(cd3,d3);
+
+    assertEqual(rampfloat(0,4,5),        f1);
+    assertEqual(rampfloat(0,4,4,5,5),    f2);
+    assertEqual(rampfloat(0,4,4,4,5,5,5),f3);
+
+    assertEqual(f1,cabs(cf1));
+    assertEqual(f2,cabs(cf2));
+    assertEqual(f3,cabs(cf3));
+
+    assertEqual(rampdouble(0,4,5),        d1);
+    assertEqual(rampdouble(0,4,4,5,5),    d2);
+    assertEqual(rampdouble(0,4,4,4,5,5,5),d3);
+
+    assertEqual(d1,cabs(cd1));
+    assertEqual(d2,cabs(cd2));
+    assertEqual(d3,cabs(cd3));
+
   }
 
   @Test void testMax() {
@@ -790,6 +963,7 @@ public class ArrayMathTest {
       assertEquals((double)i3, arr1[i3]);
     }
   }
+
 
 //////////////////////////////////////////////////////////////////////////////
 // protected
