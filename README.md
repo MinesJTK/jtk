@@ -56,11 +56,7 @@ The full name of the default Gradle task performed by the command ```gradlew``` 
 
 ```gradlew test```
 
-which will build and run non-interactive unit tests, or
-
-```gradlew deps```
-
-to copy all external dependencies (JAR files used by some packages in the Mines JTK) to a folder named ```core/build/deps/```, or
+which will build and run non-interactive unit tests.
 
 ```gradlew distZip```
 
