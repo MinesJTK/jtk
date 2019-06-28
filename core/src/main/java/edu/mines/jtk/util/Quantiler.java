@@ -357,6 +357,6 @@ public class Quantiler {
     double q0, double q1, double q2)
   {
     double qt = q1-((mm-m0)*(q2-q1)/(m2-m1)+(m2-mm)*(q1-q0)/(m1-m0))/(m2-m0);
-    return (q0<=qt)?qt:q1+(q0-q1)/(m0-m1);
+    return (q0<=qt)?qt:q1-(q0-q1)/(m0-m1);
   }
 }
