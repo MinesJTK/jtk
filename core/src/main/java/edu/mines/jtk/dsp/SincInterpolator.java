@@ -14,7 +14,8 @@ limitations under the License.
 ****************************************************************************/
 package edu.mines.jtk.dsp;
 
-import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import static edu.mines.jtk.util.ArrayMath.*;
 import edu.mines.jtk.util.Check;
@@ -624,9 +625,9 @@ public class SincInterpolator {
    * Design parameters.
    */
   private static class Design {
-    double emax;
-    double fmax; 
-    int lmax;
+    final double emax;
+    final double fmax;
+    final int lmax;
     Design(double emax, double fmax, int lmax) {
       this.emax = emax;
       this.fmax = fmax;
@@ -651,10 +652,20 @@ public class SincInterpolator {
    * Table of sinc interpolator coefficients.
    */
   private static class Table {
-    Design design; // here, all three design parameters are non-zero
-    int lsinc,nsinc,nsincm1,ishift;
-    double dsinc;
-    float[][] asinc;
+    final Design design; // here, all three design parameters are non-zero
+    final int lsinc,nsinc,nsincm1,ishift;
+    final double dsinc;
+    final float[][] asinc;
+
+    private Table(Design design, int lsinc, int nsinc, int nsincm1, int ishift, double dsinc, float[][] asinc) {
+      this.design = design;
+      this.lsinc = lsinc;
+      this.nsinc = nsinc;
+      this.nsincm1 = nsincm1;
+      this.ishift = ishift;
+      this.dsinc = dsinc;
+      this.asinc = asinc;
+    }
   }
 
   /**
@@ -736,8 +747,8 @@ public class SincInterpolator {
       nsinc *= 2;
     ++nsinc;
     int lsinc = lmax;
-    Table table = makeTable(nsinc,lsinc,kwin);
-    table.design = new Design(emax,fmax,lmax);
+    Design updDesign = new Design(emax,fmax,lmax);
+    Table table = makeTable(updDesign,nsinc,lsinc,kwin);
     _tables.put(design,table); // key is design with one zero parameter
     return table;
   }
@@ -745,7 +756,7 @@ public class SincInterpolator {
   /**
    * Builds a table of interpolators for a specified Kaiser window.
    */
-  private static Table makeTable(int nsinc, int lsinc, KaiserWindow kwin) {
+  private static Table makeTable(Design design, int nsinc, int lsinc, KaiserWindow kwin) {
     float[][] asinc = new float[nsinc][lsinc];
     int nsincm1 = nsinc-1;
     int ishift = -lsinc-lsinc/2+1;
@@ -767,14 +778,7 @@ public class SincInterpolator {
         asinc[isinc][i] = (float)(sinc(x)*kwin.evaluate(x));
       }
     }
-    Table table = new Table();
-    table.lsinc = lsinc;
-    table.nsinc = nsinc;
-    table.nsincm1 = nsincm1;
-    table.ishift = ishift;
-    table.dsinc = dsinc;
-    table.asinc = asinc;
-    return table;
+    return new Table(design, lsinc, nsinc, nsincm1, ishift, dsinc, asinc);
   }
   private static double sinc(double x) {
     return (x!=0.0)?sin(PI*x)/(PI*x):1.0;
@@ -784,15 +788,13 @@ public class SincInterpolator {
    * Map from design parameters to tables of coefficients.
    * This map saves both time and space required to compute the tables.
    */
-  private final static HashMap<Design,Table> _tables = new HashMap<Design,Table>();
+  private final static Map<Design,Table> _tables = new ConcurrentHashMap<Design,Table>();
   private static Table getTable(double emax, double fmax, int lmax) {
     Design design = new Design(emax,fmax,lmax);
-    synchronized(_tables) {
-      Table table = _tables.get(design);
-      if (table==null)
-        table = makeTable(design);
-      return table;
-    }
+    Table table = _tables.get(design);
+    if (table==null) // not using .computeIfAbsent(..) for JDK 1.7 compatibility
+      table = makeTable(design);
+    return table;
   }
 
   private float interpolate(

@@ -147,12 +147,12 @@ public class KaiserWindow {
   ///////////////////////////////////////////////////////////////////////////
   // private
 
-  private double _error;
-  private double _width;
-  private double _length;
-  private double _alpha;
-  private double _scale;
-  private double _xxmax;
+  private final double _error;
+  private final double _width;
+  private final double _length;
+  private final double _alpha;
+  private final double _scale;
+  private final double _xxmax;
 
   private KaiserWindow(double error, double width, double length) {
     _error = error;
