@@ -1,6 +1,8 @@
-description = 'Mines Java Toolkit Demos'
+plugins {
+    id 'java-library'
+}
 
-apply plugin: 'java'
+description = 'Mines Java Toolkit Demos'
 
 // Demos do not (yet) have any unit tests.
 test.enabled = false
@@ -10,8 +12,8 @@ testClasses.enabled = false
 
 // Demos require the Mines JTK core and some require Jython.
 dependencies {
-  compile project(':core')
-  compile 'org.python:jython-standalone:2.7.0'
+  implementation project(':core')
+  implementation "org.python:jython-standalone:$version_jython"
 }
 
 // A task to run a demo Java main class or Jython script.
