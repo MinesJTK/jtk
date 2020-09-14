@@ -1,32 +1,33 @@
-description = 'Mines Java Toolkit'
-
-apply plugin: 'java-library-distribution'
-apply plugin: 'maven'
-apply plugin: 'jacoco'
-apply plugin: 'signing'
-
-jar.baseName = 'edu-mines-jtk'
-
-// tag::dependencies[]
-dependencies {
-  compile     'org.jogamp.jogl:jogl-all-main:2.3.2',
-              'org.jogamp.gluegen:gluegen-rt-main:2.3.2',
-              'com.googlecode.netlib-java:netlib-java:0.9.3'
-
-  testCompile 'org.testng:testng:6.8'
-
+plugins {
+  id 'java-library'
+  id 'maven-publish'
+  id 'jacoco'
+  id 'signing'
+  id 'distribution'
 }
-// end::dependencies[]
 
-// tag::distributions[]
+description = 'Mines Java Toolkit'
+jar.archiveBaseName = 'edu-mines-jtk'
+
+dependencies {
+  // This dependency is exported to consumers, that is to say found on their compile classpath.
+  api "org.jogamp.jogl:jogl-all-main:$version_jogl"
+  api "org.jogamp.gluegen:gluegen-rt-main:$version_gluegen"
+  
+  // This dependency is used internally, and not exposed to consumers on their own compile classpath.
+  implementation "com.googlecode.netlib-java:netlib-java:$version_netlib_java"
+  
+  testImplementation "org.testng:testng:$version_testng"
+  
+  testRuntimeOnly "org.testng:testng:$version_testng"
+}
+
 distributions {
   main {
-    baseName = 'edu-mines-jtk-all'
+    distributionBaseName = 'edu-mines-jtk-all'
   }
 }
-// end::distributions[]
 
-// tag::test[]
 test {
   useTestNG() {
     options {
@@ -35,15 +36,11 @@ test {
     }
   }
 }
-// end::test[]
 
-// tag::javadoc[]
 javadoc {
   title = project.description
 }
-// end::javadoc[]
 
-// tag::jacocoTestReport[]
 jacocoTestReport {
   reports {
     xml.enabled = true
@@ -51,21 +48,16 @@ jacocoTestReport {
   }
 }
 check.dependsOn jacocoTestReport
-// end::jacocoTestReport[]
 
-// tag::javadocJar[]
 task javadocJar(type: Jar, dependsOn: javadoc) {
   classifier = 'javadoc'
   from tasks.javadoc.destinationDir
 }
-// end::javadocJar[]
 
-// tag::sourcesJar[]
 task sourcesJar(type: Jar) {
   from sourceSets.main.allSource
   classifier = 'sources'
 }
-// end::sourcesJar[]
 
 artifacts {
   archives jar
