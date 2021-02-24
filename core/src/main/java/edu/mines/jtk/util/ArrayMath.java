@@ -9253,7 +9253,7 @@ public class ArrayMath {
     int p = m[0];
     int q = m[1];
     int n = q-p+1;
-    int k = (p+q)/2;
+    int k = (int) (((long) p + (long) q)/2L);
     if (n>NSMALL_SORT) {
       int j = p;
       int l = q;
@@ -9297,7 +9297,7 @@ public class ArrayMath {
     int p = m[0];
     int q = m[1];
     int n = q-p+1;
-    int k = (p+q)/2;
+    int k = (int) (((long) p + (long) q)/2L);
     if (n>NSMALL_SORT) {
       int j = p;
       int l = q;
@@ -9404,7 +9404,7 @@ public class ArrayMath {
     int p = m[0];
     int q = m[1];
     int n = q-p+1;
-    int k = (p+q)/2;
+    int k = (int) (((long) p + (long) q)/2L);
     if (n>NSMALL_SORT) {
       int j = p;
       int l = q;
@@ -9448,7 +9448,7 @@ public class ArrayMath {
     int p = m[0];
     int q = m[1];
     int n = q-p+1;
-    int k = (p+q)/2;
+    int k = (int) (((long) p + (long) q)/2L);
     if (n>NSMALL_SORT) {
       int j = p;
       int l = q;
@@ -9555,7 +9555,7 @@ public class ArrayMath {
     int p = m[0];
     int q = m[1];
     int n = q-p+1;
-    int k = (p+q)/2;
+    int k = (int) (((long) p + (long) q)/2L);
     if (n>NSMALL_SORT) {
       int j = p;
       int l = q;
@@ -9599,7 +9599,7 @@ public class ArrayMath {
     int p = m[0];
     int q = m[1];
     int n = q-p+1;
-    int k = (p+q)/2;
+    int k = (int) (((long) p + (long) q)/2L);
     if (n>NSMALL_SORT) {
       int j = p;
       int l = q;
@@ -9706,7 +9706,7 @@ public class ArrayMath {
     int p = m[0];
     int q = m[1];
     int n = q-p+1;
-    int k = (p+q)/2;
+    int k = (int) (((long) p + (long) q)/2L);
     if (n>NSMALL_SORT) {
       int j = p;
       int l = q;
@@ -9750,7 +9750,7 @@ public class ArrayMath {
     int p = m[0];
     int q = m[1];
     int n = q-p+1;
-    int k = (p+q)/2;
+    int k = (int) (((long) p + (long) q)/2L);
     if (n>NSMALL_SORT) {
       int j = p;
       int l = q;
@@ -9857,7 +9857,7 @@ public class ArrayMath {
     int p = m[0];
     int q = m[1];
     int n = q-p+1;
-    int k = (p+q)/2;
+    int k = (int) (((long) p + (long) q)/2L);
     if (n>NSMALL_SORT) {
       int j = p;
       int l = q;
@@ -9901,7 +9901,7 @@ public class ArrayMath {
     int p = m[0];
     int q = m[1];
     int n = q-p+1;
-    int k = (p+q)/2;
+    int k = (int) (((long) p + (long) q)/2L);
     if (n>NSMALL_SORT) {
       int j = p;
       int l = q;
@@ -10008,7 +10008,7 @@ public class ArrayMath {
     int p = m[0];
     int q = m[1];
     int n = q-p+1;
-    int k = (p+q)/2;
+    int k = (int) (((long) p + (long) q)/2L);
     if (n>NSMALL_SORT) {
       int j = p;
       int l = q;
@@ -10052,7 +10052,7 @@ public class ArrayMath {
     int p = m[0];
     int q = m[1];
     int n = q-p+1;
-    int k = (p+q)/2;
+    int k = (int) (((long) p + (long) q)/2L);
     if (n>NSMALL_SORT) {
       int j = p;
       int l = q;
