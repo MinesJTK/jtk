@@ -77,7 +77,7 @@ public class LocalSmoothingFilter {
    * @param niter stop when number of iterations exceeds this limit.
    */
   public LocalSmoothingFilter(double small, int niter) {
-    _small = small;
+    _small = (float)small;
     _niter = niter;
     _ldk = new LocalDiffusionKernel(LocalDiffusionKernel.Stencil.D22);
   }
@@ -92,7 +92,7 @@ public class LocalSmoothingFilter {
   public LocalSmoothingFilter(
     double small, int niter, LocalDiffusionKernel ldk)
   {
-    _small = small;
+    _small = (float)small;
     _niter = niter;
     _ldk = ldk;
   }
@@ -361,7 +361,7 @@ public class LocalSmoothingFilter {
   private static Logger log = 
     Logger.getLogger(LocalSmoothingFilter.class.getName());
 
-  private double _small; // stop iterations when residuals are small
+  private float _small; // stop iterations when residuals are small
   private int _niter; // number of iterations
   private boolean _pc; // true, for preconditioned CG iterations
   private LocalDiffusionKernel _ldk; // computes y += (I+G'DG)x
@@ -618,23 +618,23 @@ public class LocalSmoothingFilter {
     a.apply(x,q);
     saxpy(-1.0f,q,r); // r = b-Ax
     scopy(r,d); // d = r
-    double delta = sdot(r,r); // delta = r'r
-    double bnorm = sqrt(sdot(b,b));
-    double rnorm = sqrt(delta);
-    double rnormBegin = rnorm;
-    double rnormSmall = bnorm*_small;
+    float delta = sdot(r,r); // delta = r'r
+    float bnorm = sqrt(sdot(b,b));
+    float rnorm = sqrt(delta);
+    float rnormBegin = rnorm;
+    float rnormSmall = bnorm*_small;
     int iter;
     log.fine("solve: bnorm="+bnorm+" rnorm="+rnorm);
     for (iter=0; iter<_niter && rnorm>rnormSmall; ++iter) {
       log.finer("  iter="+iter+" rnorm="+rnorm+" ratio="+rnorm/rnormBegin);
       a.apply(d,q); // q = Ad
-      double dq = sdot(d,q); // d'q = d'Ad
-      double alpha = delta/dq; // alpha = r'r/d'Ad
+      float dq = sdot(d,q); // d'q = d'Ad
+      float alpha = delta/dq; // alpha = r'r/d'Ad
       saxpy( alpha,d,x); // x = x+alpha*d
       saxpy(-alpha,q,r); // r = r-alpha*q
-      double deltaOld = delta;
+      float deltaOld = delta;
       delta = sdot(r,r); // delta = r'r
-      double beta = delta/deltaOld;
+      float beta = delta/deltaOld;
       sxpay(beta,r,d); // d = r+beta*d
       rnorm = sqrt(delta);
     }
@@ -649,27 +649,27 @@ public class LocalSmoothingFilter {
     float[][][] r = new float[n3][n2][n1];
     scopy(b,r); a.apply(x,q); saxpy(-1.0f,q,r); // r = b-Ax
     scopy(r,d);
-    double delta = sdot(r,r);
-    double bnorm = sqrt(sdot(b,b));
-    double rnorm = sqrt(delta);
-    double rnormBegin = rnorm;
-    double rnormSmall = bnorm*_small;
+    float delta = sdot(r,r);
+    float bnorm = sqrt(sdot(b,b));
+    float rnorm = sqrt(delta);
+    float rnormBegin = rnorm;
+    float rnormSmall = bnorm*_small;
     int iter;
     log.fine("solve: bnorm="+bnorm+" rnorm="+rnorm);
     for (iter=0; iter<_niter && rnorm>rnormSmall; ++iter) {
       log.finer("  iter="+iter+" rnorm="+rnorm+" ratio="+rnorm/rnormBegin);
       a.apply(d,q);
-      double dq = sdot(d,q);
-      double alpha = delta/dq;
+      float dq = sdot(d,q);
+      float alpha = delta/dq;
       saxpy( alpha,d,x);
       if (iter%100<99) {
         saxpy(-alpha,q,r);
       } else {
         scopy(b,r); a.apply(x,q); saxpy(-1.0f,q,r);
       }
-      double deltaOld = delta;
+      float deltaOld = delta;
       delta = sdot(r,r);
-      double beta = delta/deltaOld;
+      float beta = delta/deltaOld;
       sxpay(beta,r,d);
       rnorm = sqrt(delta);
     }
@@ -688,25 +688,25 @@ public class LocalSmoothingFilter {
     scopy(b,r);
     a.apply(x,q);
     saxpy(-1.0f,q,r); // r = b-Ax
-    double bnorm = sqrt(sdot(b,b));
-    double rnorm = sqrt(sdot(r,r));
-    double rnormBegin = rnorm;
-    double rnormSmall = bnorm*_small;
+    float bnorm = sqrt(sdot(b,b));
+    float rnorm = sqrt(sdot(r,r));
+    float rnormBegin = rnorm;
+    float rnormSmall = bnorm*_small;
     m.apply(r,s); // s = Mr
     scopy(s,d); // d = s
-    double delta = sdot(r,s); // r's = r'Mr
+    float delta = sdot(r,s); // r's = r'Mr
     int iter;
     log.fine("msolve: bnorm="+bnorm+" rnorm="+rnorm);
     for (iter=0; iter<_niter && rnorm>rnormSmall; ++iter) {
       log.finer("  iter="+iter+" rnorm="+rnorm+" ratio="+rnorm/rnormBegin);
       a.apply(d,q); // q = Ad
-      double alpha = delta/sdot(d,q); // alpha = r'Mr/d'Ad
+      float alpha = delta/sdot(d,q); // alpha = r'Mr/d'Ad
       saxpy( alpha,d,x); // x = x+alpha*d
       saxpy(-alpha,q,r); // r = r-alpha*q
       m.apply(r,s); // s = Mr
-      double deltaOld = delta;
+      float deltaOld = delta;
       delta = sdot(r,s); // delta = r's = r'Mr
-      double beta = delta/deltaOld;
+      float beta = delta/deltaOld;
       sxpay(beta,s,d); // d = s+beta*d
       rnorm  = sqrt(sdot(r,r));
     }
@@ -721,19 +721,19 @@ public class LocalSmoothingFilter {
     float[][][] r = new float[n3][n2][n1];
     float[][][] s = new float[n3][n2][n1];
     scopy(b,r); a.apply(x,q); saxpy(-1.0f,q,r); // r = b-Ax
-    double bnorm = sqrt(sdot(b,b));
-    double rnorm = sqrt(sdot(r,r));
-    double rnormBegin = rnorm;
-    double rnormSmall = bnorm*_small;
+    float bnorm = sqrt(sdot(b,b));
+    float rnorm = sqrt(sdot(r,r));
+    float rnormBegin = rnorm;
+    float rnormSmall = bnorm*_small;
     m.apply(r,s); // s = Mr
     scopy(s,d); // d = s
-    double delta = sdot(r,s); // r's = r'Mr
+    float delta = sdot(r,s); // r's = r'Mr
     int iter;
     log.fine("msolve: bnorm="+bnorm+" rnorm="+rnorm);
     for (iter=0; iter<_niter && rnorm>rnormSmall; ++iter) {
       log.finer("  iter="+iter+" rnorm="+rnorm+" ratio="+rnorm/rnormBegin);
       a.apply(d,q); // q = Ad
-      double alpha = delta/sdot(d,q); // alpha = r'Mr/d'Ad
+      float alpha = delta/sdot(d,q); // alpha = r'Mr/d'Ad
       saxpy( alpha,d,x); // x = x+alpha*d
       if (iter%100<99) {
         saxpy(-alpha,q,r); // r = r-alpha*q
@@ -741,9 +741,9 @@ public class LocalSmoothingFilter {
         scopy(b,r); a.apply(x,q); saxpy(-1.0f,q,r); // r = b-Ax
       }
       m.apply(r,s); // s = Mr
-      double deltaOld = delta;
+      float deltaOld = delta;
       delta = sdot(r,s); // delta = r's = r'Mr
-      double beta = delta/deltaOld;
+      float beta = delta/deltaOld;
       sxpay(beta,s,d); // d = s+beta*d
       rnorm  = sqrt(sdot(r,r));
     }
@@ -783,34 +783,34 @@ public class LocalSmoothingFilter {
   }
 
   // Returns the dot product x'y.
-  private static double sdot(float[][] x, float[][] y) {
+  private static float sdot(float[][] x, float[][] y) {
     int n1 = x[0].length;
     int n2 = x.length;
-    double d = 0.0;
+    float d = 0.0f;
     for (int i2=0; i2<n2; ++i2) {
       float[] x2 = x[i2], y2 = y[i2];
       for (int i1=0; i1<n1; ++i1) {
-        d += (double)x2[i1]*(double)y2[i1];
+        d += x2[i1]*y2[i1];
       }
     }
     return d;
   }
-  private static double sdot(final float[][][] x, final float[][][] y) {
+  private static float sdot(final float[][][] x, final float[][][] y) {
     final int n3 = x.length;
-    final double[] d3 = new double[n3];
+    final float[] d3 = new float[n3];
     Parallel.loop(n3,new Parallel.LoopInt() {
       public void compute(int i3) {
         d3[i3] = sdot(x[i3],y[i3]);
       }
     });
-    double d = 0.0;
+    float d = 0.0f;
     for (int i3=0; i3<n3; ++i3)
       d += d3[i3];
     return d;
   }
 
   // Computes y = y + a*x.
-  private static void saxpy(final double a, float[][] x, float[][] y) {
+  private static void saxpy(float a, float[][] x, float[][] y) {
     int n1 = x[0].length;
     int n2 = x.length;
     for (int i2=0; i2<n2; ++i2) {
@@ -821,7 +821,7 @@ public class LocalSmoothingFilter {
     }
   }
   private static void saxpy(
-    final double a, final float[][][] x, final float[][][] y)
+    final float a, final float[][][] x, final float[][][] y)
   {
     final int n3 = x.length;
     Parallel.loop(n3,new Parallel.LoopInt() {
@@ -832,18 +832,18 @@ public class LocalSmoothingFilter {
   }
 
   // Computes y = x + a*y.
-  private static void sxpay(final double a, float[][] x, float[][] y) {
+  private static void sxpay(float a, float[][] x, float[][] y) {
     int n1 = x[0].length;
     int n2 = x.length;
     for (int i2=0; i2<n2; ++i2) {
       float[] x2 = x[i2], y2 = y[i2];
       for (int i1=0; i1<n1; ++i1) {
-        y2[i1] = (float)(a*(double)y2[i1])+x2[i1];
+        y2[i1] = a*y2[i1]+x2[i1];
       }
     }
   }
   private static void sxpay(
-    final double a, final float[][][] x, final float[][][] y)
+    final float a, final float[][][] x, final float[][][] y)
   {
     final int n3 = x.length;
     Parallel.loop(n3,new Parallel.LoopInt() {
