@@ -1,6 +1,6 @@
 /.cache
 /.classpath
-/.project
+/**/.project
 /.pydevproject
 /.idea
 /.gradle
@@ -15,3 +15,5 @@ build/
 
 core/out/
 demo/out/
+core/bin/
+core/build/
